@@ -68,7 +68,7 @@ export default function ContactSection() {
                 <Mail className="h-6 w-6 text-gray-900 mr-4" />
                 <div>
                   <h4 className="font-medium">{t('contact.info.email')}</h4>
-                  <p className="text-gray-600">contact@moeniaproperties.com</p>
+                  <p className="text-gray-600">cuffaricristianfelice@gmail.com</p>
                 </div>
               </div>
               
