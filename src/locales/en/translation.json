@@ -140,9 +140,9 @@
         "properties": "Properties",
         "services": "Services",
         "about": "About",
-        "contact": "Contact"
+        "contact": "Contact",
+        "privacy": "Privacy Policy"
       },
-      "privacy": "Privacy Policy",
       "propertyTypes": "Property Types",
       "properties": {
         "luxury": "Luxury",
