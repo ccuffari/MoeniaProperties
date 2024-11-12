@@ -120,6 +120,7 @@
   "intro": "Learn more about our company and services."
 },
 "admin": {
+  "title": "Dashboard",
   "dashboard": {
     "properties": "Properties",
     "users": "Users",

@@ -120,6 +120,7 @@
   "intro": "Scopri di più sulla nostra azienda e sui nostri servizi."
 },
 "admin": {
+  "title": "Dashboard",
   "dashboard": {
     "properties": "Proprietà",
     "users": "Utenti",
