@@ -79,7 +79,8 @@
         "description": "Esclusivo attico con vista sulla laguna di Venezia."
       }
     },
-    "noResults": "Nessun risultato"
+    "noResults": "Nessun risultato",
+    "title": "Immobili"
   },
   "contact": {
     "title": "Contattaci",
@@ -113,5 +114,18 @@
     "privacy": "Privacy Policy",
     "adminAccess": "Accesso Admin",
     "cookieNotice": "Utilizzando questo sito, accetti l'uso dei cookie."
-  }
+  },
+  "about": {
+    "title": "About",
+    "intro": ""
+  },
+  "admin": {
+    "dashboard": {
+      "properties": "Immobili",
+      "users": "Utenti",
+      "appointments": "Appuntamenti",
+      "recentProperties": "Immobili recenti",
+      "upcomingAppointments": "Prossimi Appuntamenti"
+    }
+}
 }

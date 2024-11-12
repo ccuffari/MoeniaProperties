@@ -79,7 +79,8 @@
         "description": "Exclusive penthouse with views of the Venice lagoon."
       }
     },
-    "noResults": "No results"
+    "noResults": "No results",
+    "title": "Properties"
   },
   "contact": {
     "title": "Contact Us",
@@ -113,5 +114,19 @@
     "privacy": "Privacy Policy",
     "adminAccess": "Admin Access",
     "cookieNotice": "By using this site, you agree to our use of cookies."
+  },
+  "about" :
+  {
+    "title": "About",
+    "intro": ""
+  },
+  "admin": {
+      "dashboard": {
+        "properties": "Properties",
+        "users": "Users",
+        "appointments": "Appointments",
+        "recentProperties": "Recent Properties",
+        "upcomingAppointments": "Upcoming Appointments"
+      }
   }
 }
