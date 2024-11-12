@@ -140,9 +140,9 @@
           "properties": "Immobili",
           "services": "Servizi",
           "about": "Chi Siamo",
-          "contact": "Contatti"
+          "contact": "Contatti",
+          "privacy":"Politica sulla Privacy"
         },
-        "privacy": "Politica sulla Privacy",
         "propertyTypes": "Tipologie di Immobili",
         "properties": {
           "luxury": "Lusso",
