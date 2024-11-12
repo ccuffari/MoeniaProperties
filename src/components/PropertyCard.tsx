@@ -32,7 +32,7 @@ export default function PropertyCard({
   status
 }: PropertyCardProps) {
   const { t } = useTranslation();
-<
+
   return (
     <Link to={`/property/${id}`}>
       <div className="bg-white rounded-lg shadow-lg overflow-hidden transition-transform hover:scale-[1.02]">
