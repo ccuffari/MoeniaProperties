@@ -51,7 +51,8 @@
     "scheduleViewing": "Prenota una Visita",
     "details": {
       "schedule": "Prenota una Visita"
-    }
+    },
+    "noResults": "Nessun risultato"
   },
   "properties": {
     "featured": "Immobili in Evidenza",

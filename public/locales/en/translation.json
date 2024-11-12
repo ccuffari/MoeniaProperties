@@ -51,7 +51,8 @@
     "scheduleViewing": "Schedule Viewing",
     "details": {
       "schedule": "Schedule a Viewing"
-    }
+    },
+    "noResults": "No results"
   },
   "properties": {
     "featured": "Featured Properties",
