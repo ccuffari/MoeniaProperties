@@ -35,46 +35,45 @@ export default function PropertyCard({
 
   return (
     <Link to={`/property/${id}`}>
-      <div className="bg-white border border-old-money-100 hover:border-old-money-200 transition-all">
+      <div className="bg-white rounded-lg shadow-lg overflow-hidden transition-transform hover:scale-[1.02]">
         <div className="relative">
           <ImageCarousel images={[mainImage, ...images]} alt={title} />
-          <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm text-old-money-800 px-4 py-1 text-xs tracking-wide">
+          <div className="absolute top-4 right-4 bg-black text-white px-3 py-1 rounded-full text-sm">
             {t(`hero.propertyType.${type.toLowerCase()}`)}
           </div>
           {status !== 'active' && (
-            <div className="absolute top-4 left-4 bg-old-money-800/90 backdrop-blur-sm text-white px-4 py-1 text-xs tracking-wide uppercase">
+            <div className="absolute top-4 left-4 bg-red-500 text-white px-3 py-1 rounded-full text-sm uppercase">
               {status}
             </div>
           )}
         </div>
         
-        <div className="p-8">
-          <div className="mb-4">
-            <h3 className="font-display text-xl text-old-money-800 mb-2">{title}</h3>
-            <div className="flex items-center text-old-money-600 text-sm">
-              <MapPin className="h-4 w-4 mr-2" />
-              <p>{location}</p>
-            </div>
+        <div className="p-6">
+          <div className="flex justify-between items-start mb-4">
+            <h3 className="text-xl font-semibold">{title}</h3>
+            <p className="text-lg font-bold text-gray-900">{price}</p>
           </div>
           
-          <div className="flex justify-between items-end">
-            <div className="grid grid-cols-3 gap-4 text-old-money-600 text-sm">
-              {beds !== null && (
-                <div className="flex items-center">
-                  <Bed className="h-4 w-4 mr-1" />
-                  <span>{beds}</span>
-                </div>
-              )}
+          <div className="flex items-center text-gray-600 mb-4">
+            <MapPin className="h-4 w-4 mr-2" />
+            <p>{location}</p>
+          </div>
+          
+          <div className="flex justify-between text-gray-600">
+            {beds !== null && (
               <div className="flex items-center">
-                <Bath className="h-4 w-4 mr-1" />
-                <span>{baths}</span>
+                <Bed className="h-4 w-4 mr-1" />
+                <span>{beds} {t('property.beds')}</span>
               </div>
-              <div className="flex items-center">
-                <Square className="h-4 w-4 mr-1" />
-                <span>{sqft}</span>
-              </div>
+            )}
+            <div className="flex items-center">
+              <Bath className="h-4 w-4 mr-1" />
+              <span>{baths} {t('property.baths')}</span>
             </div>
-            <p className="font-display text-xl text-old-money-800">{price}</p>
+            <div className="flex items-center">
+              <Square className="h-4 w-4 mr-1" />
+              <span>{sqft} {t('property.sqft')}</span>
+            </div>
           </div>
         </div>
       </div>

@@ -2,158 +2,113 @@
   "nav": {
     "home": "Home",
     "properties": "Immobili",
-    "services": "Servizi",
     "about": "Chi Siamo",
     "contact": "Contatti"
   },
   "login": {
-    "title": "Accesso Area Clienti",
-    "subtitle": "Accedi alla tua area clienti esclusiva",
+    "title": "Accesso Admin",
     "email": "Indirizzo Email",
     "password": "Password",
     "submit": "Accedi",
     "loading": "Accesso in corso...",
     "error": {
-      "invalid": "Email o password non validi. Riprova."
-    },
-    "forgotPassword": "Password Dimenticata?",
-    "rememberMe": "Ricordami"
+      "invalid": "Email o password non validi"
+    }
   },
-  "admin": {
-    "dashboard": {
-      "welcome": "Bentornato",
-      "lastLogin": "Ultimo accesso",
-      "properties": "Immobili",
-      "activeListings": "Annunci Attivi",
-      "pendingListings": "In Attesa",
-      "users": "Utenti Attivi",
-      "appointments": "Appuntamenti Programmati",
-      "recentActivity": "Attività Recente",
-      "quickActions": "Azioni Rapide",
-      "viewAll": "Vedi Tutti",
-      "stats": {
-        "totalRevenue": "Ricavi Totali",
-        "averagePrice": "Prezzo Medio",
-        "salesThisMonth": "Vendite Questo Mese"
-      }
+  "hero": {
+    "title": "Proprietà Eccezionali, Vita Straordinaria",
+    "subtitle": "Scopri proprietà prestigiose che riflettono il tuo gusto distintivo",
+    "propertyType": {
+      "all": "Tutte le Tipologie",
+      "house": "Casa",
+      "apartment": "Appartamento",
+      "office": "Ufficio"
     },
-    "properties": {
-      "title": "Gestione Immobili",
-      "addNew": "Aggiungi Nuovo Immobile",
-      "search": "Cerca immobili...",
-      "filter": "Filtra",
-      "sort": "Ordina per",
-      "table": {
-        "property": "Immobile",
-        "location": "Località",
-        "price": "Prezzo",
-        "status": "Stato",
-        "actions": "Azioni"
-      },
-      "form": {
-        "title": "Dettagli Immobile",
-        "propertyName": "Nome Immobile",
-        "description": "Descrizione",
-        "price": "Prezzo",
-        "location": "Località",
-        "type": "Tipologia",
-        "status": "Stato",
-        "features": "Caratteristiche",
-        "images": "Immagini",
-        "mainImage": "Immagine Principale",
-        "additionalImages": "Immagini Aggiuntive",
-        "save": "Salva Modifiche",
-        "cancel": "Annulla",
-        "delete": "Elimina Immobile",
-        "confirmDelete": "Sei sicuro di voler eliminare questo immobile?"
-      }
-    },
-    "users": {
-      "title": "Gestione Utenti",
-      "addNew": "Aggiungi Nuovo Utente",
-      "roles": {
-        "admin": "Amministratore",
-        "agent": "Agente",
-        "client": "Cliente"
-      }
-    },
-    "settings": {
-      "title": "Impostazioni",
-      "profile": "Impostazioni Profilo",
-      "security": "Sicurezza",
-      "notifications": "Notifiche",
-      "preferences": "Preferenze"
+    "search": "Cerca"
+  },
+  "search": {
+    "placeholder": "Cerca immobili...",
+    "location": "Località",
+    "propertyType": "Tipologia",
+    "priceRange": {
+      "label": "Fascia di Prezzo",
+      "any": "Qualsiasi Prezzo",
+      "upTo1M": "Fino a 1M€",
+      "1Mto5M": "1M€ - 5M€",
+      "above5M": "Oltre 5M€"
+    }
+  },
+  "property": {
+    "notFound": "Immobile non trovato",
+    "backToProperties": "Torna agli Immobili",
+    "location": "Località",
+    "beds": "Camere",
+    "baths": "Bagni",
+    "sqft": "Mq",
+    "description": "Descrizione",
+    "features": "Caratteristiche",
+    "scheduleViewing": "Prenota una Visita",
+    "details": {
+      "schedule": "Prenota una Visita"
     }
   },
   "properties": {
-    "title": "Proprietà Distintive",
-    "subtitle": "Scopri la nostra selezione curata di proprietà eccezionali",
-    "filters": {
-      "all": "Tutte le Proprietà",
-      "location": "Località",
-      "type": "Tipologia",
-      "price": "Fascia di Prezzo",
-      "status": "Stato",
-      "sort": {
-        "newest": "Più Recenti",
-        "priceHigh": "Prezzo: Dal più alto",
-        "priceLow": "Prezzo: Dal più basso"
+    "featured": "Immobili in Evidenza",
+    "viewDetails": "Vedi Dettagli",
+    "items": {
+      "1": {
+        "title": "Villa Moderna con Vista Mare",
+        "description": "Villa contemporanea di lusso con vista mare mozzafiato, piscina a sfioro e domotica."
+      },
+      "2": {
+        "title": "Attico di Lusso nel Centro Storico",
+        "description": "Prestigioso attico con terrazza panoramica nel cuore di Roma."
+      },
+      "3": {
+        "title": "Uffici di Prestigio in Grattacielo",
+        "description": "Spazi direzionali di alto livello in uno dei grattacieli più iconici di Milano."
+      },
+      "4": {
+        "title": "Villa Storica con Parco",
+        "description": "Magnifica villa del XVI secolo immersa in un parco secolare."
+      },
+      "5": {
+        "title": "Penthouse con Terrazza",
+        "description": "Esclusivo attico con vista sulla laguna di Venezia."
       }
+    }
+  },
+  "contact": {
+    "title": "Contattaci",
+    "getInTouch": "Mettiti in Contatto",
+    "form": {
+      "name": "Nome",
+      "email": "Email",
+      "message": "Messaggio",
+      "send": "Invia Messaggio"
     },
-    "card": {
-      "beds": "Camere",
-      "baths": "Bagni",
-      "sqft": "Metri Quadri",
-      "viewDetails": "Vedi Dettagli",
-      "status": {
-        "active": "Disponibile",
-        "pending": "Sotto Contratto",
-        "sold": "Venduto"
-      }
+    "info": {
+      "title": "Informazioni di Contatto",
+      "phone": "Telefono",
+      "email": "Email",
+      "office": "Ufficio",
+      "hours": "Orari di Apertura"
+    }
+  },
+  "footer": {
+    "description": "Selezioniamo proprietà eccezionali per clienti esigenti che cercano qualità e raffinatezza senza compromessi.",
+    "quickLinks": "Link Rapidi",
+    "propertyTypes": "Tipologie di Immobili",
+    "followUs": "Seguici",
+    "properties": {
+      "luxury": "Case di Lusso",
+      "penthouses": "Attici",
+      "offices": "Uffici Premium",
+      "estates": "Tenute"
     },
-    "detail": {
-      "schedule": "Prenota Visita",
-      "contact": "Contatta Agente",
-      "features": "Caratteristiche",
-      "description": "Descrizione",
-      "location": "Posizione",
-      "propertyInfo": "Informazioni Immobile",
-      "yearBuilt": "Anno di Costruzione",
-      "propertyType": "Tipologia",
-      "parking": "Posti Auto",
-      "viewings": {
-        "title": "Prenota una Visita",
-        "date": "Data Preferita",
-        "time": "Orario Preferito",
-        "name": "Il Tuo Nome",
-        "email": "Indirizzo Email",
-        "phone": "Numero di Telefono",
-        "message": "Messaggio",
-        "submit": "Richiedi Visita",
-        "success": "Richiesta di visita inviata con successo",
-        "error": "Errore nell'invio della richiesta. Riprova."
-      }
-    },
-      "footer": {
-        "description": "Scopri immobili esclusivi su misura per il tuo stile di vita.",
-        "quickLinks": {
-          "properties": "Immobili",
-          "services": "Servizi",
-          "about": "Chi Siamo",
-          "contact": "Contatti",
-          "privacy":"Politica sulla Privacy"
-        },
-        "propertyTypes": "Tipologie di Immobili",
-        "properties": {
-          "luxury": "Lusso",
-          "penthouses": "Attici",
-          "estates": "Tenute",
-          "villas": "Ville"
-        },
-        "followUs": "Seguici",
-        "rights": "© 2024 Moenia Properties. Tutti i diritti riservati.",
-        "cookieNotice": "Questo sito utilizza i cookie per migliorare l'esperienza utente.",
-        "privacyPolicy": "Politica sulla Privacy"
-      }
+    "rights": "Tutti i diritti riservati",
+    "privacy": "Privacy Policy",
+    "adminAccess": "Accesso Admin",
+    "cookieNotice": "Utilizzando questo sito, accetti l'uso dei cookie."
   }
 }

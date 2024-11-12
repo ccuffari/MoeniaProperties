@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { usePropertyStore } from '../store/propertyStore';
+import SearchFilters from '../components/SearchFilters';
 import PropertyCard from '../components/PropertyCard';
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
@@ -8,12 +9,32 @@ export default function Properties() {
   const { t } = useTranslation();
   const { properties, loading, error } = usePropertyStore();
 
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "itemListElement": properties.map((property, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "item": {
+        "@type": "RealEstateListing",
+        "name": property.title,
+        "description": property.description,
+        "image": property.mainImage,
+        "price": property.price,
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": property.location
+        }
+      }
+    }))
+  };
+
   if (loading) {
     return (
-      <div className="pt-24 pb-16 bg-cream min-h-screen">
+      <div className="pt-24 pb-16">
         <div className="container mx-auto px-4">
           <div className="flex justify-center items-center min-h-[400px]">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-old-money-800"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900"></div>
           </div>
         </div>
       </div>
@@ -22,9 +43,9 @@ export default function Properties() {
 
   if (error) {
     return (
-      <div className="pt-24 pb-16 bg-cream min-h-screen">
+      <div className="pt-24 pb-16">
         <div className="container mx-auto px-4">
-          <div className="text-center text-old-money-600">
+          <div className="text-center text-red-600">
             {error}
           </div>
         </div>
@@ -33,30 +54,27 @@ export default function Properties() {
   }
 
   return (
-    <div className="pt-24 pb-16 bg-cream min-h-screen">
+    <div className="pt-24 pb-16">
       <Helmet>
-        <title>{t('properties.title')} | Moenia Properties</title>
-        <meta name="description" content={t('properties.subtitle')} />
+        <title>{t('properties.meta.title')}</title>
+        <meta name="description" content={t('properties.meta.description')} />
+        <script type="application/ld+json">
+          {JSON.stringify(structuredData)}
+        </script>
       </Helmet>
 
       <div className="container mx-auto px-4">
-        <div className="max-w-3xl mx-auto text-center mb-16">
-          <h1 className="font-display text-4xl md:text-5xl text-old-money-800 mb-6">
-            {t('properties.title')}
-          </h1>
-          <p className="text-old-money-600 text-lg">
-            {t('properties.subtitle')}
-          </p>
-        </div>
+        <h1 className="text-4xl font-bold mb-8">{t('properties.title')}</h1>
+        <SearchFilters />
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {properties.length > 0 ? (
             properties.map((property) => (
               <PropertyCard key={property.id} {...property} />
             ))
           ) : (
             <div className="col-span-full text-center py-12">
-              <p className="text-xl text-old-money-600">{t('properties.noResults')}</p>
+              <p className="text-xl text-gray-600">{t('properties.noResults')}</p>
             </div>
           )}
         </div>

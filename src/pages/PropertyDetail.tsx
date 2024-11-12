@@ -16,13 +16,17 @@ export default function PropertyDetail() {
 
   if (!property) {
     return (
-      <div className="pt-24 pb-16 bg-cream min-h-screen">
+      <div className="pt-24 pb-16">
+        <Helmet>
+          <title>{t('property.notFound')} - Moenia Properties</title>
+          <meta name="description" content={t('property.notFound')} />
+        </Helmet>
         <div className="container mx-auto px-4">
           <div className="text-center">
-            <h1 className="font-display text-3xl text-old-money-800 mb-6">{t('property.notFound')}</h1>
+            <h1 className="text-2xl font-bold mb-4">{t('property.notFound')}</h1>
             <button 
               onClick={() => navigate('/properties')}
-              className="text-old-money-600 hover:text-old-money-800 flex items-center justify-center gap-2"
+              className="text-gray-600 hover:text-gray-900 flex items-center justify-center gap-2"
             >
               <ArrowLeft className="h-5 w-5" />
               {t('property.backToProperties')}
@@ -33,95 +37,113 @@ export default function PropertyDetail() {
     );
   }
 
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "RealEstateListing",
+    "name": property.title,
+    "description": property.description,
+    "image": property.mainImage,
+    "price": property.price,
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": property.location
+    },
+    "floorSize": {
+      "@type": "QuantitativeValue",
+      "value": property.sqft,
+      "unitCode": "FTK"
+    }
+  };
+
   return (
-    <div className="pt-24 pb-16 bg-cream min-h-screen">
+    <div className="pt-24 pb-16">
       <Helmet>
-        <title>{`${property.title} | Moenia Properties`}</title>
-        <meta name="description" content={property.description} />
+        <title>{`${property.title} - ${property.location} | Moenia Properties`}</title>
+        <meta name="description" content={`${property.description} ${t('property.location')}: ${property.location}. ${property.sqft} ${t('property.sqft')}, ${property.beds} ${t('property.beds')}, ${property.baths} ${t('property.baths')}. ${t('property.scheduleViewing')}.`} />
+        <meta property="og:title" content={`${property.title} - ${property.location}`} />
+        <meta property="og:description" content={property.description} />
+        <meta property="og:image" content={property.mainImage} />
+        <script type="application/ld+json">
+          {JSON.stringify(structuredData)}
+        </script>
       </Helmet>
 
       <div className="container mx-auto px-4">
         <button 
           onClick={() => navigate('/properties')}
-          className="text-old-money-600 hover:text-old-money-800 flex items-center gap-2 mb-8"
+          className="text-gray-600 hover:text-gray-900 flex items-center gap-2 mb-6"
         >
           <ArrowLeft className="h-5 w-5" />
           {t('property.backToProperties')}
         </button>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          <div className="relative h-[600px]">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="relative h-[400px] lg:h-[600px]">
             <img 
               src={property.mainImage} 
               alt={property.title}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover rounded-lg"
             />
-            <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm text-old-money-800 px-4 py-1 text-xs tracking-wide">
-              {t(`properties.types.${property.type.toLowerCase()}`)}
+            <div className="absolute top-4 right-4 bg-black text-white px-3 py-1 rounded-full">
+              {t(`hero.propertyType.${property.type.toLowerCase()}`)}
             </div>
           </div>
 
-          <div className="space-y-8">
+          <div className="space-y-6">
             <div>
-              <h1 className="font-display text-4xl text-old-money-800 mb-4">{property.title}</h1>
-              <div className="flex items-center text-old-money-600 mb-4">
+              <h1 className="text-4xl font-bold mb-2">{property.title}</h1>
+              <div className="flex items-center text-gray-600 mb-4">
                 <MapPin className="h-5 w-5 mr-2" />
                 <span>{property.location}</span>
               </div>
-              <p className="font-display text-3xl text-old-money-800">{property.price}</p>
+              <p className="text-3xl font-bold text-gray-900">{property.price}</p>
             </div>
 
-            <div className="grid grid-cols-3 gap-8 py-8 border-y border-old-money-100">
+            <div className="grid grid-cols-3 gap-4 py-6 border-y border-gray-200">
               {property.beds !== null && (
                 <div className="text-center">
-                  <Bed className="h-6 w-6 mx-auto mb-2 text-old-money-600" />
-                  <p className="font-display text-xl text-old-money-800">{property.beds}</p>
-                  <p className="text-old-money-600 text-sm">{t('properties.details.beds')}</p>
+                  <Bed className="h-6 w-6 mx-auto mb-2" />
+                  <p className="font-semibold">{property.beds}</p>
+                  <p className="text-gray-600">{t('property.beds')}</p>
                 </div>
               )}
               <div className="text-center">
-                <Bath className="h-6 w-6 mx-auto mb-2 text-old-money-600" />
-                <p className="font-display text-xl text-old-money-800">{property.baths}</p>
-                <p className="text-old-money-600 text-sm">{t('properties.details.baths')}</p>
+                <Bath className="h-6 w-6 mx-auto mb-2" />
+                <p className="font-semibold">{property.baths}</p>
+                <p className="text-gray-600">{t('property.baths')}</p>
               </div>
               <div className="text-center">
-                <Square className="h-6 w-6 mx-auto mb-2 text-old-money-600" />
-                <p className="font-display text-xl text-old-money-800">{property.sqft}</p>
-                <p className="text-old-money-600 text-sm">{t('properties.details.sqft')}</p>
+                <Square className="h-6 w-6 mx-auto mb-2" />
+                <p className="font-semibold">{property.sqft}</p>
+                <p className="text-gray-600">{t('property.sqft')}</p>
               </div>
             </div>
 
             <div>
-              <h2 className="font-display text-2xl text-old-money-800 mb-4">
-                {t('properties.details.features')}
-              </h2>
-              <p className="text-old-money-600 leading-relaxed">{property.description}</p>
+              <h2 className="text-2xl font-bold mb-4">{t('property.description')}</h2>
+              <p className="text-gray-600">{property.description}</p>
             </div>
 
             {property.features && property.features.length > 0 && (
-              <div className="grid grid-cols-2 gap-4">
-                {property.features.map((feature, index) => (
-                  <div key={index} className="flex items-center text-old-money-600">
-                    <span className="w-2 h-2 bg-old-money-800 rounded-full mr-2"></span>
-                    {feature}
-                  </div>
-                ))}
+              <div>
+                <h2 className="text-2xl font-bold mb-4">{t('property.features')}</h2>
+                <ul className="grid grid-cols-2 gap-4">
+                  {property.features.map((feature, index) => (
+                    <li key={index} className="flex items-center text-gray-600">
+                      <span className="w-2 h-2 bg-gray-900 rounded-full mr-2"></span>
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
               </div>
             )}
 
-            <div className="flex gap-4">
-              <button 
-                onClick={() => setIsScheduleModalOpen(true)}
-                className="flex-1 bg-old-money-800 text-white px-6 py-3 text-sm tracking-wide hover:bg-old-money-700 transition-colors"
-              >
-                {t('properties.details.schedule')}
-              </button>
-              <button 
-                className="flex-1 border border-old-money-800 text-old-money-800 px-6 py-3 text-sm tracking-wide hover:bg-old-money-50 transition-colors"
-              >
-                {t('properties.details.contact')}
-              </button>
-            </div>
+            <button 
+              onClick={() => setIsScheduleModalOpen(true)}
+              className="w-full bg-gray-900 text-white py-3 rounded-lg hover:bg-gray-800"
+            >
+              {t('property.scheduleViewing')}
+            </button>
           </div>
         </div>
 
