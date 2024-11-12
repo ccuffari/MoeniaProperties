@@ -133,6 +133,27 @@
         "success": "Viewing request submitted successfully",
         "error": "Error submitting request. Please try again."
       }
-    }
+    },
+      "footer": {
+        "description": "Discover exclusive properties tailored to your lifestyle.",
+        "quickLinks": {
+          "properties": "Properties",
+          "services": "Services",
+          "about": "About",
+          "contact": "Contact"
+        },
+        "privacy": "Privacy Policy",
+        "propertyTypes": "Property Types",
+        "properties": {
+          "luxury": "Luxury",
+          "penthouses": "Penthouses",
+          "estates": "Estates",
+          "villas": "Villas"
+        },
+        "followUs": "Follow Us",
+        "rights": "© 2024 Moenia Properties. All rights reserved.",
+        "cookieNotice": "This site uses cookies to enhance user experience.",
+        "privacyPolicy": "Privacy Policy"
+      }
   }
 }

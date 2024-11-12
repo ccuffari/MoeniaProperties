@@ -133,6 +133,27 @@
         "success": "Richiesta di visita inviata con successo",
         "error": "Errore nell'invio della richiesta. Riprova."
       }
-    }
+    },
+      "footer": {
+        "description": "Scopri immobili esclusivi su misura per il tuo stile di vita.",
+        "quickLinks": {
+          "properties": "Immobili",
+          "services": "Servizi",
+          "about": "Chi Siamo",
+          "contact": "Contatti"
+        },
+        "privacy": "Politica sulla Privacy",
+        "propertyTypes": "Tipologie di Immobili",
+        "properties": {
+          "luxury": "Lusso",
+          "penthouses": "Attici",
+          "estates": "Tenute",
+          "villas": "Ville"
+        },
+        "followUs": "Seguici",
+        "rights": "© 2024 Moenia Properties. Tutti i diritti riservati.",
+        "cookieNotice": "Questo sito utilizza i cookie per migliorare l'esperienza utente.",
+        "privacyPolicy": "Politica sulla Privacy"
+      }
   }
 }
