@@ -1,12 +1,159 @@
 {
+  "nav": {
+    "home": "Home",
+    "properties": "Immobili",
+    "services": "Servizi",
+    "about": "Chi Siamo",
+    "contact": "Contatti"
+  },
+  "login": {
+    "title": "Accesso Area Clienti",
+    "subtitle": "Accedi alla tua area clienti esclusiva",
+    "email": "Indirizzo Email",
+    "password": "Password",
+    "submit": "Accedi",
+    "loading": "Accesso in corso...",
+    "error": {
+      "invalid": "Email o password non validi. Riprova."
+    },
+    "forgotPassword": "Password Dimenticata?",
+    "rememberMe": "Ricordami"
+  },
   "admin": {
-    "login": {
-      "title": "Accedi a Moenia Properties",
-      "description": "Accedi al pannello di amministrazione",
-      "signInWithGoogle": "Accedi con Google",
-      "signingIn": "Accesso in corso...",
-      "error": "Si è verificato un errore durante l'accesso. Riprova.",
-      "popupNote": "Assicurati che i popup siano abilitati per questo sito"
+    "dashboard": {
+      "welcome": "Bentornato",
+      "lastLogin": "Ultimo accesso",
+      "properties": "Immobili",
+      "activeListings": "Annunci Attivi",
+      "pendingListings": "In Attesa",
+      "users": "Utenti Attivi",
+      "appointments": "Appuntamenti Programmati",
+      "recentActivity": "Attività Recente",
+      "quickActions": "Azioni Rapide",
+      "viewAll": "Vedi Tutti",
+      "stats": {
+        "totalRevenue": "Ricavi Totali",
+        "averagePrice": "Prezzo Medio",
+        "salesThisMonth": "Vendite Questo Mese"
+      }
+    },
+    "properties": {
+      "title": "Gestione Immobili",
+      "addNew": "Aggiungi Nuovo Immobile",
+      "search": "Cerca immobili...",
+      "filter": "Filtra",
+      "sort": "Ordina per",
+      "table": {
+        "property": "Immobile",
+        "location": "Località",
+        "price": "Prezzo",
+        "status": "Stato",
+        "actions": "Azioni"
+      },
+      "form": {
+        "title": "Dettagli Immobile",
+        "propertyName": "Nome Immobile",
+        "description": "Descrizione",
+        "price": "Prezzo",
+        "location": "Località",
+        "type": "Tipologia",
+        "status": "Stato",
+        "features": "Caratteristiche",
+        "images": "Immagini",
+        "mainImage": "Immagine Principale",
+        "additionalImages": "Immagini Aggiuntive",
+        "save": "Salva Modifiche",
+        "cancel": "Annulla",
+        "delete": "Elimina Immobile",
+        "confirmDelete": "Sei sicuro di voler eliminare questo immobile?"
+      }
+    },
+    "users": {
+      "title": "Gestione Utenti",
+      "addNew": "Aggiungi Nuovo Utente",
+      "roles": {
+        "admin": "Amministratore",
+        "agent": "Agente",
+        "client": "Cliente"
+      }
+    },
+    "settings": {
+      "title": "Impostazioni",
+      "profile": "Impostazioni Profilo",
+      "security": "Sicurezza",
+      "notifications": "Notifiche",
+      "preferences": "Preferenze"
+    }
+  },
+  "properties": {
+    "title": "Proprietà Distintive",
+    "subtitle": "Scopri la nostra selezione curata di proprietà eccezionali",
+    "filters": {
+      "all": "Tutte le Proprietà",
+      "location": "Località",
+      "type": "Tipologia",
+      "price": "Fascia di Prezzo",
+      "status": "Stato",
+      "sort": {
+        "newest": "Più Recenti",
+        "priceHigh": "Prezzo: Dal più alto",
+        "priceLow": "Prezzo: Dal più basso"
+      }
+    },
+    "card": {
+      "beds": "Camere",
+      "baths": "Bagni",
+      "sqft": "Metri Quadri",
+      "viewDetails": "Vedi Dettagli",
+      "status": {
+        "active": "Disponibile",
+        "pending": "Sotto Contratto",
+        "sold": "Venduto"
+      }
+    },
+    "detail": {
+      "schedule": "Prenota Visita",
+      "contact": "Contatta Agente",
+      "features": "Caratteristiche",
+      "description": "Descrizione",
+      "location": "Posizione",
+      "propertyInfo": "Informazioni Immobile",
+      "yearBuilt": "Anno di Costruzione",
+      "propertyType": "Tipologia",
+      "parking": "Posti Auto",
+      "viewings": {
+        "title": "Prenota una Visita",
+        "date": "Data Preferita",
+        "time": "Orario Preferito",
+        "name": "Il Tuo Nome",
+        "email": "Indirizzo Email",
+        "phone": "Numero di Telefono",
+        "message": "Messaggio",
+        "submit": "Richiedi Visita",
+        "success": "Richiesta di visita inviata con successo",
+        "error": "Errore nell'invio della richiesta. Riprova."
+      }
+    },
+    "footer": {
+      "description": "Scopri immobili esclusivi su misura per il tuo stile di vita.",
+      "quickLinks": {
+        "properties": "Immobili",
+        "services": "Servizi",
+        "about": "Chi Siamo",
+        "contact": "Contatti"
+      },
+      "privacy": "Politica sulla Privacy",
+      "propertyTypes": "Tipologie di Immobili",
+      "properties": {
+        "luxury": "Lusso",
+        "penthouses": "Attici",
+        "estates": "Tenute",
+        "villas": "Ville"
+      },
+      "followUs": "Seguici",
+      "rights": "© 2024 Moenia Properties. Tutti i diritti riservati.",
+      "cookieNotice": "Questo sito utilizza i cookie per migliorare l'esperienza utente.",
+      "privacyPolicy": "Politica sulla Privacy"
     }
   }
 }
