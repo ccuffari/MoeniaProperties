@@ -78,7 +78,8 @@
         "title": "Penthouse with Terrace",
         "description": "Exclusive penthouse with views of the Venice lagoon."
       }
-    }
+    },
+    "noResults": "No results"
   },
   "contact": {
     "title": "Contact Us",

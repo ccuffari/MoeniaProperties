@@ -78,7 +78,8 @@
         "title": "Penthouse con Terrazza",
         "description": "Esclusivo attico con vista sulla laguna di Venezia."
       }
-    }
+    },
+    "noResults": "Nessun risultato"
   },
   "contact": {
     "title": "Contattaci",
