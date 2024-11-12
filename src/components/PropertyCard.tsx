@@ -128,7 +128,7 @@ export default function PropertyCard({
           const docRef = doc(db, 'properties', id);
           const docSnap = await getDoc(docRef);
           if (docSnap.exists()) {
-            setDynamicTitle(docSnap.data().title);
+            setDynamicTitle(docSnap.data().title); // Set dynamicTitle from Firestore
           } else {
             console.log("No such document!");
           }
