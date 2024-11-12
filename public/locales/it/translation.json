@@ -135,7 +135,9 @@
       "baths": "Bagni",
       "sqft": "Metri Quadri",
       "cancel": "Annulla",
-      "create": "Crea"
+      "create": "Crea",
+      "save": "Salva",
+      "confirmDelete": "Conferma eliminazione"
     }
 }
 }

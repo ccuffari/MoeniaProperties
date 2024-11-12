@@ -135,7 +135,9 @@
       "baths": "Baths",
       "sqft": "Square Feet",
       "cancel": "Cancel",
-      "create": "Create"
+      "create": "Create",
+      "save": "Save",
+      "confirmDelete": "Confirm Deletion"
     }
 }
 }
