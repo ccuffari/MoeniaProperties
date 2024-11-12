@@ -141,6 +141,21 @@
     "price": "Prezzo",
     "status": "Stato",
     "actions": "Azioni"
-  }
+  },
+    "form": {
+      "title": "Titolo",
+      "price": "Prezzo",
+      "location": "Posizione",
+      "type": "Tipo",
+      "status": "Stato",
+      "mainImage": "Immagine Principale",
+      "additionalImages": "Immagini Aggiuntive",
+      "description": "Descrizione",
+      "beds": "Letti",
+      "baths": "Bagni",
+      "sqft": "Metri Quadri",
+      "cancel": "Annulla",
+      "create": "Crea"
+    }
 }
 }

@@ -141,6 +141,21 @@
     "price": "Price",
     "status": "Status",
     "actions": "Actions"
-  }
+  },
+    "form": {
+      "title": "Title",
+      "price": "Price",
+      "location": "Location",
+      "type": "Type",
+      "status": "Status",
+      "mainImage": "Main Image",
+      "additionalImages": "Additional Images",
+      "description": "Description",
+      "beds": "Beds",
+      "baths": "Baths",
+      "sqft": "Square Feet",
+      "cancel": "Cancel",
+      "create": "Create"
+    }
 }
 }
