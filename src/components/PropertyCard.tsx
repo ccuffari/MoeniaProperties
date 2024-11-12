@@ -87,7 +87,7 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import ImageCarousel from './ImageCarousel';
 import { doc, getDoc } from 'firebase/firestore';
-import { db } from './firebase'; // Assicurati che il percorso sia corretto
+import { db } from './config/firebase'; // Assicurati che il percorso sia corretto
 
 interface PropertyCardProps {
   id: string;
