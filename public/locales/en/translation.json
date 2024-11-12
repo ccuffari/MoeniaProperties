@@ -58,26 +58,6 @@
     "featured": "Featured Properties",
     "viewDetails": "View Details",
     "items": {
-      "1": {
-        "title": "Modern Villa with Sea View",
-        "description": "Luxurious contemporary villa with stunning sea views, infinity pool, and smart home features."
-      },
-      "2": {
-        "title": "Historic Center Luxury Penthouse",
-        "description": "Prestigious penthouse with panoramic terrace in the heart of Rome."
-      },
-      "3": {
-        "title": "Prestigious Skyscraper Offices",
-        "description": "High-level directional spaces in one of Milan's most iconic skyscrapers."
-      },
-      "4": {
-        "title": "Historic Villa with Park",
-        "description": "Magnificent 16th century villa immersed in a secular park."
-      },
-      "5": {
-        "title": "Penthouse with Terrace",
-        "description": "Exclusive penthouse with views of the Venice lagoon."
-      }
     },
     "noResults": "No results",
     "title": "Properties"

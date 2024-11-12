@@ -58,26 +58,6 @@
     "featured": "Immobili in Evidenza",
     "viewDetails": "Vedi Dettagli",
     "items": {
-      "1": {
-        "title": "Villa Moderna con Vista Mare",
-        "description": "Villa contemporanea di lusso con vista mare mozzafiato, piscina a sfioro e domotica."
-      },
-      "2": {
-        "title": "Attico di Lusso nel Centro Storico",
-        "description": "Prestigioso attico con terrazza panoramica nel cuore di Roma."
-      },
-      "3": {
-        "title": "Uffici di Prestigio in Grattacielo",
-        "description": "Spazi direzionali di alto livello in uno dei grattacieli più iconici di Milano."
-      },
-      "4": {
-        "title": "Villa Storica con Parco",
-        "description": "Magnifica villa del XVI secolo immersa in un parco secolare."
-      },
-      "5": {
-        "title": "Penthouse con Terrazza",
-        "description": "Esclusivo attico con vista sulla laguna di Venezia."
-      }
     },
     "noResults": "Nessun risultato",
     "title": "Immobili"
