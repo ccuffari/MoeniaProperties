@@ -115,17 +115,31 @@
     "adminAccess": "Accesso Admin",
     "cookieNotice": "Utilizzando questo sito, accetti l'uso dei cookie."
   },
-  "about": {
-    "title": "About",
-    "intro": ""
+"about": {
+  "title": "Informazioni",
+  "intro": "Scopri di più sulla nostra azienda e sui nostri servizi."
+},
+"admin": {
+  "dashboard": {
+    "properties": "Proprietà",
+    "users": "Utenti",
+    "appointments": "Appuntamenti",
+    "recentProperties": "Proprietà Recenti",
+    "upcomingAppointments": "Appuntamenti in Arrivo",
+    "welcome": "Benvenuto",
+    "activeListings": "Inserzioni Attive",
+    "activeUsers": "Utenti Attivi",
+    "lastLogin": "Ultimo Accesso"
   },
-  "admin": {
-    "dashboard": {
-      "properties": "Immobili",
-      "users": "Utenti",
-      "appointments": "Appuntamenti",
-      "recentProperties": "Immobili recenti",
-      "upcomingAppointments": "Prossimi Appuntamenti"
-    }
+  "viewAll": "Visualizza Tutto",
+  "addProperty": "Aggiungi Proprietà",
+  "searchProperties": "Cerca Proprietà",
+  "table": {
+    "property": "Proprietà",
+    "location": "Posizione",
+    "price": "Prezzo",
+    "status": "Stato",
+    "actions": "Azioni"
+  }
 }
 }

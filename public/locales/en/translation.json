@@ -115,18 +115,31 @@
     "adminAccess": "Admin Access",
     "cookieNotice": "By using this site, you agree to our use of cookies."
   },
-  "about" :
-  {
-    "title": "About",
-    "intro": ""
+"about": {
+  "title": "About",
+  "intro": "Learn more about our company and services."
+},
+"admin": {
+  "dashboard": {
+    "properties": "Properties",
+    "users": "Users",
+    "appointments": "Appointments",
+    "recentProperties": "Recent Properties",
+    "upcomingAppointments": "Upcoming Appointments",
+    "welcome": "Welcome",
+    "activeListings": "Active Listings",
+    "activeUsers": "Active Users",
+    "lastLogin": "Last Login"
   },
-  "admin": {
-      "dashboard": {
-        "properties": "Properties",
-        "users": "Users",
-        "appointments": "Appointments",
-        "recentProperties": "Recent Properties",
-        "upcomingAppointments": "Upcoming Appointments"
-      }
+  "viewAll": "View All",
+  "addProperty": "Add Property",
+  "searchProperties": "Search Properties",
+  "table": {
+    "property": "Property",
+    "location": "Location",
+    "price": "Price",
+    "status": "Status",
+    "actions": "Actions"
   }
+}
 }
