@@ -82,12 +82,13 @@
 // }
 
 import * as React from 'react';
+import { useEffect, useState } from 'react';
 import { MapPin, Bed, Bath, Square } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import ImageCarousel from './ImageCarousel';
+import { db } from '../config/firebase';
 import { doc, getDoc } from 'firebase/firestore';
-import { db } from '../config/firebase'; // Assicurati che il percorso sia corretto
 
 interface PropertyCardProps {
   id: string;
@@ -117,32 +118,34 @@ export default function PropertyCard({
   status
 }: PropertyCardProps) {
   const { t } = useTranslation();
-  const [dynamicTitle, setDynamicTitle] = React.useState<string | null>(title);
+  const [dynamicTitle, setDynamicTitle] = useState(title);
 
-  React.useEffect(() => {
-    const fetchTitle = async () => {
-      try {
-        const docRef = doc(db, "properties", id);
-        const docSnap = await getDoc(docRef);
-
-        if (docSnap.exists()) {
-          setDynamicTitle(docSnap.data().title);
-        } else {
-          console.log("Documento non trovato!");
+  useEffect(() => {
+    // Fetch the title from Firestore if it was not provided
+    if (!title) {
+      const fetchTitle = async () => {
+        try {
+          const docRef = doc(db, 'properties', id);
+          const docSnap = await getDoc(docRef);
+          if (docSnap.exists()) {
+            setDynamicTitle(docSnap.data().title);
+          } else {
+            console.log("No such document!");
+          }
+        } catch (error) {
+          console.error("Error fetching title:", error);
         }
-      } catch (error) {
-        console.error("Errore durante il recupero del titolo:", error);
-      }
-    };
+      };
 
-    fetchTitle();
-  }, [id]);
+      fetchTitle();
+    }
+  }, [id, title]);
 
   return (
     <Link to={`/property/${id}`}>
       <div className="bg-white rounded-lg shadow-lg overflow-hidden transition-transform hover:scale-[1.02]">
         <div className="relative">
-          <ImageCarousel images={[mainImage, ...images]} alt={dynamicTitle || title} />
+          <ImageCarousel images={[mainImage, ...images]} alt={dynamicTitle} />
           <div className="absolute top-4 right-4 bg-black text-white px-3 py-1 rounded-full text-sm">
             {t(`hero.propertyType.${type.toLowerCase()}`)}
           </div>
@@ -155,7 +158,7 @@ export default function PropertyCard({
         
         <div className="p-6">
           <div className="flex justify-between items-start mb-4">
-            <h3 className="text-xl font-semibold">{dynamicTitle || title}</h3>
+            <h3 className="text-xl font-semibold">{dynamicTitle}</h3>
             <p className="text-lg font-bold text-gray-900">{price}</p>
           </div>
           
