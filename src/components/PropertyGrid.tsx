@@ -12,12 +12,12 @@ export default function PropertyGrid() {
     <section id="properties" className="py-16">
       <h2 className="text-3xl font-bold text-center mb-12">{t('properties.featured')}</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {properties.map((property) => ( //torna indietro
-          <div key={t(`properties.title`)} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+        {properties.map((property) => (
+          <div key={property.id} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
             <div className="relative h-64">
               <img
                 src={property.image}
-                alt={t(`properties.title`)} //torare indietro
+                alt={t(`properties.items.${property.id}.title`)}
                 className="w-full h-full object-cover"
               />
               <div className="absolute top-4 right-4 bg-gray-900 text-white px-3 py-1 rounded-full">
@@ -25,7 +25,7 @@ export default function PropertyGrid() {
               </div>
             </div>
             <div className="p-6">
-              <h3 className="text-xl font-bold mb-2">{t(`properties.items.title`)}</h3>  {/*torna indietro */}
+               <h3 className="text-xl font-bold mb-2">{t(`properties.title`)}</h3>  {/*Torna indietro*/}
               <div className="flex items-center text-gray-600 mb-4">
                 <MapPin className="h-4 w-4 mr-1" />
                 {property.location}
