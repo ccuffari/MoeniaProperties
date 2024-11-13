@@ -14,6 +14,22 @@ export default function PropertyDetail() {
   const property = properties.find(p => p.id === id);
   const [isScheduleModalOpen, setIsScheduleModalOpen] = React.useState(false);
 
+  // Carousel state and logic
+  const [currentImageIndex, setCurrentImageIndex] = React.useState(0);
+  const allImages = [property.mainImage, ...property.images]; // Include main image
+
+  const handlePrevious = () => {
+    setCurrentImageIndex((prevIndex) =>
+      prevIndex === 0 ? allImages.length - 1 : prevIndex - 1
+    );
+  };
+
+  const handleNext = () => {
+    setCurrentImageIndex((prevIndex) =>
+      prevIndex === allImages.length - 1 ? 0 : prevIndex + 1
+    );
+  };
+
   if (!property) {
     return (
       <div className="pt-24 pb-16">
@@ -80,13 +96,31 @@ export default function PropertyDetail() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <div className="relative h-[400px] lg:h-[600px]">
             <img 
-              src={property.mainImage} 
+              src={allImages[currentImageIndex]} 
               alt={property.title}
               className="w-full h-full object-cover rounded-lg"
             />
             <div className="absolute top-4 right-4 bg-black text-white px-3 py-1 rounded-full">
               {t(`hero.propertyType.${property.type.toLowerCase()}`)}
             </div>
+
+            {/* Carousel controls */}
+            {allImages.length > 1 && (
+              <div className="absolute inset-0 flex justify-between items-center p-4">
+                <button
+                  onClick={handlePrevious}
+                  className="bg-gray-800 text-white p-2 rounded-full hover:bg-gray-700"
+                >
+                  &lt;
+                </button>
+                <button
+                  onClick={handleNext}
+                  className="bg-gray-800 text-white p-2 rounded-full hover:bg-gray-700"
+                >
+                  &gt;
+                </button>
+              </div>
+            )}
           </div>
 
           <div className="space-y-6">
