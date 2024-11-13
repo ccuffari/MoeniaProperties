@@ -48,7 +48,7 @@ const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>, isMain:
     const reader = new FileReader();
     reader.onloadend = async () => {
       const base64Image = reader.result?.toString().split(',')[1];
-      const response = await fetch('/netlify/functions/', {
+      const response = await fetch('/.netlify/functions/uploadImageToGitHub', {
         method: 'POST',
         body: JSON.stringify({ imageBase64: base64Image, fileName: file.name }),
         headers: { 'Content-Type': 'application/json' }
