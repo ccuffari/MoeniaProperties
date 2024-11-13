@@ -16,7 +16,9 @@ export default function PropertyDetail() {
 
   // Carousel state and logic
   const [currentImageIndex, setCurrentImageIndex] = React.useState(0);
-  const allImages = [property.mainImage, ...property.images]; // Include main image
+  const allImages = property
+    ? [property.mainImage, ...(property.images || [])]
+    : [];
 
   const handlePrevious = () => {
     setCurrentImageIndex((prevIndex) =>
@@ -110,13 +112,15 @@ export default function PropertyDetail() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <div className="relative h-[400px] lg:h-[600px]">
             <img
-              src={allImages[currentImageIndex]}
-              alt={property.title}
+              src={property ? allImages[currentImageIndex] : ""}
+              alt={property ? property.title : ""}
               className="w-full h-full object-cover rounded-lg"
             />
-            <div className="absolute top-4 right-4 bg-black text-white px-3 py-1 rounded-full">
-              {t(`hero.propertyType.${property.type.toLowerCase()}`)}
-            </div>
+            {property && (
+              <div className="absolute top-4 right-4 bg-black text-white px-3 py-1 rounded-full">
+                {t(`hero.propertyType.${property.type.toLowerCase()}`)}
+              </div>
+            )}
 
             {/* Carousel controls */}
             {allImages.length > 1 && (
