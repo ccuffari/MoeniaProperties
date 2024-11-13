@@ -18,7 +18,11 @@ exports.handler = async (event) => {
     };
   }
 
-  const filePath = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/public/img/${fileName}`;
+  // Genera un timestamp unico
+  const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+  const uniqueFileName = `${fileName.replace(/\.[^/.]+$/, '')}-${timestamp}.png`; // Aggiungi timestamp al nome del file e imposta estensione .png
+
+  const filePath = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/public/img/${uniqueFileName}`;
   console.log(`Uploading to: ${filePath}`);
 
   const response = await fetch(filePath, {
@@ -28,7 +32,7 @@ exports.handler = async (event) => {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      message: `Add ${fileName}`,
+      message: `Add ${uniqueFileName}`,
       content: imageBase64,
     }),
   });
