@@ -1,5 +1,3 @@
-const fetch = require('node-fetch');
-
 exports.handler = async (event) => {
   const { GITHUB_TOKEN, REPO_OWNER, REPO_NAME } = process.env;
   const { imageBase64, fileName } = JSON.parse(event.body);
