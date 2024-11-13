@@ -101,6 +101,7 @@
 },
 "admin": {
   "title": "Dashboard",
+  "editProperty": "Modifica Immobile",
   "dashboard": {
     "properties": "Proprietà",
     "users": "Utenti",

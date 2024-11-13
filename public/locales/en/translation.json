@@ -102,6 +102,7 @@
 },
 "admin": {
   "title": "Dashboard",
+  "editProperty": "Edit Property",
   "dashboard": {
     "properties": "Properties",
     "users": "Users",
