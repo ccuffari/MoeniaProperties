@@ -55,7 +55,8 @@ const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>, isMain:
           headers: { 'Content-Type': 'application/json' }
         });
         if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+          const errorText = await response.text();
+          throw new Error(`HTTP error! status: ${response.status}, message: ${errorText}`);
         }
         const data = await response.json();
         if (isMain) {
