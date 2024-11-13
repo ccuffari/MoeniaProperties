@@ -16,7 +16,7 @@ export default function PropertyGrid() {
           <div key={property.id} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
             <div className="relative h-64">
               <img
-                src={property.image}
+                src={property.mainImage}
                 alt={property.title}
                 className="w-full h-full object-cover"
               />
