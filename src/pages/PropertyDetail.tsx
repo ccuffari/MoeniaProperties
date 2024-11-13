@@ -1,17 +1,17 @@
-import * as React from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { usePropertyStore } from '../store/propertyStore';
-import { MapPin, Bed, Bath, Square, ArrowLeft } from 'lucide-react';
-import ScheduleModal from '../components/ScheduleModal';
-import { Helmet } from 'react-helmet-async';
-import { useTranslation } from 'react-i18next';
+import * as React from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { usePropertyStore } from "../store/propertyStore";
+import { MapPin, Bed, Bath, Square, ArrowLeft } from "lucide-react";
+import ScheduleModal from "../components/ScheduleModal";
+import { Helmet } from "react-helmet-async";
+import { useTranslation } from "react-i18next";
 
 export default function PropertyDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { t } = useTranslation();
   const { properties } = usePropertyStore();
-  const property = properties.find(p => p.id === id);
+  const property = properties.find((p) => p.id === id);
   const [isScheduleModalOpen, setIsScheduleModalOpen] = React.useState(false);
 
   // Carousel state and logic
@@ -34,18 +34,20 @@ export default function PropertyDetail() {
     return (
       <div className="pt-24 pb-16">
         <Helmet>
-          <title>{t('property.notFound')} - Moenia Properties</title>
-          <meta name="description" content={t('property.notFound')} />
+          <title>{t("property.notFound")} - Moenia Properties</title>
+          <meta name="description" content={t("property.notFound")} />
         </Helmet>
         <div className="container mx-auto px-4">
           <div className="text-center">
-            <h1 className="text-2xl font-bold mb-4">{t('property.notFound')}</h1>
-            <button 
-              onClick={() => navigate('/properties')}
+            <h1 className="text-2xl font-bold mb-4">
+              {t("property.notFound")}
+            </h1>
+            <button
+              onClick={() => navigate("/properties")}
               className="text-gray-600 hover:text-gray-900 flex items-center justify-center gap-2"
             >
               <ArrowLeft className="h-5 w-5" />
-              {t('property.backToProperties')}
+              {t("property.backToProperties")}
             </button>
           </div>
         </div>
@@ -56,27 +58,39 @@ export default function PropertyDetail() {
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "RealEstateListing",
-    "name": property.title,
-    "description": property.description,
-    "image": property.mainImage,
-    "price": property.price,
-    "address": {
+    name: property.title,
+    description: property.description,
+    image: property.mainImage,
+    price: property.price,
+    address: {
       "@type": "PostalAddress",
-      "addressLocality": property.location
+      addressLocality: property.location,
     },
-    "floorSize": {
+    floorSize: {
       "@type": "QuantitativeValue",
-      "value": property.sqft,
-      "unitCode": "FTK"
-    }
+      value: property.sqft,
+      unitCode: "FTK",
+    },
   };
 
   return (
     <div className="pt-24 pb-16">
       <Helmet>
         <title>{`${property.title} - ${property.location} | Moenia Properties`}</title>
-        <meta name="description" content={`${property.description} ${t('property.location')}: ${property.location}. ${property.sqft} ${t('property.sqft')}, ${property.beds} ${t('property.beds')}, ${property.baths} ${t('property.baths')}. ${t('property.scheduleViewing')}.`} />
-        <meta property="og:title" content={`${property.title} - ${property.location}`} />
+        <meta
+          name="description"
+          content={`${property.description} ${t("property.location")}: ${
+            property.location
+          }. ${property.sqft} ${t("property.sqft")}, ${property.beds} ${t(
+            "property.beds"
+          )}, ${property.baths} ${t("property.baths")}. ${t(
+            "property.scheduleViewing"
+          )}.`}
+        />
+        <meta
+          property="og:title"
+          content={`${property.title} - ${property.location}`}
+        />
         <meta property="og:description" content={property.description} />
         <meta property="og:image" content={property.mainImage} />
         <script type="application/ld+json">
@@ -85,18 +99,18 @@ export default function PropertyDetail() {
       </Helmet>
 
       <div className="container mx-auto px-4">
-        <button 
-          onClick={() => navigate('/properties')}
+        <button
+          onClick={() => navigate("/properties")}
           className="text-gray-600 hover:text-gray-900 flex items-center gap-2 mb-6"
         >
           <ArrowLeft className="h-5 w-5" />
-          {t('property.backToProperties')}
+          {t("property.backToProperties")}
         </button>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <div className="relative h-[400px] lg:h-[600px]">
-            <img 
-              src={allImages[currentImageIndex]} 
+            <img
+              src={allImages[currentImageIndex]}
               alt={property.title}
               className="w-full h-full object-cover rounded-lg"
             />
@@ -109,13 +123,13 @@ export default function PropertyDetail() {
               <div className="absolute inset-0 flex justify-between items-center p-4">
                 <button
                   onClick={handlePrevious}
-                  className="bg-gray-800 text-white p-2 rounded-full hover:bg-gray-700"
+                  className="bg-gray-800 bg-opacity-50 text-white p-3 rounded-full hover:bg-opacity-75"
                 >
                   &lt;
                 </button>
                 <button
                   onClick={handleNext}
-                  className="bg-gray-800 text-white p-2 rounded-full hover:bg-gray-700"
+                  className="bg-gray-800 bg-opacity-50 text-white p-3 rounded-full hover:bg-opacity-75"
                 >
                   &gt;
                 </button>
@@ -130,7 +144,9 @@ export default function PropertyDetail() {
                 <MapPin className="h-5 w-5 mr-2" />
                 <span>{property.location}</span>
               </div>
-              <p className="text-3xl font-bold text-gray-900">{property.price}</p>
+              <p className="text-3xl font-bold text-gray-900">
+                {property.price}
+              </p>
             </div>
 
             <div className="grid grid-cols-3 gap-4 py-6 border-y border-gray-200">
@@ -138,29 +154,33 @@ export default function PropertyDetail() {
                 <div className="text-center">
                   <Bed className="h-6 w-6 mx-auto mb-2" />
                   <p className="font-semibold">{property.beds}</p>
-                  <p className="text-gray-600">{t('property.beds')}</p>
+                  <p className="text-gray-600">{t("property.beds")}</p>
                 </div>
               )}
               <div className="text-center">
                 <Bath className="h-6 w-6 mx-auto mb-2" />
                 <p className="font-semibold">{property.baths}</p>
-                <p className="text-gray-600">{t('property.baths')}</p>
+                <p className="text-gray-600">{t("property.baths")}</p>
               </div>
               <div className="text-center">
                 <Square className="h-6 w-6 mx-auto mb-2" />
                 <p className="font-semibold">{property.sqft}</p>
-                <p className="text-gray-600">{t('property.sqft')}</p>
+                <p className="text-gray-600">{t("property.sqft")}</p>
               </div>
             </div>
 
             <div>
-              <h2 className="text-2xl font-bold mb-4">{t('property.description')}</h2>
+              <h2 className="text-2xl font-bold mb-4">
+                {t("property.description")}
+              </h2>
               <p className="text-gray-600">{property.description}</p>
             </div>
 
             {property.features && property.features.length > 0 && (
               <div>
-                <h2 className="text-2xl font-bold mb-4">{t('property.features')}</h2>
+                <h2 className="text-2xl font-bold mb-4">
+                  {t("property.features")}
+                </h2>
                 <ul className="grid grid-cols-2 gap-4">
                   {property.features.map((feature, index) => (
                     <li key={index} className="flex items-center text-gray-600">
@@ -172,11 +192,11 @@ export default function PropertyDetail() {
               </div>
             )}
 
-            <button 
+            <button
               onClick={() => setIsScheduleModalOpen(true)}
               className="w-full bg-gray-900 text-white py-3 rounded-lg hover:bg-gray-800"
             >
-              {t('property.scheduleViewing')}
+              {t("property.scheduleViewing")}
             </button>
           </div>
         </div>
