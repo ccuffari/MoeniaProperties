@@ -18,32 +18,32 @@ export default function AdminDashboard() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-white p-6 rounded-lg shadow-lg">
+          {/* <div className="bg-white p-6 rounded-lg shadow-lg">
             <div className="flex items-center gap-4 mb-4">
               <Building2 className="h-8 w-8 text-gray-700" />
               <h2 className="text-xl font-semibold">{t('admin.dashboard.properties')}</h2>
             </div>
             <p className="text-3xl font-bold">15</p>
             <p className="text-gray-600">{t('admin.dashboard.activeListings')}</p>
-          </div>
+          </div> */}
 
-          <div className="bg-white p-6 rounded-lg shadow-lg">
+          {/* <div className="bg-white p-6 rounded-lg shadow-lg">
             <div className="flex items-center gap-4 mb-4">
               <Users className="h-8 w-8 text-gray-700" />
               <h2 className="text-xl font-semibold">{t('admin.dashboard.users')}</h2>
             </div>
             <p className="text-3xl font-bold">8</p>
             <p className="text-gray-600">{t('admin.dashboard.activeUsers')}</p>
-          </div>
+          </div> */}
 
-          <div className="bg-white p-6 rounded-lg shadow-lg">
-            <div className="flex items-center gap-4 mb-4">
+          {/* <div className="bg-white p-6 rounded-lg shadow-lg">
+            {/* <div className="flex items-center gap-4 mb-4">
               <Calendar className="h-8 w-8 text-gray-700" />
               <h2 className="text-xl font-semibold">{t('admin.dashboard.appointments')}</h2>
-            </div>
+            </div> */}
             <p className="text-3xl font-bold">5</p>
             <p className="text-gray-600">{t('admin.dashboard.upcomingAppointments')}</p>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
