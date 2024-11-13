@@ -29,7 +29,7 @@ export default function PropertyCard({
   baths,
   sqft,
   type,
-  status
+  status,
 }: PropertyCardProps) {
   const { t } = useTranslation();
 
@@ -37,10 +37,13 @@ export default function PropertyCard({
     <Link to={`/property/${id}`}>
       <div className="bg-white rounded-lg shadow-lg overflow-hidden transition-transform hover:scale-[1.02]">
         <div className="relative">
+          {/* Usa il componente ImageCarousel per includere tutte le immagini */}
           <ImageCarousel images={[mainImage, ...images]} alt={title} />
+          
           <div className="absolute top-4 right-4 bg-black text-white px-3 py-1 rounded-full text-sm">
             {t(`hero.propertyType.${type.toLowerCase()}`)}
           </div>
+          
           {status !== 'active' && (
             <div className="absolute top-4 left-4 bg-red-500 text-white px-3 py-1 rounded-full text-sm uppercase">
               {status}
