@@ -4,7 +4,7 @@ exports.handler = async (event) => {
   const { GITHUB_TOKEN, REPO_OWNER, REPO_NAME } = process.env;
   const { imageData, fileName } = JSON.parse(event.body);
 
-  const response = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/img/${fileName}`, {
+  const response = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/public/img/${fileName}`, {
     method: 'PUT',
     headers: {
       Authorization: `Bearer ${GITHUB_TOKEN}`,
