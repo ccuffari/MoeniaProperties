@@ -41,7 +41,6 @@ const App: React.FC = () => {
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/privacy" element={<Privacy />} />
-            <Route path="/services" element={<Services />} />
             <Route path="/login" element={
               user ? <Navigate to="/admin/dashboard" replace /> : <Login />
             } />
