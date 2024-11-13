@@ -1,7 +1,7 @@
 // PropertyCard.tsx
 import * as React from 'react';
-import { MapPin, Bed, Bath, Square, ChevronLeft, ChevronRight } from 'lucide-react';
-import { Link, useHistory } from 'react-router-dom';
+import { MapPin, Bed, Bath, Square } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 interface PropertyCardProps {
@@ -32,7 +32,6 @@ export default function PropertyCard({
   status,
 }: PropertyCardProps) {
   const { t } = useTranslation();
-  const history = useHistory();
   const [currentImageIndex, setCurrentImageIndex] = React.useState(0);
   const allImages = [mainImage, ...images];
 
@@ -48,13 +47,9 @@ export default function PropertyCard({
     );
   };
 
-  const handleImageClick = () => {
-    history.push(`/property/${id}`);
-  };
-
   return (
     <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-      <div className="relative h-64 cursor-pointer" onClick={handleImageClick}>
+      <div className="relative h-64">
         <img
           src={allImages[currentImageIndex]}
           alt={title}
@@ -71,19 +66,19 @@ export default function PropertyCard({
               onClick={handlePrevious}
               className="bg-gray-800 text-white p-2 rounded-full hover:bg-gray-700"
             >
-              <ChevronLeft />
+              &lt;
             </button>
             <button
               onClick={handleNext}
               className="bg-gray-800 text-white p-2 rounded-full hover:bg-gray-700"
             >
-              <ChevronRight />
+              &gt;
             </button>
           </div>
         )}
       </div>
       <div className="p-6">
-        <h3 className="text-xl font-bold mb-2">{title}</h3>  
+        <h3 className="text-xl font-bold mb-2">{title}</h3>
         <div className="flex items-center text-gray-600 mb-4">
           <MapPin className="h-4 w-4 mr-1" />
           {location}
