@@ -18,21 +18,7 @@ export default function Dashboard() {
 
   // Mock appointments data
   const upcomingAppointments = [
-    {
-      id: 1,
-      clientName: "John Doe",
-      propertyTitle: "Luxury Villa",
-      date: new Date().toISOString(),
-      time: "14:00"
-    },
-    {
-      id: 2,
-      clientName: "Jane Smith",
-      propertyTitle: "Modern Apartment",
-      date: new Date(Date.now() + 86400000).toISOString(), // Tomorrow
-      time: "10:30"
-    }
-  ];
+ ];
 
   return (
     <div className="pt-24 pb-16">
