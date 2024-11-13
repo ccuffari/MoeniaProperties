@@ -192,12 +192,12 @@ export default function PropertyDetail() {
               </div>
             )}
 
-            <button
+            {/* <button
               onClick={() => setIsScheduleModalOpen(true)}
               className="w-full bg-gray-900 text-white py-3 rounded-lg hover:bg-gray-800"
             >
               {t("property.scheduleViewing")}
-            </button>
+            </button> */}
           </div>
         </div>
 
