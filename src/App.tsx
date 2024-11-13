@@ -9,6 +9,7 @@ import Properties from './pages/Properties';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import Privacy from './pages/Privacy';
+import Services from './pages/Services';
 import PropertyDetail from './pages/PropertyDetail';
 import Dashboard from './pages/admin/Dashboard';
 import AdminProperties from './pages/AdminProperties';
@@ -40,6 +41,7 @@ const App: React.FC = () => {
             <Route path="/property/:id" element={<PropertyDetail />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/services" element={<Services />} />
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/login" element={
               user ? <Navigate to="/admin/dashboard" replace /> : <Login />
