@@ -67,16 +67,16 @@ export default function Dashboard() {
             </div>
           </div>
 
-          <div className="bg-white p-6 rounded-lg shadow-lg">
+           {/* <div className="bg-white p-6 rounded-lg shadow-lg">
             <div className="flex items-center gap-4 mb-4">
               <Users className="h-8 w-8 text-gray-700" />
               <h2 className="text-xl font-semibold">{t('admin.dashboard.users')}</h2>
             </div>
             <p className="text-3xl font-bold">8</p>
             <p className="text-gray-600">{t('admin.dashboard.activeUsers')}</p>
-          </div>
+          </div>  */}
 
-          <div className="bg-white p-6 rounded-lg shadow-lg">
+          {/* <div className="bg-white p-6 rounded-lg shadow-lg">
             <div className="flex items-center gap-4 mb-4">
               <Calendar className="h-8 w-8 text-gray-700" />
               <h2 className="text-xl font-semibold">{t('admin.dashboard.appointments')}</h2>
@@ -84,7 +84,7 @@ export default function Dashboard() {
             <p className="text-3xl font-bold">{upcomingAppointments.length}</p>
             <p className="text-gray-600">{t('admin.dashboard.upcomingAppointments')}</p>
           </div>
-        </div>
+        </div> */}
 
         {/* Recent Properties and Appointments */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -128,7 +128,7 @@ export default function Dashboard() {
           </div>
 
           {/* Upcoming Appointments */}
-          <div className="bg-white rounded-lg shadow-lg p-6">
+          {/* <div className="bg-white rounded-lg shadow-lg p-6">
             <div className="flex justify-between items-center mb-6">
               <h2 className="text-xl font-bold">{t('admin.dashboard.upcomingAppointments')}</h2>
               <Link 
@@ -156,7 +156,7 @@ export default function Dashboard() {
                   </div>
                 </div>
               ))}
-            </div>
+            </div> */}
           </div>
         </div>
 
