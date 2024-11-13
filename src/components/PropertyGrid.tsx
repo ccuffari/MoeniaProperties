@@ -12,12 +12,12 @@ export default function PropertyGrid() {
     <section id="properties" className="py-16">
       <h2 className="text-3xl font-bold text-center mb-12">{t('properties.featured')}</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {properties.map((property) => (
-          <div key={property.id} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+        {properties.map((property) => ( //torna indietro
+          <div key={property.title} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
             <div className="relative h-64">
               <img
                 src={property.image}
-                alt={t(`properties.items.${property.id}.title`)}
+                alt={t(`properties.title`)} //torare indietro
                 className="w-full h-full object-cover"
               />
               <div className="absolute top-4 right-4 bg-gray-900 text-white px-3 py-1 rounded-full">
