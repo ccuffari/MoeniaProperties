@@ -17,7 +17,7 @@ export default function PropertyGrid() {
             <div className="relative h-64">
               <img
                 src={property.image}
-                alt={propertiestitle}
+                alt={property.title}
                 className="w-full h-full object-cover"
               />
               <div className="absolute top-4 right-4 bg-gray-900 text-white px-3 py-1 rounded-full">
