@@ -91,7 +91,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           <div>
             <div className="flex items-center space-x-2 mb-4">
-              <img src="/img/logo.svg" alt="Moenia Properties" className="h-8 w-8" />
+              <img src="/img/logo.jpg" alt="Moenia Properties" className="h-8 w-8" />
               <span className="text-xl font-bold text-old-money-800">Moenia Properties</span>
             </div>
             <p className="text-old-money-600">
