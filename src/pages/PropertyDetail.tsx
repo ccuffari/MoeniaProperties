@@ -123,13 +123,13 @@ export default function PropertyDetail() {
               <div className="absolute inset-0 flex justify-between items-center p-4">
                 <button
                   onClick={handlePrevious}
-                  className="bg-gray-800 bg-opacity-50 text-white p-3 rounded-full hover:bg-opacity-75"
+                  className="bg-gray-800 bg-opacity-50 text-white h-10 w-10 flex items-center justify-center rounded-full hover:bg-opacity-75"
                 >
                   &lt;
                 </button>
                 <button
                   onClick={handleNext}
-                  className="bg-gray-800 bg-opacity-50 text-white p-3 rounded-full hover:bg-opacity-75"
+                  className="bg-gray-800 bg-opacity-50 text-white h-10 w-10 flex items-center justify-center rounded-full hover:bg-opacity-75"
                 >
                   &gt;
                 </button>
