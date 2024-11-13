@@ -65,12 +65,12 @@ const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>, isMain:
         }
       } catch (error) {
         console.error('Error uploading image:', error);
+        alert(`Error uploading image: ${error.message}`);
       }
     };
     reader.readAsDataURL(file);
   }
 };
-
 
 
   const removeImage = (index: number) => {
