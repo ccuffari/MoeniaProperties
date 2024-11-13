@@ -1,22 +1,44 @@
-import * as React from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { usePropertyStore } from "../store/propertyStore";
-import { MapPin, Bed, Bath, Square, ArrowLeft } from "lucide-react";
-import ScheduleModal from "../components/ScheduleModal";
-import { Helmet } from "react-helmet-async";
-import { useTranslation } from "react-i18next";
-
 export default function PropertyDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const { properties } = usePropertyStore();
+  const { properties, fetchPropertyById } = usePropertyStore(); // Aggiungi fetchPropertyById se esiste
   const property = properties.find((p) => p.id === id);
   const [isScheduleModalOpen, setIsScheduleModalOpen] = React.useState(false);
 
-  // Carousel state and logic
+  React.useEffect(() => {
+    if (!property) {
+      fetchPropertyById(id); // Funzione per caricare il dato se non disponibile
+    }
+  }, [id, property, fetchPropertyById]);
+
+  if (!property) {
+    return (
+      <div className="pt-24 pb-16">
+        <Helmet>
+          <title>{t("property.notFound")} - Moenia Properties</title>
+          <meta name="description" content={t("property.notFound")} />
+        </Helmet>
+        <div className="container mx-auto px-4">
+          <div className="text-center">
+            <h1 className="text-2xl font-bold mb-4">
+              {t("property.notFound")}
+            </h1>
+            <button
+              onClick={() => navigate("/properties")}
+              className="text-gray-600 hover:text-gray-900 flex items-center justify-center gap-2"
+            >
+              <ArrowLeft className="h-5 w-5" />
+              {t("property.backToProperties")}
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  const allImages = [property.mainImage, ...(property.images || [])]; // Verifica anche se 'images' è presente
   const [currentImageIndex, setCurrentImageIndex] = React.useState(0);
-  const allImages = [property.mainImage, ...property.images]; // Include main image
 
   const handlePrevious = () => {
     setCurrentImageIndex((prevIndex) =>
