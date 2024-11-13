@@ -1,4 +1,3 @@
-// Properties.jsx
 import * as React from 'react';
 import { usePropertyStore } from '../store/propertyStore';
 import SearchFilters from '../components/SearchFilters';
@@ -71,7 +70,7 @@ export default function Properties() {
         <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {properties.length > 0 ? (
             properties.map((property) => (
-              <PropertyCard key={property.id} property={property} />
+              <PropertyCard key={property.id} {...property} />
             ))
           ) : (
             <div className="col-span-full text-center py-12">
