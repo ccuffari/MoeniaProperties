@@ -1,8 +1,16 @@
+import React from "react";
+import { useParams, useNavigate } from "react-router-dom"; // Importa useParams e useNavigate
+import { Helmet } from "react-helmet";
+import { useTranslation } from "react-i18next";
+import { ArrowLeft, MapPin, Bed, Bath, Square } from "your-icons-library";
+import { usePropertyStore } from "your-store";
+import ScheduleModal from "path-to-your/ScheduleModal";
+
 export default function PropertyDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const { properties, fetchPropertyById } = usePropertyStore(); // Aggiungi fetchPropertyById se esiste
+  const { properties, fetchPropertyById } = usePropertyStore();
   const property = properties.find((p) => p.id === id);
   const [isScheduleModalOpen, setIsScheduleModalOpen] = React.useState(false);
 
@@ -37,7 +45,7 @@ export default function PropertyDetail() {
     );
   }
 
-  const allImages = [property.mainImage, ...(property.images || [])]; // Verifica anche se 'images' è presente
+  const allImages = [property.mainImage, ...(property.images || [])];
   const [currentImageIndex, setCurrentImageIndex] = React.useState(0);
 
   const handlePrevious = () => {
@@ -51,31 +59,6 @@ export default function PropertyDetail() {
       prevIndex === allImages.length - 1 ? 0 : prevIndex + 1
     );
   };
-
-  if (!property) {
-    return (
-      <div className="pt-24 pb-16">
-        <Helmet>
-          <title>{t("property.notFound")} - Moenia Properties</title>
-          <meta name="description" content={t("property.notFound")} />
-        </Helmet>
-        <div className="container mx-auto px-4">
-          <div className="text-center">
-            <h1 className="text-2xl font-bold mb-4">
-              {t("property.notFound")}
-            </h1>
-            <button
-              onClick={() => navigate("/properties")}
-              className="text-gray-600 hover:text-gray-900 flex items-center justify-center gap-2"
-            >
-              <ArrowLeft className="h-5 w-5" />
-              {t("property.backToProperties")}
-            </button>
-          </div>
-        </div>
-      </div>
-    );
-  }
 
   const structuredData = {
     "@context": "https://schema.org",
@@ -140,7 +123,6 @@ export default function PropertyDetail() {
               {t(`hero.propertyType.${property.type.toLowerCase()}`)}
             </div>
 
-            {/* Carousel controls */}
             {allImages.length > 1 && (
               <div className="absolute inset-0 flex justify-between items-center p-4">
                 <button
