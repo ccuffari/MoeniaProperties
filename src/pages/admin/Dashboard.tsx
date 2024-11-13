@@ -138,8 +138,8 @@ export default function Dashboard() {
                 {t('admin.viewAll')}
                 <ArrowRight className="h-4 w-4" />
               </Link>
-            </div> */}
-            {/* <div className="space-y-4">
+            </div>
+            <div className="space-y-4">
               {upcomingAppointments.map((appointment) => (
                 <div key={appointment.id} className="p-4 border rounded-lg">
                   <div className="flex justify-between items-start mb-2">
@@ -156,8 +156,8 @@ export default function Dashboard() {
                   </div>
                 </div>
               ))}
-            </div> */}
-          </div>
+            </div>
+          </div> */}
         </div>
 
         {showPropertyForm && (
