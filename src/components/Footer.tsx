@@ -19,7 +19,13 @@ export default function Footer() {
               {t('footer.description')}
             </p>
           </div>
-                    
+          
+          <div>
+          </div>
+          
+          <div>
+          </div>
+          
           <div>
             <h4 className="text-lg font-bold mb-4 text-old-money-800">{t('footer.followUs')}</h4>
             <div className="flex space-x-4">
