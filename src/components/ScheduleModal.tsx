@@ -75,13 +75,13 @@ export default function ScheduleModal({ isOpen, onClose, propertyTitle }: Schedu
             ></textarea>
           </div>
 
-          <button
+          {/* <button
             type="submit"
             className="w-full bg-gray-900 text-white py-2 rounded-lg hover:bg-gray-800 flex items-center justify-center gap-2"
           >
             <Calendar className="h-5 w-5" />
             {t('property.scheduleViewing')}
-          </button>
+          </button> */}
         </form>
       </div>
     </div>
