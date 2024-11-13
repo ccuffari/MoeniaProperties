@@ -8,22 +8,7 @@ export default function AppointmentCalendar() {
 
   // Mock appointments data - in a real app, this would come from an API
   const appointments = [
-    {
-      id: 1,
-      clientName: 'John Doe',
-      propertyTitle: 'Contemporary Villa',
-      time: '10:00 AM',
-      date: new Date().toISOString(),
-      status: 'confirmed'
-    },
-    {
-      id: 2,
-      clientName: 'Jane Smith',
-      propertyTitle: 'Luxury Penthouse',
-      time: '2:00 PM',
-      date: new Date().toISOString(),
-      status: 'pending'
-    }
+
   ];
 
   return (
