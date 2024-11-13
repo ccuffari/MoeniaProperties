@@ -37,7 +37,6 @@ export default function PropertyCard({
     <Link to={`/property/${id}`}>
       <div className="bg-white rounded-lg shadow-lg overflow-hidden transition-transform hover:scale-[1.02]">
         <div className="relative">
-          {/* Usa il componente ImageCarousel per includere tutte le immagini */}
           <ImageCarousel images={[mainImage, ...images]} alt={title} />
           
           <div className="absolute top-4 right-4 bg-black text-white px-3 py-1 rounded-full text-sm">
