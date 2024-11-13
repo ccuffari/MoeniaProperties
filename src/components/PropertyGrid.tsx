@@ -25,7 +25,7 @@ export default function PropertyGrid() {
               </div>
             </div>
             <div className="p-6">
-               <h3 className="text-xl font-bold mb-2">{t(`properties.meta.title`)}</h3>  {/*Torna indietro*/}
+              <h3 className="text-xl font-bold mb-2">{property.title}</h3>  
               <div className="flex items-center text-gray-600 mb-4">
                 <MapPin className="h-4 w-4 mr-1" />
                 {property.location}
