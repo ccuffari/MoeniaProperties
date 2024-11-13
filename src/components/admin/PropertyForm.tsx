@@ -48,16 +48,23 @@ const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>, isMain:
     const reader = new FileReader();
     reader.onloadend = async () => {
       const base64Image = reader.result?.toString().split(',')[1];
-      const response = await fetch('https://moeniaproperties.it/.netlify/functions/uploadImageToGitHub', {
-        method: 'POST',
-        body: JSON.stringify({ imageBase64: base64Image, fileName: file.name }),
-        headers: { 'Content-Type': 'application/json' }
-      });
-      const data = await response.json();
-      if (isMain) {
-        setFormData((prev) => ({ ...prev, mainImage: data.url }));
-      } else {
-        setFormData((prev) => ({ ...prev, images: [...prev.images, data.url] }));
+      try {
+        const response = await fetch('https://moeniaproperties.it/.netlify/functions/uploadImageToGitHub', {
+          method: 'POST',
+          body: JSON.stringify({ imageBase64: base64Image, fileName: file.name }),
+          headers: { 'Content-Type': 'application/json' }
+        });
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        if (isMain) {
+          setFormData((prev) => ({ ...prev, mainImage: data.url }));
+        } else {
+          setFormData((prev) => ({ ...prev, images: [...prev.images, data.url] }));
+        }
+      } catch (error) {
+        console.error('Error uploading image:', error);
       }
     };
     reader.readAsDataURL(file);
