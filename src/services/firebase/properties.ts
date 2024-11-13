@@ -23,15 +23,33 @@ export async function getProperties(): Promise<Property[]> {
     const q = query(propertiesRef, orderBy('createdAt', 'desc'));
     const snapshot = await getDocs(q);
     
-    return snapshot.docs.map(doc => ({
-      id: doc.id,
-      ...doc.data()
-    } as Property));
+    return snapshot.docs.map(doc => {
+      const data = doc.data();
+      // Assicurati che i dati siano nel formato corretto
+      return {
+        id: doc.id,
+        title: data.title || '',
+        location: data.location || '',
+        price: data.price || '',
+        mainImage: data.mainImage || '',
+        images: data.images || [],
+        beds: data.beds || null,
+        baths: data.baths || 0,
+        sqft: data.sqft || 0,
+        type: data.type || '',
+        description: data.description || '',
+        status: data.status || 'active',
+        features: data.features || [],
+        yearBuilt: data.yearBuilt || null,
+        parking: data.parking || null
+      } as Property;
+    });
   } catch (error) {
     console.error('Error fetching properties:', error);
     throw error;
   }
 }
+
 
 export async function getPropertyById(id: string): Promise<Property | null> {
   try {
