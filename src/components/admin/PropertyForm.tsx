@@ -42,19 +42,28 @@ export default function PropertyForm({ propertyId, onClose }: PropertyFormProps)
     onClose();
   };
 
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>, isMain: boolean) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      // In a real application, you would upload the file to a server
-      // For now, we'll just use a fake URL
-      const imageUrl = URL.createObjectURL(file);
+const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>, isMain: boolean) => {
+  const file = e.target.files?.[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onloadend = async () => {
+      const base64Image = reader.result?.toString().split(',')[1];
+      const response = await fetch('/.netlify/functions/uploadImageToGitHub', {
+        method: 'POST',
+        body: JSON.stringify({ imageBase64: base64Image, fileName: file.name }),
+        headers: { 'Content-Type': 'application/json' }
+      });
+      const data = await response.json();
       if (isMain) {
-        setFormData(prev => ({ ...prev, mainImage: imageUrl }));
+        setFormData((prev) => ({ ...prev, mainImage: data.url }));
       } else {
-        setFormData(prev => ({ ...prev, images: [...prev.images, imageUrl] }));
+        setFormData((prev) => ({ ...prev, images: [...prev.images, data.url] }));
       }
-    }
-  };
+    };
+    reader.readAsDataURL(file);
+  }
+};
+
 
   const removeImage = (index: number) => {
     setFormData(prev => ({
