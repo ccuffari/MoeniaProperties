@@ -1,3 +1,4 @@
+// PropertyGrid.tsx
 import * as React from 'react';
 import { MapPin, Bed, Bath, Square } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -23,16 +24,17 @@ export default function PropertyGrid() {
 function PropertyCard({ property }) {
   const { t } = useTranslation();
   const [currentImageIndex, setCurrentImageIndex] = React.useState(0);
+  const allImages = [property.mainImage, ...property.images]; // Include main image
 
   const handlePrevious = () => {
     setCurrentImageIndex((prevIndex) =>
-      prevIndex === 0 ? property.images.length - 1 : prevIndex - 1
+      prevIndex === 0 ? allImages.length - 1 : prevIndex - 1
     );
   };
 
   const handleNext = () => {
     setCurrentImageIndex((prevIndex) =>
-      prevIndex === property.images.length - 1 ? 0 : prevIndex + 1
+      prevIndex === allImages.length - 1 ? 0 : prevIndex + 1
     );
   };
 
@@ -40,7 +42,7 @@ function PropertyCard({ property }) {
     <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
       <div className="relative h-64">
         <img
-          src={property.images[currentImageIndex]}
+          src={allImages[currentImageIndex]}
           alt={property.title}
           className="w-full h-full object-cover"
         />
@@ -49,7 +51,7 @@ function PropertyCard({ property }) {
         </div>
         
         {/* Carousel controls */}
-        {property.images.length > 1 && (
+        {allImages.length > 1 && (
           <div className="absolute inset-0 flex justify-between items-center p-4">
             <button
               onClick={handlePrevious}
