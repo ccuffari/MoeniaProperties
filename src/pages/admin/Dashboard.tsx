@@ -42,72 +42,47 @@ export default function Dashboard() {
               {t("admin.dashboard.lastLogin")}: {new Date().toLocaleString()}
             </p>
           </div>
-          <button
+          {/* <button
             onClick={() => setShowPropertyForm(true)}
             className="bg-gray-900 text-white px-4 py-2 rounded-lg hover:bg-gray-800 flex items-center gap-2"
           >
             <Plus className="h-5 w-5" />
-            {t("admin.addProperty")}
-          </button>
+            {t('admin.addProperty')}
+          </button> */}
         </div>
 
         {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        {/* <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           <div className="bg-white p-6 rounded-lg shadow-lg">
             <div className="flex items-center gap-4 mb-4">
-              <Building2 className="h-8 w-8 text-gray-700" />{" "}
-              {/* Icona proprietà */}
-              <h2 className="text-xl font-semibold">
-                {t("admin.dashboard.properties")}
-              </h2>{" "}
-              {/* Titolo sezione proprietà */}
+              <Building2 className="h-8 w-8 text-gray-700" />
+              <h2 className="text-xl font-semibold">{t('admin.dashboard.properties')}</h2>
             </div>
-            <p className="text-3xl font-bold">{activeProperties}</p>{" "}
-            {/* Numero proprietà attive */}
+            <p className="text-3xl font-bold">{activeProperties}</p>
             <div className="flex justify-between items-center mt-2">
-              <p className="text-gray-600">
-                {t("admin.dashboard.activeListings")}
-              </p>{" "}
-              {/* Testo proprietà attive */}
-              <span className="text-sm text-green-600">
-                +{pendingProperties} pending
-              </span>{" "}
-              {/* Numero proprietà in sospeso */}
+              <p className="text-gray-600">{t('admin.dashboard.activeListings')}</p>
+              <span className="text-sm text-green-600">+{pendingProperties} pending</span>
             </div>
           </div>
 
           <div className="bg-white p-6 rounded-lg shadow-lg">
             <div className="flex items-center gap-4 mb-4">
-              <Users className="h-8 w-8 text-gray-700" /> {/* Icona utenti */}
-              <h2 className="text-xl font-semibold">
-                {t("admin.dashboard.users")}
-              </h2>{" "}
-              {/* Titolo sezione utenti */}
+              <Users className="h-8 w-8 text-gray-700" />
+              <h2 className="text-xl font-semibold">{t('admin.dashboard.users')}</h2>
             </div>
-            <p className="text-3xl font-bold">8</p> {/* Numero utenti attivi */}
-            <p className="text-gray-600">
-              {t("admin.dashboard.activeUsers")}
-            </p>{" "}
-            {/* Testo utenti attivi */}
+            <p className="text-3xl font-bold">8</p>
+            <p className="text-gray-600">{t('admin.dashboard.activeUsers')}</p>
           </div>
 
           <div className="bg-white p-6 rounded-lg shadow-lg">
             <div className="flex items-center gap-4 mb-4">
-              <Calendar className="h-8 w-8 text-gray-700" />{" "}
-              {/* Icona appuntamenti */}
-              <h2 className="text-xl font-semibold">
-                {t("admin.dashboard.appointments")}
-              </h2>{" "}
-              {/* Titolo sezione appuntamenti */}
+              <Calendar className="h-8 w-8 text-gray-700" />
+              <h2 className="text-xl font-semibold">{t('admin.dashboard.appointments')}</h2>
             </div>
-            <p className="text-3xl font-bold">{upcomingAppointments.length}</p>{" "}
-            {/* Numero appuntamenti futuri */}
-            <p className="text-gray-600">
-              {t("admin.dashboard.upcomingAppointments")}
-            </p>{" "}
-            {/* Testo appuntamenti futuri */}
+            <p className="text-3xl font-bold">{upcomingAppointments.length}</p>
+            <p className="text-gray-600">{t('admin.dashboard.upcomingAppointments')}</p>
           </div>
-        </div>
+        </div> */}
 
         {/* Recent Properties and Appointments */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -135,19 +110,13 @@ export default function Dashboard() {
                     src={property.mainImage}
                     alt={property.title}
                     className="w-16 h-16 object-cover rounded-lg"
-                  />{" "}
-                  {/* Immagine della proprietà */}
+                  />
                   <div className="flex-1">
-                    <h3 className="font-medium">{property.title}</h3>{" "}
-                    {/* Titolo proprietà */}
-                    <p className="text-sm text-gray-600">
-                      {property.location}
-                    </p>{" "}
-                    {/* Localizzazione proprietà */}
+                    <h3 className="font-medium">{property.title}</h3>
+                    <p className="text-sm text-gray-600">{property.location}</p>
                   </div>
                   <div className="text-right">
-                    <p className="font-medium">{property.price}</p>{" "}
-                    {/* Prezzo proprietà */}
+                    <p className="font-medium">{property.price}</p>
                     <span
                       className={`text-xs px-2 py-1 rounded-full ${
                         property.status === "active"
@@ -158,8 +127,7 @@ export default function Dashboard() {
                       }`}
                     >
                       {property.status}
-                    </span>{" "}
-                    {/* Stato proprietà */}
+                    </span>
                   </div>
                 </div>
               ))}
@@ -167,16 +135,14 @@ export default function Dashboard() {
           </div>
 
           {/* Upcoming Appointments */}
-          <div className="bg-white rounded-lg shadow-lg p-6">
+          {/* <div className="bg-white rounded-lg shadow-lg p-6">
             <div className="flex justify-between items-center mb-6">
-              <h2 className="text-xl font-bold">
-                {t("admin.dashboard.upcomingAppointments")}
-              </h2>
-              <Link
+              <h2 className="text-xl font-bold">{t('admin.dashboard.upcomingAppointments')}</h2>
+              <Link 
                 to="/admin/appointments"
                 className="text-gray-600 hover:text-gray-900 flex items-center gap-2"
               >
-                {t("admin.viewAll")}
+                {t('admin.viewAll')}
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
@@ -185,26 +151,20 @@ export default function Dashboard() {
                 <div key={appointment.id} className="p-4 border rounded-lg">
                   <div className="flex justify-between items-start mb-2">
                     <div>
-                      <h3 className="font-medium">{appointment.clientName}</h3>{" "}
-                      {/* Nome cliente appuntamento */}
-                      <p className="text-sm text-gray-600">
-                        {appointment.propertyTitle}
-                      </p>{" "}
-                      {/* Titolo proprietà appuntamento */}
+                      <h3 className="font-medium">{appointment.clientName}</h3>
+                      <p className="text-sm text-gray-600">{appointment.propertyTitle}</p>
                     </div>
                     <div className="text-right">
-                      <p className="font-medium">{appointment.time}</p>{" "}
-                      {/* Orario appuntamento */}
+                      <p className="font-medium">{appointment.time}</p>
                       <p className="text-sm text-gray-600">
                         {new Date(appointment.date).toLocaleDateString()}
-                      </p>{" "}
-                      {/* Data appuntamento */}
+                      </p>
                     </div>
                   </div>
                 </div>
               ))}
             </div>
-          </div>
+          </div> */}
         </div>
 
         {showPropertyForm && (
