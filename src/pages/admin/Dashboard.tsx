@@ -67,24 +67,24 @@ export default function Dashboard() {
             </div>
           </div>
 
-           {/* <div className="bg-white p-6 rounded-lg shadow-lg">
+           <div className="bg-white p-6 rounded-lg shadow-lg">
             <div className="flex items-center gap-4 mb-4">
               <Users className="h-8 w-8 text-gray-700" />
-              <h2 className="text-xl font-semibold">{t('admin.dashboard.users')}</h2>
+              {/* <h2 className="text-xl font-semibold">{t('admin.dashboard.users')}</h2>
             </div>
             <p className="text-3xl font-bold">8</p>
-            <p className="text-gray-600">{t('admin.dashboard.activeUsers')}</p>
-          </div>  */}
+            <p className="text-gray-600">{t('admin.dashboard.activeUsers')}</p> */}
+          </div> */
 
-          {/* <div className="bg-white p-6 rounded-lg shadow-lg">
+          <div className="bg-white p-6 rounded-lg shadow-lg">
             <div className="flex items-center gap-4 mb-4">
               <Calendar className="h-8 w-8 text-gray-700" />
-              <h2 className="text-xl font-semibold">{t('admin.dashboard.appointments')}</h2>
+              {/* <h2 className="text-xl font-semibold">{t('admin.dashboard.appointments')}</h2>
             </div>
             <p className="text-3xl font-bold">{upcomingAppointments.length}</p>
-            <p className="text-gray-600">{t('admin.dashboard.upcomingAppointments')}</p>
+            <p className="text-gray-600">{t('admin.dashboard.upcomingAppointments')}</p> */}
           </div>
-        </div> */}
+        </div>
 
         {/* Recent Properties and Appointments */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -128,8 +128,8 @@ export default function Dashboard() {
           </div>
 
           {/* Upcoming Appointments */}
-          {/* <div className="bg-white rounded-lg shadow-lg p-6">
-            <div className="flex justify-between items-center mb-6">
+          <div className="bg-white rounded-lg shadow-lg p-6">
+            {/* <div className="flex justify-between items-center mb-6">
               <h2 className="text-xl font-bold">{t('admin.dashboard.upcomingAppointments')}</h2>
               <Link 
                 to="/admin/appointments"
@@ -138,8 +138,8 @@ export default function Dashboard() {
                 {t('admin.viewAll')}
                 <ArrowRight className="h-4 w-4" />
               </Link>
-            </div>
-            <div className="space-y-4">
+            </div> */}
+            {/* <div className="space-y-4">
               {upcomingAppointments.map((appointment) => (
                 <div key={appointment.id} className="p-4 border rounded-lg">
                   <div className="flex justify-between items-start mb-2">
