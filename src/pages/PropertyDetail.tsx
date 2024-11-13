@@ -1,24 +1,34 @@
-import React from "react";
-import { useParams, useNavigate } from "react-router-dom"; // Importa useParams e useNavigate
-import { Helmet } from "react-helmet";
+import * as React from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { usePropertyStore } from "../store/propertyStore";
+import { MapPin, Bed, Bath, Square, ArrowLeft } from "lucide-react";
+import ScheduleModal from "../components/ScheduleModal";
+import { Helmet } from "react-helmet-async";
 import { useTranslation } from "react-i18next";
-import { ArrowLeft, MapPin, Bed, Bath, Square } from "your-icons-library";
-import { usePropertyStore } from "your-store";
-import ScheduleModal from "path-to-your/ScheduleModal";
 
 export default function PropertyDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const { properties, fetchPropertyById } = usePropertyStore();
+  const { properties } = usePropertyStore();
   const property = properties.find((p) => p.id === id);
   const [isScheduleModalOpen, setIsScheduleModalOpen] = React.useState(false);
 
-  React.useEffect(() => {
-    if (!property) {
-      fetchPropertyById(id); // Funzione per caricare il dato se non disponibile
-    }
-  }, [id, property, fetchPropertyById]);
+  // Carousel state and logic
+  const [currentImageIndex, setCurrentImageIndex] = React.useState(0);
+  const allImages = [property.mainImage, ...property.images]; // Include main image
+
+  const handlePrevious = () => {
+    setCurrentImageIndex((prevIndex) =>
+      prevIndex === 0 ? allImages.length - 1 : prevIndex - 1
+    );
+  };
+
+  const handleNext = () => {
+    setCurrentImageIndex((prevIndex) =>
+      prevIndex === allImages.length - 1 ? 0 : prevIndex + 1
+    );
+  };
 
   if (!property) {
     return (
@@ -44,21 +54,6 @@ export default function PropertyDetail() {
       </div>
     );
   }
-
-  const allImages = [property.mainImage, ...(property.images || [])];
-  const [currentImageIndex, setCurrentImageIndex] = React.useState(0);
-
-  const handlePrevious = () => {
-    setCurrentImageIndex((prevIndex) =>
-      prevIndex === 0 ? allImages.length - 1 : prevIndex - 1
-    );
-  };
-
-  const handleNext = () => {
-    setCurrentImageIndex((prevIndex) =>
-      prevIndex === allImages.length - 1 ? 0 : prevIndex + 1
-    );
-  };
 
   const structuredData = {
     "@context": "https://schema.org",
@@ -123,6 +118,7 @@ export default function PropertyDetail() {
               {t(`hero.propertyType.${property.type.toLowerCase()}`)}
             </div>
 
+            {/* Carousel controls */}
             {allImages.length > 1 && (
               <div className="absolute inset-0 flex justify-between items-center p-4">
                 <button
