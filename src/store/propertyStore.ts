@@ -17,11 +17,11 @@ export interface Property {
   features?: string[];
   yearBuilt?: number;
   parking?: number;
-  map?: string;               // URL o link alla mappa
-  contacts?: string;           // Contatti per la proprietà
-  dimension?: string;          // Dimensione della proprietà
-  numRooms?: number;           // Numero di locali
-  floor?: string;              // Piano
+  map: string;               // URL o link alla mappa
+  contacts: string;           // Contatti per la proprietà
+  dimension: string;          // Dimensione della proprietà
+  numRooms: number;           // Numero di locali
+  floor: string;              // Piano
 }
 
 interface PropertyState {
