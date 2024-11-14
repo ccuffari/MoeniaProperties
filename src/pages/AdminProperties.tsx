@@ -74,7 +74,6 @@ const PropertyForm = ({ propertyId, onClose }) => {
             />
           </div>
 
-          {/* Repeating similar fields for the other attributes */}
           <div className="mb-4">
             <label
               htmlFor="price"
