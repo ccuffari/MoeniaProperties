@@ -25,16 +25,14 @@ export default function PropertyForm({
     location: property?.location || "",
     type: property?.type || "House",
     status: property?.status || "active",
-    beds: property?.beds || 0,
-    baths: property?.baths || 0,
-    sqft: property?.sqft || 0,
-    yearBuilt: property?.yearBuilt || new Date().getFullYear(),
     googleMapsLink: property?.googleMapsLink || "",
     mainImage: property?.mainImage || "",
     images: property?.images || [],
     rooms: property?.rooms || 0,
     floors: property?.floors || 0,
     contacts: property?.contacts || "",
+    size: property?.size || 0,
+    actions: property?.actions || "",
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -45,65 +43,6 @@ export default function PropertyForm({
       addProperty(formData);
     }
     onClose();
-  };
-
-  const handleImageUpload = async (
-    e: React.ChangeEvent<HTMLInputElement>,
-    isMain: boolean
-  ) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = async () => {
-        const base64Image = reader.result?.toString().split(",")[1];
-        try {
-          const response = await fetch(
-            "https://moeniaproperties.it/.netlify/functions/uploadImageToGitHub",
-            {
-              method: "POST",
-              body: JSON.stringify({
-                imageBase64: base64Image,
-                fileName: file.name,
-              }),
-              headers: { "Content-Type": "application/json" },
-            }
-          );
-          if (!response.ok) {
-            const errorText = await response.text();
-            throw new Error(
-              `HTTP error! status: ${response.status}, message: ${errorText}`
-            );
-          }
-          const data = await response.json();
-          if (isMain) {
-            setFormData((prev) => ({ ...prev, mainImage: data.url }));
-          } else {
-            setFormData((prev) => ({
-              ...prev,
-              images: [...prev.images, data.url],
-            }));
-          }
-        } catch (error) {
-          console.error("Error uploading image:", error);
-          alert(`Error uploading image: ${error.message}`);
-        }
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
-  const removeImage = (index: number) => {
-    setFormData((prev) => ({
-      ...prev,
-      images: prev.images.filter((_, i) => i !== index),
-    }));
-  };
-
-  const removeMainImage = () => {
-    setFormData((prev) => ({
-      ...prev,
-      mainImage: "",
-    }));
   };
 
   return (
@@ -126,7 +65,7 @@ export default function PropertyForm({
                   htmlFor="title"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  {t("admin.form.title")}
+                  {t("admin.table.property")}
                 </label>
                 <input
                   id="title"
@@ -142,10 +81,28 @@ export default function PropertyForm({
 
               <div className="space-y-2">
                 <label
+                  htmlFor="status"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  {t("admin.table.status")}
+                </label>
+                <input
+                  id="status"
+                  type="text"
+                  value={formData.status}
+                  onChange={(e) =>
+                    setFormData((prev) => ({ ...prev, status: e.target.value }))
+                  }
+                  className="w-full p-2 border rounded-lg"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label
                   htmlFor="price"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  {t("admin.form.price")}
+                  {t("admin.table.prize")}
                 </label>
                 <input
                   id="price"
@@ -161,32 +118,10 @@ export default function PropertyForm({
 
               <div className="space-y-2">
                 <label
-                  htmlFor="location"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  {t("admin.form.location")}
-                </label>
-                <input
-                  id="location"
-                  type="text"
-                  value={formData.location}
-                  onChange={(e) =>
-                    setFormData((prev) => ({
-                      ...prev,
-                      location: e.target.value,
-                    }))
-                  }
-                  required
-                  className="w-full p-2 border rounded-lg"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <label
                   htmlFor="googleMapsLink"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  {t("admin.form.googleMapsLink")}
+                  {t("admin.table.googleMapsLink")}
                 </label>
                 <input
                   id="googleMapsLink"
@@ -204,37 +139,18 @@ export default function PropertyForm({
 
               <div className="space-y-2">
                 <label
-                  htmlFor="type"
+                  htmlFor="description"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  {t("admin.form.type")}
+                  {t("admin.table.description")}
                 </label>
-                <input
-                  id="type"
-                  type="text"
-                  value={formData.type}
-                  onChange={(e) =>
-                    setFormData((prev) => ({ ...prev, type: e.target.value }))
-                  }
-                  className="w-full p-2 border rounded-lg"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <label
-                  htmlFor="yearBuilt"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  {t("admin.form.yearBuilt")}
-                </label>
-                <input
-                  id="yearBuilt"
-                  type="number"
-                  value={formData.yearBuilt}
+                <textarea
+                  id="description"
+                  value={formData.description}
                   onChange={(e) =>
                     setFormData((prev) => ({
                       ...prev,
-                      yearBuilt: parseInt(e.target.value),
+                      description: e.target.value,
                     }))
                   }
                   className="w-full p-2 border rounded-lg"
@@ -246,16 +162,16 @@ export default function PropertyForm({
                   htmlFor="size"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  {t("admin.form.size")}
+                  {t("admin.table.size")}
                 </label>
                 <input
                   id="size"
                   type="number"
-                  value={formData.sqft}
+                  value={formData.size}
                   onChange={(e) =>
                     setFormData((prev) => ({
                       ...prev,
-                      sqft: parseInt(e.target.value),
+                      size: parseInt(e.target.value),
                     }))
                   }
                   className="w-full p-2 border rounded-lg"
@@ -267,7 +183,7 @@ export default function PropertyForm({
                   htmlFor="rooms"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  {t("admin.form.rooms")}
+                  {t("admin.table.rooms")}
                 </label>
                 <input
                   id="rooms"
@@ -288,7 +204,7 @@ export default function PropertyForm({
                   htmlFor="floors"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  {t("admin.form.floors")}
+                  {t("admin.table.floor")}
                 </label>
                 <input
                   id="floors"
@@ -309,7 +225,7 @@ export default function PropertyForm({
                   htmlFor="contacts"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  {t("admin.form.contacts")}
+                  {t("admin.table.contacts")}
                 </label>
                 <input
                   id="contacts"
@@ -319,6 +235,27 @@ export default function PropertyForm({
                     setFormData((prev) => ({
                       ...prev,
                       contacts: e.target.value,
+                    }))
+                  }
+                  className="w-full p-2 border rounded-lg"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label
+                  htmlFor="actions"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  {t("admin.table.actions")}
+                </label>
+                <input
+                  id="actions"
+                  type="text"
+                  value={formData.actions}
+                  onChange={(e) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      actions: e.target.value,
                     }))
                   }
                   className="w-full p-2 border rounded-lg"
