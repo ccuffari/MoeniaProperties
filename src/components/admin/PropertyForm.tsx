@@ -267,10 +267,7 @@ export default function PropertyForm({
                   type="text"
                   value={formData.zipCode}
                   onChange={(e) =>
-                    setFormData((prev) => ({
-                      ...prev,
-                      zipCode: e.target.value,
-                    }))
+                    setFormData((prev) => ({ ...prev, zipCode: e.target.value }))
                   }
                   className="w-full p-2 border rounded-lg"
                   required
@@ -285,10 +282,7 @@ export default function PropertyForm({
                   type="text"
                   value={formData.country}
                   onChange={(e) =>
-                    setFormData((prev) => ({
-                      ...prev,
-                      country: e.target.value,
-                    }))
+                    setFormData((prev) => ({ ...prev, country: e.target.value }))
                   }
                   className="w-full p-2 border rounded-lg"
                   required
