@@ -1,0 +1,145 @@
+{
+  "nav": {
+    "home": "Home",
+    "properties": "Properties",
+    "services": "Services",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "login": {
+    "title": "Admin Login",
+    "email": "Email Address",
+    "password": "Password",
+    "submit": "Sign In",
+    "loading": "Signing in...",
+    "error": {
+      "invalid": "Invalid email or password"
+    }
+  },
+  "hero": {
+    "title": "Exceptional Properties, Extraordinary Living",
+    "subtitle": "Discover prestigious properties that reflect your distinctive taste",
+    "propertyType": {
+      "all": "All Types",
+      "house": "House",
+      "apartment": "Apartment",
+      "office": "Office"
+    },
+    "search": "Search"
+  },
+  "search": {
+    "placeholder": "Search properties...",
+    "location": "Location",
+    "propertyType": "Property Type",
+    "priceRange": {
+      "label": "Price Range",
+      "any": "Any Price",
+      "upTo1M": "Up to $1M",
+      "1Mto5M": "$1M - $5M",
+      "above5M": "$5M+"
+    }
+  },
+  "property": {
+    "notFound": "Property not found",
+    "backToProperties": "Back to Properties",
+    "location": "Location",
+    "beds": "Beds",
+    "baths": "Baths",
+    "sqft": "Sq Ft",
+    "description": "Description",
+    "features": "Features",
+    "scheduleViewing": "Schedule Viewing",
+    "details": {
+      "schedule": "Schedule a Viewing"
+    },
+    "noResults": "No results"
+  },
+  "properties": {
+    "featured": "Featured Properties",
+    "viewDetails": "View Details",
+    "items": {
+      
+    },
+    "noResults": "No results",
+    "title": "Properties"
+  },
+  "contact": {
+    "title": "Contact Us",
+    "getInTouch": "Get in Touch",
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "message": "Message",
+      "send": "Send Message"
+    },
+    "info": {
+      "title": "Contact Information",
+      "phone": "Phone",
+      "email": "Email",
+      "office": "Office",
+      "hours": "Office Hours"
+    }
+  },
+  "footer": {
+    "description": "Curating exceptional properties for discerning clients who seek unparalleled quality and sophistication.",
+    "quickLinks": "Quick Links",
+    "propertyTypes": "Property Types",
+    "followUs": "Follow Us",
+    "properties": {
+      "luxury": "Luxury Homes",
+      "penthouses": "Penthouses",
+      "offices": "Premium Offices",
+      "estates": "Estates"
+    },
+    "rights": "All rights reserved",
+    "privacy": "Privacy Policy",
+    "adminAccess": "Admin Access",
+    "cookieNotice": "By using this site, you agree to our use of cookies."
+  },
+"about": {
+  "title": "About",
+  "intro": "Learn more about our company and services."
+},
+"admin": {
+  "title": "Dashboard",
+  "editProperty": "Edit Property",
+  "dashboard": {
+    "properties": "Properties",
+    "users": "Users",
+    "appointments": "Appointments",
+    "recentProperties": "Recent Properties",
+    "upcomingAppointments": "Upcoming Appointments",
+    "welcome": "Welcome",
+    "activeListings": "Active Listings",
+    "activeUsers": "Active Users",
+    "lastLogin": "Last Login"
+  },
+  "viewAll": "View All",
+  "addProperty": "Add Property",
+  "searchProperties": "Search Properties",
+  "table": {
+    "property": "Property",
+    "location": "Location",
+    "price": "Price",
+    "status": "Status",
+    "actions": "Actions"
+  },
+    "form": {
+      "title": "Title",
+      "price": "Price",
+      "location": "Location",
+      "type": "Type",
+      "status": "Status",
+      "mainImage": "Main Image",
+      "additionalImages": "Additional Images",
+      "description": "Description",
+      "beds": "Beds",
+      "baths": "Baths",
+      "sqft": "Square Feet",
+      "cancel": "Cancel",
+      "create": "Create",
+      "save": "Save",
+      "confirmDelete": "Confirm Deletion"
+    }
+}
+}

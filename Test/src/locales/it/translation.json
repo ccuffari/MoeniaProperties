@@ -1,0 +1,12 @@
+{
+  "admin": {
+    "login": {
+      "title": "Accedi a Moenia Properties",
+      "description": "Accedi al pannello di amministrazione",
+      "signInWithGoogle": "Accedi con Google",
+      "signingIn": "Accesso in corso...",
+      "error": "Si è verificato un errore durante l'accesso. Riprova.",
+      "popupNote": "Assicurati che i popup siano abilitati per questo sito"
+    }
+  }
+}

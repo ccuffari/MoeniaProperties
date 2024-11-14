@@ -1,0 +1,144 @@
+{
+  "nav": {
+    "home": "Home",
+    "properties": "Immobili",
+    "services": "Servizi",
+    "about": "Chi Siamo",
+    "contact": "Contatti"
+  },
+  "login": {
+    "title": "Accesso Admin",
+    "email": "Indirizzo Email",
+    "password": "Password",
+    "submit": "Accedi",
+    "loading": "Accesso in corso...",
+    "error": {
+      "invalid": "Email o password non validi"
+    }
+  },
+  "hero": {
+    "title": "Proprietà Eccezionali, Vita Straordinaria",
+    "subtitle": "Scopri proprietà prestigiose che riflettono il tuo gusto distintivo",
+    "propertyType": {
+      "all": "Tutte le Tipologie",
+      "house": "Casa",
+      "apartment": "Appartamento",
+      "office": "Ufficio"
+    },
+    "search": "Cerca"
+  },
+  "search": {
+    "placeholder": "Cerca immobili...",
+    "location": "Località",
+    "propertyType": "Tipologia",
+    "priceRange": {
+      "label": "Fascia di Prezzo",
+      "any": "Qualsiasi Prezzo",
+      "upTo1M": "Fino a 1M€",
+      "1Mto5M": "1M€ - 5M€",
+      "above5M": "Oltre 5M€"
+    }
+  },
+  "property": {
+    "notFound": "Immobile non trovato",
+    "backToProperties": "Torna agli Immobili",
+    "location": "Località",
+    "beds": "Camere",
+    "baths": "Bagni",
+    "sqft": "Mq",
+    "description": "Descrizione",
+    "features": "Caratteristiche",
+    "scheduleViewing": "Prenota una Visita",
+    "details": {
+      "schedule": "Prenota una Visita"
+    },
+    "noResults": "Nessun risultato"
+  },
+  "properties": {
+    "featured": "Immobili in Evidenza",
+    "viewDetails": "Vedi Dettagli",
+    "items": {
+    },
+    "noResults": "Nessun risultato",
+    "title": "Immobili"
+  },
+  "contact": {
+    "title": "Contattaci",
+    "getInTouch": "Mettiti in Contatto",
+    "form": {
+      "name": "Nome",
+      "email": "Email",
+      "message": "Messaggio",
+      "send": "Invia Messaggio"
+    },
+    "info": {
+      "title": "Informazioni di Contatto",
+      "phone": "Telefono",
+      "email": "Email",
+      "office": "Ufficio",
+      "hours": "Orari di Apertura"
+    }
+  },
+  "footer": {
+    "description": "Selezioniamo proprietà eccezionali per clienti esigenti che cercano qualità e raffinatezza senza compromessi.",
+    "quickLinks": "Link Rapidi",
+    "propertyTypes": "Tipologie di Immobili",
+    "followUs": "Seguici",
+    "properties": {
+      "luxury": "Case di Lusso",
+      "penthouses": "Attici",
+      "offices": "Uffici Premium",
+      "estates": "Tenute"
+    },
+    "rights": "Tutti i diritti riservati",
+    "privacy": "Privacy Policy",
+    "adminAccess": "Accesso Admin",
+    "cookieNotice": "Utilizzando questo sito, accetti l'uso dei cookie."
+  },
+"about": {
+  "title": "Informazioni",
+  "intro": "Scopri di più sulla nostra azienda e sui nostri servizi."
+},
+"admin": {
+  "title": "Dashboard",
+  "editProperty": "Modifica Immobile",
+  "dashboard": {
+    "properties": "Proprietà",
+    "users": "Utenti",
+    "appointments": "Appuntamenti",
+    "recentProperties": "Proprietà Recenti",
+    "upcomingAppointments": "Appuntamenti in Arrivo",
+    "welcome": "Benvenuto",
+    "activeListings": "Inserzioni Attive",
+    "activeUsers": "Utenti Attivi",
+    "lastLogin": "Ultimo Accesso"
+  },
+  "viewAll": "Visualizza Tutto",
+  "addProperty": "Aggiungi Proprietà",
+  "searchProperties": "Cerca Proprietà",
+  "table": {
+    "property": "Proprietà",
+    "location": "Posizione",
+    "price": "Prezzo",
+    "status": "Stato",
+    "actions": "Azioni"
+  },
+    "form": {
+      "title": "Titolo",
+      "price": "Prezzo",
+      "location": "Posizione",
+      "type": "Tipo",
+      "status": "Stato",
+      "mainImage": "Immagine Principale",
+      "additionalImages": "Immagini Aggiuntive",
+      "description": "Descrizione",
+      "beds": "Letti",
+      "baths": "Bagni",
+      "sqft": "Metri Quadri",
+      "cancel": "Annulla",
+      "create": "Crea",
+      "save": "Salva",
+      "confirmDelete": "Conferma eliminazione"
+    }
+}
+}
