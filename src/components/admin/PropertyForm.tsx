@@ -1,33 +1,28 @@
-import * as React from "react";
-import { X, Upload, Plus, Trash2 } from "lucide-react";
-import { usePropertyStore } from "../../store/propertyStore";
-import { useTranslation } from "react-i18next";
+import * as React from 'react';
+import { X, Upload, Plus, Trash2 } from 'lucide-react';
+import { usePropertyStore } from '../../store/propertyStore';
+import { useTranslation } from 'react-i18next';
 
 interface PropertyFormProps {
   propertyId: number | null;
   onClose: () => void;
 }
 
-export default function PropertyForm({
-  propertyId,
-  onClose,
-}: PropertyFormProps) {
+export default function PropertyForm({ propertyId, onClose }: PropertyFormProps) {
   const { t } = useTranslation();
   const { properties, addProperty, updateProperty } = usePropertyStore();
-  const property = propertyId
-    ? properties.find((p) => p.id === propertyId)
-    : null;
+  const property = propertyId ? properties.find((p) => p.id === propertyId) : null;
 
   const [formData, setFormData] = React.useState({
-    title: property?.title || "",
-    description: property?.description || "",
-    price: property?.price || "",
-    map: property?.map || "",
-    contacts: property?.contacts || "",
-    size: property?.size || "",
+    title: property?.title || '',
+    description: property?.description || '',
+    price: property?.price || '',
+    map: property?.map || '',
+    contacts: property?.contacts || '',
+    size: property?.size || '',
     rooms: property?.rooms || 0,
-    floor: property?.floor || "",
-    mainImage: property?.mainImage || "",
+    floor: property?.floor || '',
+    mainImage: property?.mainImage || '',
     images: property?.images || [],
   });
 
@@ -43,44 +38,30 @@ export default function PropertyForm({
     onClose();
   };
 
-  const handleImageUpload = async (
-    e: React.ChangeEvent<HTMLInputElement>,
-    isMain: boolean
-  ) => {
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>, isMain: boolean) => {
     const file = e.target.files?.[0];
     if (file) {
       const reader = new FileReader();
       reader.onloadend = async () => {
-        const base64Image = reader.result?.toString().split(",")[1];
+        const base64Image = reader.result?.toString().split(',')[1];
         try {
-          const response = await fetch(
-            "https://moeniaproperties.it/.netlify/functions/uploadImageToGitHub",
-            {
-              method: "POST",
-              body: JSON.stringify({
-                imageBase64: base64Image,
-                fileName: file.name,
-              }),
-              headers: { "Content-Type": "application/json" },
-            }
-          );
+          const response = await fetch('https://moeniaproperties.it/.netlify/functions/uploadImageToGitHub', {
+            method: 'POST',
+            body: JSON.stringify({ imageBase64: base64Image, fileName: file.name }),
+            headers: { 'Content-Type': 'application/json' },
+          });
           if (!response.ok) {
             const errorText = await response.text();
-            throw new Error(
-              `HTTP error! status: ${response.status}, message: ${errorText}`
-            );
+            throw new Error(`HTTP error! status: ${response.status}, message: ${errorText}`);
           }
           const data = await response.json();
           if (isMain) {
             setFormData((prev) => ({ ...prev, mainImage: data.url }));
           } else {
-            setFormData((prev) => ({
-              ...prev,
-              images: [...prev.images, data.url],
-            }));
+            setFormData((prev) => ({ ...prev, images: [...prev.images, data.url] }));
           }
         } catch (error) {
-          console.error("Error uploading image:", error);
+          console.error('Error uploading image:', error);
           alert(`Error uploading image: ${error.message}`);
         }
       };
@@ -101,7 +82,7 @@ export default function PropertyForm({
         <div className="p-6">
           <div className="flex justify-between items-center mb-6">
             <h2 className="text-2xl font-bold">
-              {propertyId ? t("admin.editProperty") : t("admin.addProperty")}
+              {propertyId ? t('admin.editProperty') : t('admin.addProperty')}
             </h2>
             <button onClick={onClose}>
               <X className="h-6 w-6" />
@@ -112,14 +93,12 @@ export default function PropertyForm({
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  {t("admin.form.title")}
+                  {t('admin.form.title')}
                 </label>
                 <input
                   type="text"
                   value={formData.title}
-                  onChange={(e) =>
-                    setFormData((prev) => ({ ...prev, title: e.target.value }))
-                  }
+                  onChange={(e) => setFormData((prev) => ({ ...prev, title: e.target.value }))}
                   className="w-full p-2 border rounded-lg"
                   required
                 />
@@ -127,14 +106,12 @@ export default function PropertyForm({
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  {t("admin.form.price")}
+                  {t('admin.form.price')}
                 </label>
                 <input
                   type="text"
                   value={formData.price}
-                  onChange={(e) =>
-                    setFormData((prev) => ({ ...prev, price: e.target.value }))
-                  }
+                  onChange={(e) => setFormData((prev) => ({ ...prev, price: e.target.value }))}
                   className="w-full p-2 border rounded-lg"
                   required
                 />
@@ -142,14 +119,12 @@ export default function PropertyForm({
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  {t("admin.form.map")}
+                  {t('admin.form.map')}
                 </label>
                 <input
                   type="text"
                   value={formData.map}
-                  onChange={(e) =>
-                    setFormData((prev) => ({ ...prev, map: e.target.value }))
-                  }
+                  onChange={(e) => setFormData((prev) => ({ ...prev, map: e.target.value }))}
                   className="w-full p-2 border rounded-lg"
                   required
                 />
@@ -157,17 +132,12 @@ export default function PropertyForm({
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  {t("admin.form.contacts")}
+                  {t('admin.form.contacts')}
                 </label>
                 <input
                   type="text"
                   value={formData.contacts}
-                  onChange={(e) =>
-                    setFormData((prev) => ({
-                      ...prev,
-                      contacts: e.target.value,
-                    }))
-                  }
+                  onChange={(e) => setFormData((prev) => ({ ...prev, contacts: e.target.value }))}
                   className="w-full p-2 border rounded-lg"
                   required
                 />
@@ -175,14 +145,12 @@ export default function PropertyForm({
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  {t("admin.form.size")}
+                  {t('admin.form.size')}
                 </label>
                 <input
                   type="text"
                   value={formData.size}
-                  onChange={(e) =>
-                    setFormData((prev) => ({ ...prev, size: e.target.value }))
-                  }
+                  onChange={(e) => setFormData((prev) => ({ ...prev, size: e.target.value }))}
                   className="w-full p-2 border rounded-lg"
                   required
                 />
@@ -190,17 +158,12 @@ export default function PropertyForm({
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  {t("admin.form.rooms")}
+                  {t('admin.form.rooms')}
                 </label>
                 <input
                   type="number"
                   value={formData.rooms}
-                  onChange={(e) =>
-                    setFormData((prev) => ({
-                      ...prev,
-                      rooms: parseInt(e.target.value),
-                    }))
-                  }
+                  onChange={(e) => setFormData((prev) => ({ ...prev, rooms: parseInt(e.target.value) }))}
                   className="w-full p-2 border rounded-lg"
                   min="0"
                   required
@@ -209,14 +172,12 @@ export default function PropertyForm({
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  {t("admin.form.floor")}
+                  {t('admin.form.floor')}
                 </label>
                 <input
                   type="text"
                   value={formData.floor}
-                  onChange={(e) =>
-                    setFormData((prev) => ({ ...prev, floor: e.target.value }))
-                  }
+                  onChange={(e) => setFormData((prev) => ({ ...prev, floor: e.target.value }))}
                   className="w-full p-2 border rounded-lg"
                   required
                 />
@@ -224,7 +185,7 @@ export default function PropertyForm({
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  {t("admin.form.mainImage")}
+                  {t('admin.form.mainImage')}
                 </label>
                 <div className="flex items-center gap-4">
                   {formData.mainImage && (
@@ -248,7 +209,7 @@ export default function PropertyForm({
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  {t("admin.form.additionalImages")}
+                  {t('admin.form.additionalImages')}
                 </label>
                 <div className="flex flex-wrap gap-4">
                   {formData.images.map((image, index) => (
@@ -286,13 +247,13 @@ export default function PropertyForm({
                 onClick={onClose}
                 className="px-4 py-2 border rounded-lg hover:bg-gray-50"
               >
-                {t("admin.form.cancel")}
+                {t('admin.form.cancel')}
               </button>
               <button
                 type="submit"
                 className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
               >
-                {propertyId ? t("admin.form.update") : t("admin.form.add")}
+                {propertyId ? t('admin.form.update') : t('admin.form.add')}
               </button>
             </div>
           </form>
