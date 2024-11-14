@@ -1,5 +1,5 @@
 import * as React from "react";
-import { X, Upload, Plus, Trash2 } from "lucide-react";
+import { X, Upload, Plus } from "lucide-react";
 import { usePropertyStore } from "../../store/propertyStore";
 import { useTranslation } from "react-i18next";
 
@@ -25,13 +25,15 @@ export default function PropertyForm({
     location: property?.location || "",
     type: property?.type || "House",
     status: property?.status || "active",
-    beds: property?.beds || 0,
-    baths: property?.baths || 0,
-    sqft: property?.sqft || 0,
     yearBuilt: property?.yearBuilt || new Date().getFullYear(),
     googleMapsLink: property?.googleMapsLink || "",
     mainImage: property?.mainImage || "",
     images: property?.images || [],
+    beds: property?.beds || 0,  // rooms
+    baths: property?.baths || 0,
+    sqft: property?.sqft || 0,  // size
+    floors: property?.floors || 1,
+    contacts: property?.contacts || "",
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -119,293 +121,112 @@ export default function PropertyForm({
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">
-                <label
-                  htmlFor="title"
-                  className="block text-sm font-medium text-gray-700"
-                >
+                <label htmlFor="title" className="block text-sm font-medium text-gray-700">
                   {t("admin.form.title")}
                 </label>
                 <input
                   id="title"
                   type="text"
                   value={formData.title}
-                  onChange={(e) =>
-                    setFormData((prev) => ({ ...prev, title: e.target.value }))
-                  }
+                  onChange={(e) => setFormData((prev) => ({ ...prev, title: e.target.value }))}
                   required
                   className="w-full p-2 border rounded-lg"
                 />
               </div>
 
+              {/* Additional form fields */}
               <div className="space-y-2">
-                <label
-                  htmlFor="price"
-                  className="block text-sm font-medium text-gray-700"
-                >
+                <label htmlFor="price" className="block text-sm font-medium text-gray-700">
                   {t("admin.form.price")}
                 </label>
                 <input
                   id="price"
                   type="text"
                   value={formData.price}
-                  onChange={(e) =>
-                    setFormData((prev) => ({ ...prev, price: e.target.value }))
-                  }
+                  onChange={(e) => setFormData((prev) => ({ ...prev, price: e.target.value }))}
                   required
                   className="w-full p-2 border rounded-lg"
                 />
               </div>
 
               <div className="space-y-2">
-                <label
-                  htmlFor="location"
-                  className="block text-sm font-medium text-gray-700"
-                >
+                <label htmlFor="location" className="block text-sm font-medium text-gray-700">
                   {t("admin.form.location")}
                 </label>
                 <input
                   id="location"
                   type="text"
                   value={formData.location}
-                  onChange={(e) =>
-                    setFormData((prev) => ({
-                      ...prev,
-                      location: e.target.value,
-                    }))
-                  }
+                  onChange={(e) => setFormData((prev) => ({ ...prev, location: e.target.value }))}
                   required
                   className="w-full p-2 border rounded-lg"
                 />
               </div>
 
               <div className="space-y-2">
-                <label
-                  htmlFor="type"
-                  className="block text-sm font-medium text-gray-700"
-                >
+                <label htmlFor="googleMapsLink" className="block text-sm font-medium text-gray-700">
+                  Google Maps Link
+                </label>
+                <input
+                  id="googleMapsLink"
+                  type="text"
+                  value={formData.googleMapsLink}
+                  onChange={(e) => setFormData((prev) => ({ ...prev, googleMapsLink: e.target.value }))}
+                  className="w-full p-2 border rounded-lg"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label htmlFor="type" className="block text-sm font-medium text-gray-700">
                   {t("admin.form.type")}
                 </label>
                 <select
                   id="type"
                   value={formData.type}
-                  onChange={(e) =>
-                    setFormData((prev) => ({ ...prev, type: e.target.value }))
-                  }
+                  onChange={(e) => setFormData((prev) => ({ ...prev, type: e.target.value }))}
                   required
                   className="w-full p-2 border rounded-lg"
                 >
                   <option value="House">{t("hero.propertyType.house")}</option>
-                  <option value="Apartment">
-                    {t("hero.propertyType.apartment")}
-                  </option>
-                  <option value="Office">
-                    {t("hero.propertyType.office")}
-                  </option>
+                  <option value="Apartment">{t("hero.propertyType.apartment")}</option>
+                  <option value="Office">{t("hero.propertyType.office")}</option>
                 </select>
               </div>
 
+              {/* More fields */}
               <div className="space-y-2">
-                <label
-                  htmlFor="status"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  {t("admin.form.status")}
-                </label>
-                <select
-                  id="status"
-                  value={formData.status}
-                  onChange={(e) =>
-                    setFormData((prev) => ({
-                      ...prev,
-                      status: e.target.value as any,
-                    }))
-                  }
-                  required
-                  className="w-full p-2 border rounded-lg"
-                >
-                  <option value="active">Active</option>
-                  <option value="pending">Pending</option>
-                  <option value="sold">Sold</option>
-                </select>
-              </div>
-
-              <div className="space-y-2">
-                <label
-                  htmlFor="mainImage"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  {t("admin.form.mainImage")}
-                </label>
-                <div className="flex items-center gap-4">
-                  {formData.mainImage && (
-                    <div className="relative">
-                      <img
-                        src={formData.mainImage}
-                        alt="Main property image"
-                        className="h-20 w-20 object-cover rounded-lg"
-                      />
-                      <button
-                        type="button"
-                        onClick={removeMainImage}
-                        className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1"
-                      >
-                        <X className="h-4 w-4" />
-                      </button>
-                    </div>
-                  )}
-                  <label className="cursor-pointer bg-gray-100 p-4 rounded-lg hover:bg-gray-200">
-                    <Upload className="h-6 w-6" />
-                    <input
-                      id="mainImage"
-                      type="file"
-                      accept="image/*"
-                      onChange={(e) => handleImageUpload(e, true)}
-                      className="hidden"
-                    />
-                  </label>
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <label
-                  htmlFor="additionalImages"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  {t("admin.form.additionalImages")}
-                </label>
-                <div className="flex flex-wrap gap-4">
-                  {formData.images.map((image, index) => (
-                    <div key={index} className="relative">
-                      <img
-                        src={image}
-                        alt={`Property image ${index + 1}`}
-                        className="h-20 w-20 object-cover rounded-lg"
-                      />
-                      <button
-                        type="button"
-                        onClick={() => removeImage(index)}
-                        className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1"
-                      >
-                        <X className="h-4 w-4" />
-                      </button>
-                    </div>
-                  ))}
-                  <label className="cursor-pointer bg-gray-100 p-4 rounded-lg hover:bg-gray-200">
-                    <Plus className="h-6 w-6" />
-                    <input
-                      id="additionalImages"
-                      type="file"
-                      accept="image/*"
-                      onChange={(e) => handleImageUpload(e, false)}
-                      className="hidden"
-                    />
-                  </label>
-                </div>
-              </div>
-            </div>
-
-            <div className="space-y-2">
-              <label
-                htmlFor="description"
-                className="block text-sm font-medium text-gray-700"
-              >
-                {t("admin.form.description")}
-              </label>
-              <textarea
-                id="description"
-                value={formData.description}
-                onChange={(e) =>
-                  setFormData((prev) => ({
-                    ...prev,
-                    description: e.target.value,
-                  }))
-                }
-                required
-                className="w-full p-2 border rounded-lg"
-                rows={4}
-              />
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="space-y-2">
-                <label
-                  htmlFor="beds"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  {t("admin.form.beds")}
+                <label htmlFor="yearBuilt" className="block text-sm font-medium text-gray-700">
+                  Year Built
                 </label>
                 <input
-                  id="beds"
+                  id="yearBuilt"
                   type="number"
-                  value={formData.beds}
-                  onChange={(e) =>
-                    setFormData((prev) => ({
-                      ...prev,
-                      beds: parseInt(e.target.value),
-                    }))
-                  }
+                  value={formData.yearBuilt}
+                  onChange={(e) => setFormData((prev) => ({ ...prev, yearBuilt: parseInt(e.target.value) }))}
                   className="w-full p-2 border rounded-lg"
-                  min="0"
                 />
               </div>
 
               <div className="space-y-2">
-                <label
-                  htmlFor="baths"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  {t("admin.form.baths")}
+                <label htmlFor="contacts" className="block text-sm font-medium text-gray-700">
+                  Contacts
                 </label>
                 <input
-                  id="baths"
-                  type="number"
-                  value={formData.baths}
-                  onChange={(e) =>
-                    setFormData((prev) => ({
-                      ...prev,
-                      baths: parseInt(e.target.value),
-                    }))
-                  }
+                  id="contacts"
+                  type="text"
+                  value={formData.contacts}
+                  onChange={(e) => setFormData((prev) => ({ ...prev, contacts: e.target.value }))}
                   className="w-full p-2 border rounded-lg"
-                  min="0"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <label
-                  htmlFor="sqft"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  {t("admin.form.sqft")}
-                </label>
-                <input
-                  id="sqft"
-                  type="number"
-                  value={formData.sqft}
-                  onChange={(e) =>
-                    setFormData((prev) => ({
-                      ...prev,
-                      sqft: parseInt(e.target.value),
-                    }))
-                  }
-                  className="w-full p-2 border rounded-lg"
-                  min="0"
                 />
               </div>
             </div>
 
+            {/* Add delete and save buttons */}
             <div className="flex justify-end gap-4">
-              <button
-                type="button"
-                onClick={onClose}
-                className="px-4 py-2 border rounded-lg hover:bg-gray-50"
-              >
+              <button type="button" onClick={onClose} className="px-4 py-2 border rounded-lg hover:bg-gray-50">
                 {t("admin.form.cancel")}
               </button>
-              <button
-                type="submit"
-                className="px-4 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800"
-              >
+              <button type="submit" className="px-4 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800">
                 {propertyId ? t("admin.form.save") : t("admin.form.create")}
               </button>
             </div>
