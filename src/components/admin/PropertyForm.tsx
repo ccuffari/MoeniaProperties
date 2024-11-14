@@ -29,8 +29,7 @@ export default function PropertyForm({
     baths: property?.baths || 0,
     sqft: property?.sqft || 0,
     yearBuilt: property?.yearBuilt || new Date().getFullYear(),
-    parking: property?.parking || 0,
-    features: property?.features || [],
+    googleMapsLink: property?.googleMapsLink || "",
     mainImage: property?.mainImage || "",
     images: property?.images || [],
   });
