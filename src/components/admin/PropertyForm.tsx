@@ -25,14 +25,15 @@ export default function PropertyForm({
     location: property?.location || "",
     type: property?.type || "House",
     status: property?.status || "active",
+    beds: property?.beds || 0,
+    baths: property?.baths || 0,
+    sqft: property?.sqft || 0,
     yearBuilt: property?.yearBuilt || new Date().getFullYear(),
     googleMapsLink: property?.googleMapsLink || "",
     mainImage: property?.mainImage || "",
     images: property?.images || [],
-    beds: property?.beds || 0, // rooms
-    baths: property?.baths || 0,
-    sqft: property?.sqft || 0, // size
-    floors: property?.floors || 1,
+    rooms: property?.rooms || 0,
+    floors: property?.floors || 0,
     contacts: property?.contacts || "",
   });
 
@@ -139,7 +140,6 @@ export default function PropertyForm({
                 />
               </div>
 
-              {/* Additional form fields */}
               <div className="space-y-2">
                 <label
                   htmlFor="price"
@@ -186,7 +186,7 @@ export default function PropertyForm({
                   htmlFor="googleMapsLink"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Google Maps Link
+                  {t("admin.form.googleMapsLink")}
                 </label>
                 <input
                   id="googleMapsLink"
@@ -209,32 +209,23 @@ export default function PropertyForm({
                 >
                   {t("admin.form.type")}
                 </label>
-                <select
+                <input
                   id="type"
+                  type="text"
                   value={formData.type}
                   onChange={(e) =>
                     setFormData((prev) => ({ ...prev, type: e.target.value }))
                   }
-                  required
                   className="w-full p-2 border rounded-lg"
-                >
-                  <option value="House">{t("hero.propertyType.house")}</option>
-                  <option value="Apartment">
-                    {t("hero.propertyType.apartment")}
-                  </option>
-                  <option value="Office">
-                    {t("hero.propertyType.office")}
-                  </option>
-                </select>
+                />
               </div>
 
-              {/* More fields */}
               <div className="space-y-2">
                 <label
                   htmlFor="yearBuilt"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Year Built
+                  {t("admin.form.yearBuilt")}
                 </label>
                 <input
                   id="yearBuilt"
@@ -252,10 +243,73 @@ export default function PropertyForm({
 
               <div className="space-y-2">
                 <label
+                  htmlFor="size"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  {t("admin.form.size")}
+                </label>
+                <input
+                  id="size"
+                  type="number"
+                  value={formData.sqft}
+                  onChange={(e) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      sqft: parseInt(e.target.value),
+                    }))
+                  }
+                  className="w-full p-2 border rounded-lg"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label
+                  htmlFor="rooms"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  {t("admin.form.rooms")}
+                </label>
+                <input
+                  id="rooms"
+                  type="number"
+                  value={formData.rooms}
+                  onChange={(e) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      rooms: parseInt(e.target.value),
+                    }))
+                  }
+                  className="w-full p-2 border rounded-lg"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label
+                  htmlFor="floors"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  {t("admin.form.floors")}
+                </label>
+                <input
+                  id="floors"
+                  type="number"
+                  value={formData.floors}
+                  onChange={(e) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      floors: parseInt(e.target.value),
+                    }))
+                  }
+                  className="w-full p-2 border rounded-lg"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label
                   htmlFor="contacts"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Contacts
+                  {t("admin.form.contacts")}
                 </label>
                 <input
                   id="contacts"
@@ -272,20 +326,12 @@ export default function PropertyForm({
               </div>
             </div>
 
-            {/* Add delete and save buttons */}
-            <div className="flex justify-end gap-4">
-              <button
-                type="button"
-                onClick={onClose}
-                className="px-4 py-2 border rounded-lg hover:bg-gray-50"
-              >
-                {t("admin.form.cancel")}
-              </button>
+            <div className="space-y-6 mt-4">
               <button
                 type="submit"
-                className="px-4 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800"
+                className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700"
               >
-                {propertyId ? t("admin.form.save") : t("admin.form.create")}
+                {t("admin.form.save")}
               </button>
             </div>
           </form>
