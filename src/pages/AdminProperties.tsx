@@ -164,7 +164,7 @@ export default function AdminProperties() {
                       {property.yearBuilt}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {property.amenities.join(", ")}
+                      {property.amenities ? property.amenities.join(", ") : ""}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                       <button
