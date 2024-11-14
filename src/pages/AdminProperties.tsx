@@ -1,5 +1,5 @@
 //moeniaproperties.it/admin/properties
-https: import * as React from "react";
+import * as React from "react";
 import { Plus, Pencil, Trash2, Search } from "lucide-react";
 import { usePropertyStore } from "../store/propertyStore";
 import { useTranslation } from "react-i18next";
