@@ -25,14 +25,16 @@ export default function PropertyForm({
     location: property?.location || "",
     type: property?.type || "House",
     status: property?.status || "active",
+    beds: property?.beds || 0,
+    baths: property?.baths || 0,
+    sqft: property?.sqft || 0,
+    yearBuilt: property?.yearBuilt || new Date().getFullYear(),
     googleMapsLink: property?.googleMapsLink || "",
     mainImage: property?.mainImage || "",
     images: property?.images || [],
     rooms: property?.rooms || 0,
     floors: property?.floors || 0,
     contacts: property?.contacts || "",
-    size: property?.size || 0,
-    actions: property?.actions || "",
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -43,6 +45,65 @@ export default function PropertyForm({
       addProperty(formData);
     }
     onClose();
+  };
+
+  const handleImageUpload = async (
+    e: React.ChangeEvent<HTMLInputElement>,
+    isMain: boolean
+  ) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = async () => {
+        const base64Image = reader.result?.toString().split(",")[1];
+        try {
+          const response = await fetch(
+            "https://moeniaproperties.it/.netlify/functions/uploadImageToGitHub",
+            {
+              method: "POST",
+              body: JSON.stringify({
+                imageBase64: base64Image,
+                fileName: file.name,
+              }),
+              headers: { "Content-Type": "application/json" },
+            }
+          );
+          if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(
+              `HTTP error! status: ${response.status}, message: ${errorText}`
+            );
+          }
+          const data = await response.json();
+          if (isMain) {
+            setFormData((prev) => ({ ...prev, mainImage: data.url }));
+          } else {
+            setFormData((prev) => ({
+              ...prev,
+              images: [...prev.images, data.url],
+            }));
+          }
+        } catch (error) {
+          console.error("Error uploading image:", error);
+          alert(`Error uploading image: ${error.message}`);
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const removeImage = (index: number) => {
+    setFormData((prev) => ({
+      ...prev,
+      images: prev.images.filter((_, i) => i !== index),
+    }));
+  };
+
+  const removeMainImage = () => {
+    setFormData((prev) => ({
+      ...prev,
+      mainImage: "",
+    }));
   };
 
   return (
@@ -81,24 +142,6 @@ export default function PropertyForm({
 
               <div className="space-y-2">
                 <label
-                  htmlFor="status"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  {t("admin.table.status")}
-                </label>
-                <input
-                  id="status"
-                  type="text"
-                  value={formData.status}
-                  onChange={(e) =>
-                    setFormData((prev) => ({ ...prev, status: e.target.value }))
-                  }
-                  className="w-full p-2 border rounded-lg"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <label
                   htmlFor="price"
                   className="block text-sm font-medium text-gray-700"
                 >
@@ -110,6 +153,28 @@ export default function PropertyForm({
                   value={formData.price}
                   onChange={(e) =>
                     setFormData((prev) => ({ ...prev, price: e.target.value }))
+                  }
+                  required
+                  className="w-full p-2 border rounded-lg"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label
+                  htmlFor="location"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  {t("admin.table.description")}
+                </label>
+                <input
+                  id="location"
+                  type="text"
+                  value={formData.location}
+                  onChange={(e) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      location: e.target.value,
+                    }))
                   }
                   required
                   className="w-full p-2 border rounded-lg"
@@ -139,19 +204,17 @@ export default function PropertyForm({
 
               <div className="space-y-2">
                 <label
-                  htmlFor="description"
+                  htmlFor="type"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  {t("admin.table.description")}
+                  {t("admin.table.status")}
                 </label>
-                <textarea
-                  id="description"
-                  value={formData.description}
+                <input
+                  id="type"
+                  type="text"
+                  value={formData.type}
                   onChange={(e) =>
-                    setFormData((prev) => ({
-                      ...prev,
-                      description: e.target.value,
-                    }))
+                    setFormData((prev) => ({ ...prev, type: e.target.value }))
                   }
                   className="w-full p-2 border rounded-lg"
                 />
@@ -167,11 +230,11 @@ export default function PropertyForm({
                 <input
                   id="size"
                   type="number"
-                  value={formData.size}
+                  value={formData.sqft}
                   onChange={(e) =>
                     setFormData((prev) => ({
                       ...prev,
-                      size: parseInt(e.target.value),
+                      sqft: parseInt(e.target.value),
                     }))
                   }
                   className="w-full p-2 border rounded-lg"
@@ -201,13 +264,13 @@ export default function PropertyForm({
 
               <div className="space-y-2">
                 <label
-                  htmlFor="floors"
+                  htmlFor="floor"
                   className="block text-sm font-medium text-gray-700"
                 >
                   {t("admin.table.floor")}
                 </label>
                 <input
-                  id="floors"
+                  id="floor"
                   type="number"
                   value={formData.floors}
                   onChange={(e) =>
@@ -240,35 +303,21 @@ export default function PropertyForm({
                   className="w-full p-2 border rounded-lg"
                 />
               </div>
-
-              <div className="space-y-2">
-                <label
-                  htmlFor="actions"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  {t("admin.table.actions")}
-                </label>
-                <input
-                  id="actions"
-                  type="text"
-                  value={formData.actions}
-                  onChange={(e) =>
-                    setFormData((prev) => ({
-                      ...prev,
-                      actions: e.target.value,
-                    }))
-                  }
-                  className="w-full p-2 border rounded-lg"
-                />
-              </div>
             </div>
 
-            <div className="space-y-6 mt-4">
+            <div className="flex justify-end space-x-4">
+              <button
+                type="button"
+                onClick={onClose}
+                className="px-4 py-2 bg-gray-500 text-white rounded-lg"
+              >
+                Cancel
+              </button>
               <button
                 type="submit"
-                className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700"
+                className="px-4 py-2 bg-blue-600 text-white rounded-lg"
               >
-                {t("admin.form.save")}
+                Save
               </button>
             </div>
           </form>
