@@ -1,5 +1,5 @@
 import * as React from "react";
-import { X, Upload, Plus } from "lucide-react";
+import { X, Upload, Plus, Trash2 } from "lucide-react";
 import { usePropertyStore } from "../../store/propertyStore";
 import { useTranslation } from "react-i18next";
 
@@ -23,11 +23,6 @@ export default function PropertyForm({
     description: property?.description || "",
     price: property?.price || "",
     location: property?.location || "",
-    map: property?.map || "",
-    contact: property?.contact || "",
-    size: property?.size || "",
-    rooms: property?.rooms || 1,
-    floor: property?.floor || 1,
     type: property?.type || "House",
     status: property?.status || "active",
     beds: property?.beds || 0,
@@ -42,7 +37,11 @@ export default function PropertyForm({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    propertyId ? updateProperty(propertyId, formData) : addProperty(formData);
+    if (propertyId) {
+      updateProperty(propertyId, formData);
+    } else {
+      addProperty(formData);
+    }
     onClose();
   };
 
@@ -67,14 +66,21 @@ export default function PropertyForm({
               headers: { "Content-Type": "application/json" },
             }
           );
-          if (!response.ok) throw new Error(await response.text());
+          if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(
+              `HTTP error! status: ${response.status}, message: ${errorText}`
+            );
+          }
           const data = await response.json();
-          setFormData((prev) => ({
-            ...prev,
-            ...(isMain
-              ? { mainImage: data.url }
-              : { images: [...prev.images, data.url] }),
-          }));
+          if (isMain) {
+            setFormData((prev) => ({ ...prev, mainImage: data.url }));
+          } else {
+            setFormData((prev) => ({
+              ...prev,
+              images: [...prev.images, data.url],
+            }));
+          }
         } catch (error) {
           console.error("Error uploading image:", error);
           alert(`Error uploading image: ${error.message}`);
@@ -88,6 +94,13 @@ export default function PropertyForm({
     setFormData((prev) => ({
       ...prev,
       images: prev.images.filter((_, i) => i !== index),
+    }));
+  };
+
+  const removeMainImage = () => {
+    setFormData((prev) => ({
+      ...prev,
+      mainImage: "",
     }));
   };
 
@@ -121,7 +134,7 @@ export default function PropertyForm({
                     setFormData((prev) => ({ ...prev, title: e.target.value }))
                   }
                   required
-                  className="w-full px-4 py-2 border rounded-lg"
+                  className="w-full p-2 border rounded-lg"
                 />
               </div>
 
@@ -140,7 +153,7 @@ export default function PropertyForm({
                     setFormData((prev) => ({ ...prev, price: e.target.value }))
                   }
                   required
-                  className="w-full px-4 py-2 border rounded-lg"
+                  className="w-full p-2 border rounded-lg"
                 />
               </div>
 
@@ -162,106 +175,7 @@ export default function PropertyForm({
                     }))
                   }
                   required
-                  className="w-full px-4 py-2 border rounded-lg"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <label
-                  htmlFor="map"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  {t("admin.form.map")}
-                </label>
-                <input
-                  id="map"
-                  type="text"
-                  value={formData.map}
-                  onChange={(e) =>
-                    setFormData((prev) => ({ ...prev, map: e.target.value }))
-                  }
-                  className="w-full px-4 py-2 border rounded-lg"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <label
-                  htmlFor="contact"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  {t("admin.form.contact")}
-                </label>
-                <input
-                  id="contact"
-                  type="text"
-                  value={formData.contact}
-                  onChange={(e) =>
-                    setFormData((prev) => ({
-                      ...prev,
-                      contact: e.target.value,
-                    }))
-                  }
-                  className="w-full px-4 py-2 border rounded-lg"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <label
-                  htmlFor="size"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  {t("admin.form.size")}
-                </label>
-                <input
-                  id="size"
-                  type="text"
-                  value={formData.size}
-                  onChange={(e) =>
-                    setFormData((prev) => ({ ...prev, size: e.target.value }))
-                  }
-                  className="w-full px-4 py-2 border rounded-lg"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <label
-                  htmlFor="rooms"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  {t("admin.form.rooms")}
-                </label>
-                <input
-                  id="rooms"
-                  type="number"
-                  value={formData.rooms}
-                  onChange={(e) =>
-                    setFormData((prev) => ({
-                      ...prev,
-                      rooms: Number(e.target.value),
-                    }))
-                  }
-                  className="w-full px-4 py-2 border rounded-lg"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <label
-                  htmlFor="floor"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  {t("admin.form.floor")}
-                </label>
-                <input
-                  id="floor"
-                  type="number"
-                  value={formData.floor}
-                  onChange={(e) =>
-                    setFormData((prev) => ({
-                      ...prev,
-                      floor: Number(e.target.value),
-                    }))
-                  }
-                  className="w-full px-4 py-2 border rounded-lg"
+                  className="w-full p-2 border rounded-lg"
                 />
               </div>
 
@@ -279,11 +193,15 @@ export default function PropertyForm({
                     setFormData((prev) => ({ ...prev, type: e.target.value }))
                   }
                   required
-                  className="w-full px-4 py-2 border rounded-lg"
+                  className="w-full p-2 border rounded-lg"
                 >
-                  <option value="House">House</option>
-                  <option value="Apartment">Apartment</option>
-                  <option value="Office">Office</option>
+                  <option value="House">{t("hero.propertyType.house")}</option>
+                  <option value="Apartment">
+                    {t("hero.propertyType.apartment")}
+                  </option>
+                  <option value="Office">
+                    {t("hero.propertyType.office")}
+                  </option>
                 </select>
               </div>
 
@@ -298,10 +216,13 @@ export default function PropertyForm({
                   id="status"
                   value={formData.status}
                   onChange={(e) =>
-                    setFormData((prev) => ({ ...prev, status: e.target.value }))
+                    setFormData((prev) => ({
+                      ...prev,
+                      status: e.target.value as any,
+                    }))
                   }
                   required
-                  className="w-full px-4 py-2 border rounded-lg"
+                  className="w-full p-2 border rounded-lg"
                 >
                   <option value="active">Active</option>
                   <option value="pending">Pending</option>
@@ -316,28 +237,71 @@ export default function PropertyForm({
                 >
                   {t("admin.form.mainImage")}
                 </label>
-                <input
-                  id="mainImage"
-                  type="file"
-                  onChange={(e) => handleImageUpload(e, true)}
-                  className="w-full"
-                />
+                <div className="flex items-center gap-4">
+                  {formData.mainImage && (
+                    <div className="relative">
+                      <img
+                        src={formData.mainImage}
+                        alt="Main property image"
+                        className="h-20 w-20 object-cover rounded-lg"
+                      />
+                      <button
+                        type="button"
+                        onClick={removeMainImage}
+                        className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1"
+                      >
+                        <X className="h-4 w-4" />
+                      </button>
+                    </div>
+                  )}
+                  <label className="cursor-pointer bg-gray-100 p-4 rounded-lg hover:bg-gray-200">
+                    <Upload className="h-6 w-6" />
+                    <input
+                      id="mainImage"
+                      type="file"
+                      accept="image/*"
+                      onChange={(e) => handleImageUpload(e, true)}
+                      className="hidden"
+                    />
+                  </label>
+                </div>
               </div>
 
               <div className="space-y-2">
                 <label
-                  htmlFor="images"
+                  htmlFor="additionalImages"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  {t("admin.form.images")}
+                  {t("admin.form.additionalImages")}
                 </label>
-                <input
-                  id="images"
-                  type="file"
-                  multiple
-                  onChange={(e) => handleImageUpload(e, false)}
-                  className="w-full"
-                />
+                <div className="flex flex-wrap gap-4">
+                  {formData.images.map((image, index) => (
+                    <div key={index} className="relative">
+                      <img
+                        src={image}
+                        alt={`Property image ${index + 1}`}
+                        className="h-20 w-20 object-cover rounded-lg"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => removeImage(index)}
+                        className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1"
+                      >
+                        <X className="h-4 w-4" />
+                      </button>
+                    </div>
+                  ))}
+                  <label className="cursor-pointer bg-gray-100 p-4 rounded-lg hover:bg-gray-200">
+                    <Plus className="h-6 w-6" />
+                    <input
+                      id="additionalImages"
+                      type="file"
+                      accept="image/*"
+                      onChange={(e) => handleImageUpload(e, false)}
+                      className="hidden"
+                    />
+                  </label>
+                </div>
               </div>
             </div>
 
@@ -358,7 +322,8 @@ export default function PropertyForm({
                   }))
                 }
                 required
-                className="w-full px-4 py-2 border rounded-lg"
+                className="w-full p-2 border rounded-lg"
+                rows={4}
               />
             </div>
 
@@ -377,10 +342,11 @@ export default function PropertyForm({
                   onChange={(e) =>
                     setFormData((prev) => ({
                       ...prev,
-                      beds: Number(e.target.value),
+                      beds: parseInt(e.target.value),
                     }))
                   }
-                  className="w-full px-4 py-2 border rounded-lg"
+                  className="w-full p-2 border rounded-lg"
+                  min="0"
                 />
               </div>
 
@@ -398,10 +364,11 @@ export default function PropertyForm({
                   onChange={(e) =>
                     setFormData((prev) => ({
                       ...prev,
-                      baths: Number(e.target.value),
+                      baths: parseInt(e.target.value),
                     }))
                   }
-                  className="w-full px-4 py-2 border rounded-lg"
+                  className="w-full p-2 border rounded-lg"
+                  min="0"
                 />
               </div>
 
@@ -419,62 +386,30 @@ export default function PropertyForm({
                   onChange={(e) =>
                     setFormData((prev) => ({
                       ...prev,
-                      sqft: Number(e.target.value),
+                      sqft: parseInt(e.target.value),
                     }))
                   }
-                  className="w-full px-4 py-2 border rounded-lg"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <label
-                  htmlFor="yearBuilt"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  {t("admin.form.yearBuilt")}
-                </label>
-                <input
-                  id="yearBuilt"
-                  type="number"
-                  value={formData.yearBuilt}
-                  onChange={(e) =>
-                    setFormData((prev) => ({
-                      ...prev,
-                      yearBuilt: Number(e.target.value),
-                    }))
-                  }
-                  className="w-full px-4 py-2 border rounded-lg"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <label
-                  htmlFor="parking"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  {t("admin.form.parking")}
-                </label>
-                <input
-                  id="parking"
-                  type="number"
-                  value={formData.parking}
-                  onChange={(e) =>
-                    setFormData((prev) => ({
-                      ...prev,
-                      parking: Number(e.target.value),
-                    }))
-                  }
-                  className="w-full px-4 py-2 border rounded-lg"
+                  className="w-full p-2 border rounded-lg"
+                  min="0"
                 />
               </div>
             </div>
 
-            <button
-              type="submit"
-              className="bg-blue-600 text-white px-4 py-2 rounded-lg"
-            >
-              {propertyId ? t("admin.update") : t("admin.add")}
-            </button>
+            <div className="flex justify-end gap-4">
+              <button
+                type="button"
+                onClick={onClose}
+                className="px-4 py-2 border rounded-lg hover:bg-gray-50"
+              >
+                {t("admin.form.cancel")}
+              </button>
+              <button
+                type="submit"
+                className="px-4 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800"
+              >
+                {propertyId ? t("admin.form.save") : t("admin.form.create")}
+              </button>
+            </div>
           </form>
         </div>
       </div>
