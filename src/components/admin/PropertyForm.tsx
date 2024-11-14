@@ -1,6 +1,3 @@
-vedi una tabella in questo codice da ggiornare con i nuovi attributi?
-
-
 import * as React from "react";
 import { X, Upload, Plus, Trash2 } from "lucide-react";
 import { usePropertyStore } from "../../store/propertyStore";
@@ -70,7 +67,7 @@ export default function PropertyForm({
           if (!response.ok) {
             const errorText = await response.text();
             throw new Error(
-              HTTP error! status: ${response.status}, message: ${errorText}
+              `HTTP error! status: ${response.status}, message: ${errorText}`
             );
           }
           const data = await response.json();
@@ -84,7 +81,7 @@ export default function PropertyForm({
           }
         } catch (error) {
           console.error("Error uploading image:", error);
-          alert(Error uploading image: ${error.message});
+          alert(`Error uploading image: ${error.message}`);
         }
       };
       reader.readAsDataURL(file);
@@ -258,7 +255,7 @@ export default function PropertyForm({
                     <div key={index} className="relative">
                       <img
                         src={image}
-                        alt={Property image ${index + 1}}
+                        alt={`Property image ${index + 1}`}
                         className="h-20 w-20 object-cover rounded-lg"
                       />
                       <button
