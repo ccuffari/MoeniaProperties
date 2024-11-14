@@ -22,23 +22,13 @@ export default function PropertyForm({
     title: property?.title || "",
     description: property?.description || "",
     price: property?.price || "",
-    location: property?.location || "",
-    type: property?.type || "House",
-    status: property?.status || "active",
-    beds: property?.beds || 0,
-    baths: property?.baths || 0,
-    sqft: property?.sqft || 0,
-    yearBuilt: property?.yearBuilt || new Date().getFullYear(),
-    parking: property?.parking || 0,
-    features: property?.features || [],
-    mainImage: property?.mainImage || "",
-    images: property?.images || [],
-    // New attributes
     map: property?.map || "",
     contacts: property?.contacts || "",
-    size: property?.size || 0,
+    size: property?.size || "",
     rooms: property?.rooms || 0,
-    floor: property?.floor || 0,
+    floor: property?.floor || "",
+    mainImage: property?.mainImage || "",
+    images: property?.images || [],
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -120,7 +110,6 @@ export default function PropertyForm({
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Existing form fields */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   {t("admin.form.title")}
@@ -136,7 +125,21 @@ export default function PropertyForm({
                 />
               </div>
 
-              {/* New form fields */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  {t("admin.form.price")}
+                </label>
+                <input
+                  type="text"
+                  value={formData.price}
+                  onChange={(e) =>
+                    setFormData((prev) => ({ ...prev, price: e.target.value }))
+                  }
+                  className="w-full p-2 border rounded-lg"
+                  required
+                />
+              </div>
+
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   {t("admin.form.map")}
@@ -148,6 +151,7 @@ export default function PropertyForm({
                     setFormData((prev) => ({ ...prev, map: e.target.value }))
                   }
                   className="w-full p-2 border rounded-lg"
+                  required
                 />
               </div>
 
@@ -174,16 +178,13 @@ export default function PropertyForm({
                   {t("admin.form.size")}
                 </label>
                 <input
-                  type="number"
+                  type="text"
                   value={formData.size}
                   onChange={(e) =>
-                    setFormData((prev) => ({
-                      ...prev,
-                      size: parseInt(e.target.value),
-                    }))
+                    setFormData((prev) => ({ ...prev, size: e.target.value }))
                   }
                   className="w-full p-2 border rounded-lg"
-                  min="0"
+                  required
                 />
               </div>
 
@@ -202,6 +203,7 @@ export default function PropertyForm({
                   }
                   className="w-full p-2 border rounded-lg"
                   min="0"
+                  required
                 />
               </div>
 
@@ -210,17 +212,71 @@ export default function PropertyForm({
                   {t("admin.form.floor")}
                 </label>
                 <input
-                  type="number"
+                  type="text"
                   value={formData.floor}
                   onChange={(e) =>
-                    setFormData((prev) => ({
-                      ...prev,
-                      floor: parseInt(e.target.value),
-                    }))
+                    setFormData((prev) => ({ ...prev, floor: e.target.value }))
                   }
                   className="w-full p-2 border rounded-lg"
-                  min="0"
+                  required
                 />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  {t("admin.form.mainImage")}
+                </label>
+                <div className="flex items-center gap-4">
+                  {formData.mainImage && (
+                    <img
+                      src={formData.mainImage}
+                      alt="Main property image"
+                      className="h-20 w-20 object-cover rounded-lg"
+                    />
+                  )}
+                  <label className="cursor-pointer bg-gray-100 p-4 rounded-lg hover:bg-gray-200">
+                    <Upload className="h-6 w-6" />
+                    <input
+                      type="file"
+                      accept="image/*"
+                      className="hidden"
+                      onChange={(e) => handleImageUpload(e, true)}
+                    />
+                  </label>
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  {t("admin.form.additionalImages")}
+                </label>
+                <div className="flex flex-wrap gap-4">
+                  {formData.images.map((image, index) => (
+                    <div key={index} className="relative">
+                      <img
+                        src={image}
+                        alt={`Property image ${index + 1}`}
+                        className="h-20 w-20 object-cover rounded-lg"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => removeImage(index)}
+                        className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1"
+                      >
+                        <X className="h-4 w-4" />
+                      </button>
+                    </div>
+                  ))}
+                  <label className="cursor-pointer bg-gray-100 p-4 rounded-lg hover:bg-gray-200">
+                    <Plus className="h-6 w-6" />
+                    <input
+                      type="file"
+                      accept="image/*"
+                      className="hidden"
+                      onChange={(e) => handleImageUpload(e, false)}
+                    />
+                  </label>
+                </div>
               </div>
             </div>
 
@@ -234,9 +290,9 @@ export default function PropertyForm({
               </button>
               <button
                 type="submit"
-                className="px-4 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800"
+                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
               >
-                {propertyId ? t("admin.form.save") : t("admin.form.create")}
+                {propertyId ? t("admin.form.update") : t("admin.form.add")}
               </button>
             </div>
           </form>
