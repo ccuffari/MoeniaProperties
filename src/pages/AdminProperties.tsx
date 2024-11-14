@@ -1,4 +1,3 @@
-//moeniaproperties.it/admin/properties
 import * as React from "react";
 import { Plus, Pencil, Trash2, Search } from "lucide-react";
 import { usePropertyStore } from "../store/propertyStore";
@@ -70,22 +69,16 @@ export default function AdminProperties() {
                     {t("admin.table.property")}
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    {t("admin.table.location")}
+                    {t("admin.table.status")}
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     {t("admin.table.price")}
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    {t("admin.table.status")}
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     {t("admin.table.googleMapsLink")}
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    {t("admin.table.type")}
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    {t("admin.table.yearBuilt")}
+                    {t("admin.table.description")}
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     {t("admin.table.size")}
@@ -94,7 +87,7 @@ export default function AdminProperties() {
                     {t("admin.table.rooms")}
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    {t("admin.table.floors")}
+                    {t("admin.table.floor")}
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     {t("admin.table.contacts")}
@@ -118,33 +111,14 @@ export default function AdminProperties() {
                           <div className="text-sm font-medium text-gray-900">
                             {property.title}
                           </div>
-                          <div className="text-sm text-gray-500">
-                            {t(
-                              `hero.propertyType.${property.type.toLowerCase()}`
-                            )}
-                          </div>
                         </div>
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {property.location}
+                      {property.status}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       {property.price}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <span
-                        className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full
-                        ${
-                          property.status === "active"
-                            ? "bg-green-100 text-green-800"
-                            : property.status === "pending"
-                            ? "bg-yellow-100 text-yellow-800"
-                            : "bg-red-100 text-red-800"
-                        }`}
-                      >
-                        {property.status}
-                      </span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       <a
@@ -156,10 +130,7 @@ export default function AdminProperties() {
                       </a>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {t(`hero.propertyType.${property.type.toLowerCase()}`)}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {property.yearBuilt}
+                      {property.description}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       {property.size} sqm
@@ -168,7 +139,7 @@ export default function AdminProperties() {
                       {property.rooms}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {property.floors}
+                      {property.floor}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       {property.contacts}
