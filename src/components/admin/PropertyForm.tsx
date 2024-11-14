@@ -1,3 +1,6 @@
+vedi una tabella in questo codice da ggiornare con i nuovi attributi?
+
+
 import * as React from "react";
 import { X, Upload, Plus, Trash2 } from "lucide-react";
 import { usePropertyStore } from "../../store/propertyStore";
@@ -29,13 +32,6 @@ export default function PropertyForm({
     floor: property?.floor || "",
     mainImage: property?.mainImage || "",
     images: property?.images || [],
-    street: property?.street || "", // Nuovo campo
-    city: property?.city || "", // Nuovo campo
-    zipCode: property?.zipCode || "", // Nuovo campo
-    country: property?.country || "", // Nuovo campo
-    type: property?.type || "", // Nuovo campo
-    yearBuilt: property?.yearBuilt || "", // Nuovo campo
-    amenities: property?.amenities || "", // Nuovo campo
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -74,7 +70,7 @@ export default function PropertyForm({
           if (!response.ok) {
             const errorText = await response.text();
             throw new Error(
-              `HTTP error! status: ${response.status}, message: ${errorText}`
+              HTTP error! status: ${response.status}, message: ${errorText}
             );
           }
           const data = await response.json();
@@ -88,7 +84,7 @@ export default function PropertyForm({
           }
         } catch (error) {
           console.error("Error uploading image:", error);
-          alert(`Error uploading image: ${error.message}`);
+          alert(Error uploading image: ${error.message});
         }
       };
       reader.readAsDataURL(file);
@@ -231,180 +227,75 @@ export default function PropertyForm({
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  {t("admin.form.street")}
-                </label>
-                <input
-                  type="text"
-                  value={formData.street}
-                  onChange={(e) =>
-                    setFormData((prev) => ({ ...prev, street: e.target.value }))
-                  }
-                  className="w-full p-2 border rounded-lg"
-                  required
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  {t("admin.form.city")}
-                </label>
-                <input
-                  type="text"
-                  value={formData.city}
-                  onChange={(e) =>
-                    setFormData((prev) => ({ ...prev, city: e.target.value }))
-                  }
-                  className="w-full p-2 border rounded-lg"
-                  required
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  {t("admin.form.zipCode")}
-                </label>
-                <input
-                  type="text"
-                  value={formData.zipCode}
-                  onChange={(e) =>
-                    setFormData((prev) => ({ ...prev, zipCode: e.target.value }))
-                  }
-                  className="w-full p-2 border rounded-lg"
-                  required
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  {t("admin.form.country")}
-                </label>
-                <input
-                  type="text"
-                  value={formData.country}
-                  onChange={(e) =>
-                    setFormData((prev) => ({ ...prev, country: e.target.value }))
-                  }
-                  className="w-full p-2 border rounded-lg"
-                  required
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  {t("admin.form.type")}
-                </label>
-                <input
-                  type="text"
-                  value={formData.type}
-                  onChange={(e) =>
-                    setFormData((prev) => ({ ...prev, type: e.target.value }))
-                  }
-                  className="w-full p-2 border rounded-lg"
-                  required
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  {t("admin.form.yearBuilt")}
-                </label>
-                <input
-                  type="text"
-                  value={formData.yearBuilt}
-                  onChange={(e) =>
-                    setFormData((prev) => ({
-                      ...prev,
-                      yearBuilt: e.target.value,
-                    }))
-                  }
-                  className="w-full p-2 border rounded-lg"
-                  required
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  {t("admin.form.amenities")}
-                </label>
-                <input
-                  type="text"
-                  value={formData.amenities}
-                  onChange={(e) =>
-                    setFormData((prev) => ({
-                      ...prev,
-                      amenities: e.target.value,
-                    }))
-                  }
-                  className="w-full p-2 border rounded-lg"
-                  required
-                />
-              </div>
-
-              <div className="col-span-2">
-                <label className="block text-sm font-medium text-gray-700 mb-1">
                   {t("admin.form.mainImage")}
                 </label>
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={(e) => handleImageUpload(e, true)}
-                  className="w-full p-2 border rounded-lg"
-                />
-                {formData.mainImage && (
-                  <div className="mt-4">
+                <div className="flex items-center gap-4">
+                  {formData.mainImage && (
                     <img
                       src={formData.mainImage}
-                      alt="Main Image"
-                      className="w-full h-auto rounded-lg"
+                      alt="Main property image"
+                      className="h-20 w-20 object-cover rounded-lg"
                     />
-                  </div>
-                )}
+                  )}
+                  <label className="cursor-pointer bg-gray-100 p-4 rounded-lg hover:bg-gray-200">
+                    <Upload className="h-6 w-6" />
+                    <input
+                      type="file"
+                      accept="image/*"
+                      className="hidden"
+                      onChange={(e) => handleImageUpload(e, true)}
+                    />
+                  </label>
+                </div>
               </div>
 
-              <div className="col-span-2">
+              <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  {t("admin.form.images")}
+                  {t("admin.form.additionalImages")}
                 </label>
                 <div className="flex flex-wrap gap-4">
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={(e) => handleImageUpload(e, false)}
-                    className="w-full p-2 border rounded-lg"
-                  />
                   {formData.images.map((image, index) => (
                     <div key={index} className="relative">
                       <img
                         src={image}
-                        alt={`Property image ${index}`}
-                        className="w-32 h-32 object-cover rounded-lg"
+                        alt={Property image ${index + 1}}
+                        className="h-20 w-20 object-cover rounded-lg"
                       />
                       <button
                         type="button"
                         onClick={() => removeImage(index)}
-                        className="absolute top-0 right-0 p-1 bg-red-500 text-white rounded-full"
+                        className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1"
                       >
-                        <Trash2 className="h-4 w-4" />
+                        <X className="h-4 w-4" />
                       </button>
                     </div>
                   ))}
+                  <label className="cursor-pointer bg-gray-100 p-4 rounded-lg hover:bg-gray-200">
+                    <Plus className="h-6 w-6" />
+                    <input
+                      type="file"
+                      accept="image/*"
+                      className="hidden"
+                      onChange={(e) => handleImageUpload(e, false)}
+                    />
+                  </label>
                 </div>
               </div>
             </div>
 
-            <div className="mt-6 flex justify-end">
+            <div className="flex justify-end gap-4">
               <button
                 type="button"
                 onClick={onClose}
-                className="px-4 py-2 bg-gray-300 rounded-lg text-gray-700"
+                className="px-4 py-2 border rounded-lg hover:bg-gray-50"
               >
-                {t("admin.cancel")}
+                {t("admin.form.cancel")}
               </button>
               <button
                 type="submit"
-                className="ml-4 px-6 py-2 bg-blue-600 text-white rounded-lg"
+                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
               >
-                {propertyId ? t("admin.saveChanges") : t("admin.addProperty")}
+                {propertyId ? t("admin.form.update") : t("admin.form.add")}
               </button>
             </div>
           </form>
