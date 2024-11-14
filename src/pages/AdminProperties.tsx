@@ -69,28 +69,34 @@ export default function AdminProperties() {
                     {t("admin.table.property")}
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    {t("admin.table.status")}
+                    {t("admin.table.location")}
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     {t("admin.table.price")}
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    {t("admin.table.googleMapsLink")}
+                    {t("admin.table.status")}
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    {t("admin.table.description")}
+                    {t("admin.table.street")}
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    {t("admin.table.size")}
+                    {t("admin.table.city")}
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    {t("admin.table.rooms")}
+                    {t("admin.table.zipCode")}
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    {t("admin.table.floor")}
+                    {t("admin.table.country")}
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    {t("admin.table.contacts")}
+                    {t("admin.table.type")}
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    {t("admin.table.yearBuilt")}
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    {t("admin.table.amenities")}
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     {t("admin.table.actions")}
@@ -111,38 +117,57 @@ export default function AdminProperties() {
                           <div className="text-sm font-medium text-gray-900">
                             {property.title}
                           </div>
+                          <div className="text-sm text-gray-500">
+                            {t(
+                              `hero.propertyType.${property.type.toLowerCase()}`
+                            )}
+                          </div>
                         </div>
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {property.status}
+                      {property.location}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       {property.price}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      <a
-                        href={property.googleMapsLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <span
+                        className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full
+                        ${
+                          property.status === "active"
+                            ? "bg-green-100 text-green-800"
+                            : property.status === "pending"
+                            ? "bg-yellow-100 text-yellow-800"
+                            : "bg-red-100 text-red-800"
+                        }`}
                       >
-                        Google Maps
-                      </a>
+                        {property.status}
+                      </span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {property.description}
+                      {property.street}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {property.size} sqm
+                      {property.city}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {property.rooms}
+                      {property.zipCode}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {property.floor}
+                      {property.country}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {property.contacts}
+                      {t(`hero.propertyType.${property.type.toLowerCase()}`)}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      {property.yearBuilt}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      {Array.isArray(property.amenities) &&
+                      property.amenities.length > 0
+                        ? property.amenities.join(", ")
+                        : t("admin.noAmenities")}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                       <button

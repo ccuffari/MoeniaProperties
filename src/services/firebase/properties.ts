@@ -20,22 +20,28 @@ const PROPERTIES_COLLECTION = 'properties';
 export async function getProperties(): Promise<Property[]> {
   try {
     const propertiesRef = collection(db, PROPERTIES_COLLECTION);
-    const q = query(propertiesRef, orderBy('admin.table.status', 'desc'));
+    const q = query(propertiesRef, orderBy('createdAt', 'desc'));
     const snapshot = await getDocs(q);
     
     return snapshot.docs.map(doc => {
       const data = doc.data();
+      // Assicurati che i dati siano nel formato corretto
       return {
         id: doc.id,
-        property: data['admin.table.property'] || '',
-        status: data['admin.table.status'] || 'active',
-        prize: data['admin.table.prize'] || '',
-        googleMapsLink: data['admin.table.googleMapsLink'] || '',
-        description: data['admin.table.description'] || '',
-        size: data['admin.table.size'] || 0,
-        rooms: data['admin.table.rooms'] || 0,
-        floor: data['admin.table.floor'] || 0,
-        contacts: data['admin.table.contacts'] || ''
+        title: data.title || '',
+        location: data.location || '',
+        price: data.price || '',
+        mainImage: data.mainImage || '',
+        images: data.images || [],
+        beds: data.beds || null,
+        baths: data.baths || 0,
+        sqft: data.sqft || 0,
+        type: data.type || '',
+        description: data.description || '',
+        status: data.status || 'active',
+        features: data.features || [],
+        yearBuilt: data.yearBuilt || null,
+        parking: data.parking || null
       } as Property;
     });
   } catch (error) {
@@ -43,6 +49,7 @@ export async function getProperties(): Promise<Property[]> {
     throw error;
   }
 }
+
 
 export async function getPropertyById(id: string): Promise<Property | null> {
   try {
@@ -107,19 +114,24 @@ export async function deleteProperty(id: string): Promise<void> {
 
 export async function getFilteredProperties(filters: {
   searchTerm?: string;
-  status?: string;
-  prizeRange?: string;
+  propertyType?: string;
+  priceRange?: string;
   location?: string;
+  status?: string;
 }): Promise<Property[]> {
   try {
     let q = query(collection(db, PROPERTIES_COLLECTION));
 
+    if (filters.propertyType) {
+      q = query(q, where('type', '==', filters.propertyType));
+    }
+
     if (filters.status) {
-      q = query(q, where('admin.table.status', '==', filters.status));
+      q = query(q, where('status', '==', filters.status));
     }
 
     if (filters.location) {
-      q = query(q, where('admin.table.googleMapsLink', '==', filters.location));
+      q = query(q, where('location', '==', filters.location));
     }
 
     const snapshot = await getDocs(q);
@@ -128,20 +140,21 @@ export async function getFilteredProperties(filters: {
       ...doc.data()
     } as Property));
 
-    // Filtraggio lato client per searchTerm e prizeRange
+    // Client-side filtering for search term and price range
     if (filters.searchTerm) {
       const searchTerm = filters.searchTerm.toLowerCase();
       properties = properties.filter(property =>
-        property.property.toLowerCase().includes(searchTerm) ||
+        property.title.toLowerCase().includes(searchTerm) ||
+        property.location.toLowerCase().includes(searchTerm) ||
         property.description.toLowerCase().includes(searchTerm)
       );
     }
 
-    if (filters.prizeRange) {
-      const [min, max] = filters.prizeRange.split('-').map(Number);
+    if (filters.priceRange) {
+      const [min, max] = filters.priceRange.split('-').map(Number);
       properties = properties.filter(property => {
-        const prize = parseInt(property.prize.replace(/[^0-9]/g, ''));
-        return prize >= min && (!max || prize <= max);
+        const price = parseInt(property.price.replace(/[^0-9]/g, ''));
+        return price >= min && (!max || price <= max);
       });
     }
 
@@ -152,7 +165,7 @@ export async function getFilteredProperties(filters: {
   }
 }
 
-// Inizializzazione dati di esempio se necessario
+// Initialize sample data if needed
 export async function initializeSampleProperties(sampleProperties: Property[]): Promise<void> {
   try {
     const snapshot = await getDocs(collection(db, PROPERTIES_COLLECTION));
