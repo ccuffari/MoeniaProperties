@@ -29,9 +29,9 @@ export default function PropertyForm({
     googleMapsLink: property?.googleMapsLink || "",
     mainImage: property?.mainImage || "",
     images: property?.images || [],
-    beds: property?.beds || 0,  // rooms
+    beds: property?.beds || 0, // rooms
     baths: property?.baths || 0,
-    sqft: property?.sqft || 0,  // size
+    sqft: property?.sqft || 0, // size
     floors: property?.floors || 1,
     contacts: property?.contacts || "",
   });
@@ -121,14 +121,19 @@ export default function PropertyForm({
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">
-                <label htmlFor="title" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="title"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   {t("admin.form.title")}
                 </label>
                 <input
                   id="title"
                   type="text"
                   value={formData.title}
-                  onChange={(e) => setFormData((prev) => ({ ...prev, title: e.target.value }))}
+                  onChange={(e) =>
+                    setFormData((prev) => ({ ...prev, title: e.target.value }))
+                  }
                   required
                   className="w-full p-2 border rounded-lg"
                 />
@@ -136,86 +141,132 @@ export default function PropertyForm({
 
               {/* Additional form fields */}
               <div className="space-y-2">
-                <label htmlFor="price" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="price"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   {t("admin.form.price")}
                 </label>
                 <input
                   id="price"
                   type="text"
                   value={formData.price}
-                  onChange={(e) => setFormData((prev) => ({ ...prev, price: e.target.value }))}
+                  onChange={(e) =>
+                    setFormData((prev) => ({ ...prev, price: e.target.value }))
+                  }
                   required
                   className="w-full p-2 border rounded-lg"
                 />
               </div>
 
               <div className="space-y-2">
-                <label htmlFor="location" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="location"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   {t("admin.form.location")}
                 </label>
                 <input
                   id="location"
                   type="text"
                   value={formData.location}
-                  onChange={(e) => setFormData((prev) => ({ ...prev, location: e.target.value }))}
+                  onChange={(e) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      location: e.target.value,
+                    }))
+                  }
                   required
                   className="w-full p-2 border rounded-lg"
                 />
               </div>
 
               <div className="space-y-2">
-                <label htmlFor="googleMapsLink" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="googleMapsLink"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   Google Maps Link
                 </label>
                 <input
                   id="googleMapsLink"
                   type="text"
                   value={formData.googleMapsLink}
-                  onChange={(e) => setFormData((prev) => ({ ...prev, googleMapsLink: e.target.value }))}
+                  onChange={(e) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      googleMapsLink: e.target.value,
+                    }))
+                  }
                   className="w-full p-2 border rounded-lg"
                 />
               </div>
 
               <div className="space-y-2">
-                <label htmlFor="type" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="type"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   {t("admin.form.type")}
                 </label>
                 <select
                   id="type"
                   value={formData.type}
-                  onChange={(e) => setFormData((prev) => ({ ...prev, type: e.target.value }))}
+                  onChange={(e) =>
+                    setFormData((prev) => ({ ...prev, type: e.target.value }))
+                  }
                   required
                   className="w-full p-2 border rounded-lg"
                 >
                   <option value="House">{t("hero.propertyType.house")}</option>
-                  <option value="Apartment">{t("hero.propertyType.apartment")}</option>
-                  <option value="Office">{t("hero.propertyType.office")}</option>
+                  <option value="Apartment">
+                    {t("hero.propertyType.apartment")}
+                  </option>
+                  <option value="Office">
+                    {t("hero.propertyType.office")}
+                  </option>
                 </select>
               </div>
 
               {/* More fields */}
               <div className="space-y-2">
-                <label htmlFor="yearBuilt" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="yearBuilt"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   Year Built
                 </label>
                 <input
                   id="yearBuilt"
                   type="number"
                   value={formData.yearBuilt}
-                  onChange={(e) => setFormData((prev) => ({ ...prev, yearBuilt: parseInt(e.target.value) }))}
+                  onChange={(e) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      yearBuilt: parseInt(e.target.value),
+                    }))
+                  }
                   className="w-full p-2 border rounded-lg"
                 />
               </div>
 
               <div className="space-y-2">
-                <label htmlFor="contacts" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="contacts"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   Contacts
                 </label>
                 <input
                   id="contacts"
                   type="text"
                   value={formData.contacts}
-                  onChange={(e) => setFormData((prev) => ({ ...prev, contacts: e.target.value }))}
+                  onChange={(e) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      contacts: e.target.value,
+                    }))
+                  }
                   className="w-full p-2 border rounded-lg"
                 />
               </div>
@@ -223,10 +274,17 @@ export default function PropertyForm({
 
             {/* Add delete and save buttons */}
             <div className="flex justify-end gap-4">
-              <button type="button" onClick={onClose} className="px-4 py-2 border rounded-lg hover:bg-gray-50">
+              <button
+                type="button"
+                onClick={onClose}
+                className="px-4 py-2 border rounded-lg hover:bg-gray-50"
+              >
                 {t("admin.form.cancel")}
               </button>
-              <button type="submit" className="px-4 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800">
+              <button
+                type="submit"
+                className="px-4 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800"
+              >
                 {propertyId ? t("admin.form.save") : t("admin.form.create")}
               </button>
             </div>
