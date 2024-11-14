@@ -23,6 +23,11 @@ export default function PropertyForm({
     description: property?.description || "",
     price: property?.price || "",
     location: property?.location || "",
+    map: property?.map || "",
+    contact: property?.contact || "",
+    size: property?.size || "",
+    rooms: property?.rooms || 1,
+    floor: property?.floor || 1,
     type: property?.type || "House",
     status: property?.status || "active",
     beds: property?.beds || 0,
@@ -58,7 +63,7 @@ export default function PropertyForm({
               body: JSON.stringify({
                 imageBase64: base64Image,
                 fileName: file.name,
-              }),<
+              }),
               headers: { "Content-Type": "application/json" },
             }
           );
@@ -129,6 +134,51 @@ export default function PropertyForm({
                   setFormData((prev) => ({ ...prev, location: value }))
                 }
                 required
+              />
+
+              {/* Map Input */}
+              <TextInput
+                label={t("admin.form.map")}
+                value={formData.map}
+                onChange={(value) =>
+                  setFormData((prev) => ({ ...prev, map: value }))
+                }
+              />
+
+              {/* Contact Input */}
+              <TextInput
+                label={t("admin.form.contact")}
+                value={formData.contact}
+                onChange={(value) =>
+                  setFormData((prev) => ({ ...prev, contact: value }))
+                }
+              />
+
+              {/* Size Input */}
+              <TextInput
+                label={t("admin.form.size")}
+                value={formData.size}
+                onChange={(value) =>
+                  setFormData((prev) => ({ ...prev, size: value }))
+                }
+              />
+
+              {/* Rooms Input */}
+              <NumberInput
+                label={t("admin.form.rooms")}
+                value={formData.rooms}
+                onChange={(value) =>
+                  setFormData((prev) => ({ ...prev, rooms: value }))
+                }
+              />
+
+              {/* Floor Input */}
+              <NumberInput
+                label={t("admin.form.floor")}
+                value={formData.floor}
+                onChange={(value) =>
+                  setFormData((prev) => ({ ...prev, floor: value }))
+                }
               />
 
               {/* Type Dropdown */}
