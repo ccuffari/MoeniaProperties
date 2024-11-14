@@ -5,17 +5,19 @@ interface Property {
   id: string;
   title: string;
   location: string;
-  price: string;
+  price: string;                  // admin.table.prize
   mainImage: string;
   images: string[];
-  beds: number | null;
+  beds: number | null;            // admin.table.rooms
   baths: number;
-  sqft: number;
+  sqft: number;                   // admin.table.size
   type: string;
-  description: string;
-  status: 'active' | 'pending' | 'sold';
+  description: string;            // admin.table.description
+  status: 'active' | 'pending' | 'sold'; // admin.table.status
   yearBuilt?: number;
-  googleMapsLink: string;
+  googleMapsLink: string;         // admin.table.googleMapsLink
+  floors?: number;                // admin.table.floor
+  contacts?: string;              // admin.table.contacts
 }
 
 interface PropertyState {
