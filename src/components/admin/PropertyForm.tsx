@@ -106,170 +106,224 @@ export default function PropertyForm({
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Title Input */}
-              <TextInput
-                label={t("admin.form.title")}
+              <input
+                type="text"
+                placeholder={t("admin.form.title")}
                 value={formData.title}
-                onChange={(value) =>
-                  setFormData((prev) => ({ ...prev, title: value }))
+                onChange={(e) =>
+                  setFormData((prev) => ({ ...prev, title: e.target.value }))
                 }
                 required
+                className="w-full px-4 py-2 border rounded-lg"
               />
 
-              {/* Price Input */}
-              <TextInput
-                label={t("admin.form.price")}
+              <input
+                type="text"
+                placeholder={t("admin.form.price")}
                 value={formData.price}
-                onChange={(value) =>
-                  setFormData((prev) => ({ ...prev, price: value }))
+                onChange={(e) =>
+                  setFormData((prev) => ({ ...prev, price: e.target.value }))
                 }
                 required
+                className="w-full px-4 py-2 border rounded-lg"
               />
 
-              {/* Location Input */}
-              <TextInput
-                label={t("admin.form.location")}
+              <input
+                type="text"
+                placeholder={t("admin.form.location")}
                 value={formData.location}
-                onChange={(value) =>
-                  setFormData((prev) => ({ ...prev, location: value }))
+                onChange={(e) =>
+                  setFormData((prev) => ({
+                    ...prev,
+                    location: e.target.value,
+                  }))
                 }
                 required
+                className="w-full px-4 py-2 border rounded-lg"
               />
 
-              {/* Map Input */}
-              <TextInput
-                label={t("admin.form.map")}
+              <input
+                type="text"
+                placeholder={t("admin.form.map")}
                 value={formData.map}
-                onChange={(value) =>
-                  setFormData((prev) => ({ ...prev, map: value }))
+                onChange={(e) =>
+                  setFormData((prev) => ({ ...prev, map: e.target.value }))
                 }
+                className="w-full px-4 py-2 border rounded-lg"
               />
 
-              {/* Contact Input */}
-              <TextInput
-                label={t("admin.form.contact")}
+              <input
+                type="text"
+                placeholder={t("admin.form.contact")}
                 value={formData.contact}
-                onChange={(value) =>
-                  setFormData((prev) => ({ ...prev, contact: value }))
+                onChange={(e) =>
+                  setFormData((prev) => ({ ...prev, contact: e.target.value }))
                 }
+                className="w-full px-4 py-2 border rounded-lg"
               />
 
-              {/* Size Input */}
-              <TextInput
-                label={t("admin.form.size")}
+              <input
+                type="text"
+                placeholder={t("admin.form.size")}
                 value={formData.size}
-                onChange={(value) =>
-                  setFormData((prev) => ({ ...prev, size: value }))
+                onChange={(e) =>
+                  setFormData((prev) => ({ ...prev, size: e.target.value }))
                 }
+                className="w-full px-4 py-2 border rounded-lg"
               />
 
-              {/* Rooms Input */}
-              <NumberInput
-                label={t("admin.form.rooms")}
+              <input
+                type="number"
+                placeholder={t("admin.form.rooms")}
                 value={formData.rooms}
-                onChange={(value) =>
-                  setFormData((prev) => ({ ...prev, rooms: value }))
+                onChange={(e) =>
+                  setFormData((prev) => ({
+                    ...prev,
+                    rooms: Number(e.target.value),
+                  }))
                 }
+                className="w-full px-4 py-2 border rounded-lg"
               />
 
-              {/* Floor Input */}
-              <NumberInput
-                label={t("admin.form.floor")}
+              <input
+                type="number"
+                placeholder={t("admin.form.floor")}
                 value={formData.floor}
-                onChange={(value) =>
-                  setFormData((prev) => ({ ...prev, floor: value }))
+                onChange={(e) =>
+                  setFormData((prev) => ({
+                    ...prev,
+                    floor: Number(e.target.value),
+                  }))
                 }
+                className="w-full px-4 py-2 border rounded-lg"
               />
 
-              {/* Type Dropdown */}
-              <SelectInput
-                label={t("admin.form.type")}
+              <select
                 value={formData.type}
-                options={["House", "Apartment", "Office"]}
-                onChange={(value) =>
-                  setFormData((prev) => ({ ...prev, type: value }))
+                onChange={(e) =>
+                  setFormData((prev) => ({ ...prev, type: e.target.value }))
                 }
                 required
-              />
+                className="w-full px-4 py-2 border rounded-lg"
+              >
+                <option value="House">House</option>
+                <option value="Apartment">Apartment</option>
+                <option value="Office">Office</option>
+              </select>
 
-              {/* Status Dropdown */}
-              <SelectInput
-                label={t("admin.form.status")}
+              <select
                 value={formData.status}
-                options={["active", "pending", "sold"]}
-                onChange={(value) =>
-                  setFormData((prev) => ({ ...prev, status: value }))
+                onChange={(e) =>
+                  setFormData((prev) => ({ ...prev, status: e.target.value }))
                 }
                 required
+                className="w-full px-4 py-2 border rounded-lg"
+              >
+                <option value="active">Active</option>
+                <option value="pending">Pending</option>
+                <option value="sold">Sold</option>
+              </select>
+
+              <input
+                type="file"
+                onChange={(e) => handleImageUpload(e, true)}
+                className="w-full"
               />
 
-              {/* Main Image Upload */}
-              <ImageUpload
-                label={t("admin.form.mainImage")}
-                image={formData.mainImage}
-                onUpload={(e) => handleImageUpload(e, true)}
-              />
-
-              {/* Additional Images Upload */}
-              <MultipleImageUpload
-                label={t("admin.form.additionalImages")}
-                images={formData.images}
-                onUpload={(e) => handleImageUpload(e, false)}
-                onRemove={removeImage}
+              <input
+                type="file"
+                multiple
+                onChange={(e) => handleImageUpload(e, false)}
+                className="w-full"
               />
             </div>
 
-            {/* Description Textarea */}
-            <TextArea
-              label={t("admin.form.description")}
+            <textarea
+              placeholder={t("admin.form.description")}
               value={formData.description}
-              onChange={(value) =>
-                setFormData((prev) => ({ ...prev, description: value }))
+              onChange={(e) =>
+                setFormData((prev) => ({
+                  ...prev,
+                  description: e.target.value,
+                }))
               }
               required
+              className="w-full px-4 py-2 border rounded-lg"
             />
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <NumberInput
-                label={t("admin.form.beds")}
+              <input
+                type="number"
+                placeholder={t("admin.form.beds")}
                 value={formData.beds}
-                onChange={(value) =>
-                  setFormData((prev) => ({ ...prev, beds: value }))
+                onChange={(e) =>
+                  setFormData((prev) => ({
+                    ...prev,
+                    beds: Number(e.target.value),
+                  }))
                 }
+                className="w-full px-4 py-2 border rounded-lg"
               />
 
-              <NumberInput
-                label={t("admin.form.baths")}
+              <input
+                type="number"
+                placeholder={t("admin.form.baths")}
                 value={formData.baths}
-                onChange={(value) =>
-                  setFormData((prev) => ({ ...prev, baths: value }))
+                onChange={(e) =>
+                  setFormData((prev) => ({
+                    ...prev,
+                    baths: Number(e.target.value),
+                  }))
                 }
+                className="w-full px-4 py-2 border rounded-lg"
               />
 
-              <NumberInput
-                label={t("admin.form.sqft")}
+              <input
+                type="number"
+                placeholder={t("admin.form.sqft")}
                 value={formData.sqft}
-                onChange={(value) =>
-                  setFormData((prev) => ({ ...prev, sqft: value }))
+                onChange={(e) =>
+                  setFormData((prev) => ({
+                    ...prev,
+                    sqft: Number(e.target.value),
+                  }))
                 }
+                className="w-full px-4 py-2 border rounded-lg"
+              />
+
+              <input
+                type="number"
+                placeholder={t("admin.form.yearBuilt")}
+                value={formData.yearBuilt}
+                onChange={(e) =>
+                  setFormData((prev) => ({
+                    ...prev,
+                    yearBuilt: Number(e.target.value),
+                  }))
+                }
+                className="w-full px-4 py-2 border rounded-lg"
+              />
+
+              <input
+                type="number"
+                placeholder={t("admin.form.parking")}
+                value={formData.parking}
+                onChange={(e) =>
+                  setFormData((prev) => ({
+                    ...prev,
+                    parking: Number(e.target.value),
+                  }))
+                }
+                className="w-full px-4 py-2 border rounded-lg"
               />
             </div>
 
-            <div className="flex justify-end gap-4">
-              <button
-                type="button"
-                onClick={onClose}
-                className="px-4 py-2 border rounded-lg hover:bg-gray-50"
-              >
-                {t("admin.form.cancel")}
-              </button>
-              <button
-                type="submit"
-                className="px-4 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800"
-              >
-                {propertyId ? t("admin.form.save") : t("admin.form.create")}
-              </button>
-            </div>
+            <button
+              type="submit"
+              className="bg-blue-600 text-white px-4 py-2 rounded-lg"
+            >
+              {propertyId ? t("admin.update") : t("admin.add")}
+            </button>
           </form>
         </div>
       </div>
