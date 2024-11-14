@@ -77,7 +77,6 @@ export default function AdminProperties() {
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     {t("admin.table.status")}
                   </th>
-                  {/* Nuove colonne aggiunte */}
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     {t("admin.table.street")}
                   </th>
@@ -146,7 +145,6 @@ export default function AdminProperties() {
                         {property.status}
                       </span>
                     </td>
-                    {/* Nuove celle aggiunte */}
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       {property.street}
                     </td>
@@ -166,7 +164,10 @@ export default function AdminProperties() {
                       {property.yearBuilt}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {property.amenities?.join(", ")}
+                      {Array.isArray(property.amenities) &&
+                      property.amenities.length > 0
+                        ? property.amenities.join(", ")
+                        : t("admin.noAmenities")}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                       <button
