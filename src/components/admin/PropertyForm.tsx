@@ -1,5 +1,5 @@
 import * as React from "react";
-import { X, Upload, Plus } from "lucide-react";
+import { X, Upload, Plus, Trash2 } from "lucide-react";
 import { usePropertyStore } from "../../store/propertyStore";
 import { useTranslation } from "react-i18next";
 
@@ -33,11 +33,23 @@ export default function PropertyForm({
     features: property?.features || [],
     mainImage: property?.mainImage || "",
     images: property?.images || [],
+    // New attributes
+    map: property?.map || "",
+    contacts: property?.contacts || "",
+    size: property?.size || 0,
+    rooms: property?.rooms || 0,
+    floor: property?.floor || 0,
   });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    propertyId ? updateProperty(propertyId, formData) : addProperty(formData);
+
+    if (propertyId) {
+      updateProperty(propertyId, formData);
+    } else {
+      addProperty(formData);
+    }
+
     onClose();
   };
 
@@ -62,14 +74,21 @@ export default function PropertyForm({
               headers: { "Content-Type": "application/json" },
             }
           );
-          if (!response.ok) throw new Error(await response.text());
+          if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(
+              `HTTP error! status: ${response.status}, message: ${errorText}`
+            );
+          }
           const data = await response.json();
-          setFormData((prev) => ({
-            ...prev,
-            ...(isMain
-              ? { mainImage: data.url }
-              : { images: [...prev.images, data.url] }),
-          }));
+          if (isMain) {
+            setFormData((prev) => ({ ...prev, mainImage: data.url }));
+          } else {
+            setFormData((prev) => ({
+              ...prev,
+              images: [...prev.images, data.url],
+            }));
+          }
         } catch (error) {
           console.error("Error uploading image:", error);
           alert(`Error uploading image: ${error.message}`);
@@ -101,108 +120,108 @@ export default function PropertyForm({
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Title Input */}
-              <TextInput
-                label={t("admin.form.title")}
-                value={formData.title}
-                onChange={(value) =>
-                  setFormData((prev) => ({ ...prev, title: value }))
-                }
-                required
-              />
+              {/* Existing form fields */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  {t("admin.form.title")}
+                </label>
+                <input
+                  type="text"
+                  value={formData.title}
+                  onChange={(e) =>
+                    setFormData((prev) => ({ ...prev, title: e.target.value }))
+                  }
+                  className="w-full p-2 border rounded-lg"
+                  required
+                />
+              </div>
 
-              {/* Price Input */}
-              <TextInput
-                label={t("admin.form.price")}
-                value={formData.price}
-                onChange={(value) =>
-                  setFormData((prev) => ({ ...prev, price: value }))
-                }
-                required
-              />
+              {/* New form fields */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  {t("admin.form.map")}
+                </label>
+                <input
+                  type="text"
+                  value={formData.map}
+                  onChange={(e) =>
+                    setFormData((prev) => ({ ...prev, map: e.target.value }))
+                  }
+                  className="w-full p-2 border rounded-lg"
+                />
+              </div>
 
-              {/* Location Input */}
-              <TextInput
-                label={t("admin.form.location")}
-                value={formData.location}
-                onChange={(value) =>
-                  setFormData((prev) => ({ ...prev, location: value }))
-                }
-                required
-              />
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  {t("admin.form.contacts")}
+                </label>
+                <input
+                  type="text"
+                  value={formData.contacts}
+                  onChange={(e) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      contacts: e.target.value,
+                    }))
+                  }
+                  className="w-full p-2 border rounded-lg"
+                  required
+                />
+              </div>
 
-              {/* Type Dropdown */}
-              <SelectInput
-                label={t("admin.form.type")}
-                value={formData.type}
-                options={["House", "Apartment", "Office"]}
-                onChange={(value) =>
-                  setFormData((prev) => ({ ...prev, type: value }))
-                }
-                required
-              />
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  {t("admin.form.size")}
+                </label>
+                <input
+                  type="number"
+                  value={formData.size}
+                  onChange={(e) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      size: parseInt(e.target.value),
+                    }))
+                  }
+                  className="w-full p-2 border rounded-lg"
+                  min="0"
+                />
+              </div>
 
-              {/* Status Dropdown */}
-              <SelectInput
-                label={t("admin.form.status")}
-                value={formData.status}
-                options={["active", "pending", "sold"]}
-                onChange={(value) =>
-                  setFormData((prev) => ({ ...prev, status: value }))
-                }
-                required
-              />
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  {t("admin.form.rooms")}
+                </label>
+                <input
+                  type="number"
+                  value={formData.rooms}
+                  onChange={(e) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      rooms: parseInt(e.target.value),
+                    }))
+                  }
+                  className="w-full p-2 border rounded-lg"
+                  min="0"
+                />
+              </div>
 
-              {/* Main Image Upload */}
-              <ImageUpload
-                label={t("admin.form.mainImage")}
-                image={formData.mainImage}
-                onUpload={(e) => handleImageUpload(e, true)}
-              />
-
-              {/* Additional Images Upload */}
-              <MultipleImageUpload
-                label={t("admin.form.additionalImages")}
-                images={formData.images}
-                onUpload={(e) => handleImageUpload(e, false)}
-                onRemove={removeImage}
-              />
-            </div>
-
-            {/* Description Textarea */}
-            <TextArea
-              label={t("admin.form.description")}
-              value={formData.description}
-              onChange={(value) =>
-                setFormData((prev) => ({ ...prev, description: value }))
-              }
-              required
-            />
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <NumberInput
-                label={t("admin.form.beds")}
-                value={formData.beds}
-                onChange={(value) =>
-                  setFormData((prev) => ({ ...prev, beds: value }))
-                }
-              />
-
-              <NumberInput
-                label={t("admin.form.baths")}
-                value={formData.baths}
-                onChange={(value) =>
-                  setFormData((prev) => ({ ...prev, baths: value }))
-                }
-              />
-
-              <NumberInput
-                label={t("admin.form.sqft")}
-                value={formData.sqft}
-                onChange={(value) =>
-                  setFormData((prev) => ({ ...prev, sqft: value }))
-                }
-              />
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  {t("admin.form.floor")}
+                </label>
+                <input
+                  type="number"
+                  value={formData.floor}
+                  onChange={(e) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      floor: parseInt(e.target.value),
+                    }))
+                  }
+                  className="w-full p-2 border rounded-lg"
+                  min="0"
+                />
+              </div>
             </div>
 
             <div className="flex justify-end gap-4">
