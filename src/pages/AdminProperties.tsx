@@ -1,217 +1,193 @@
-import React, { useEffect, useState } from "react";
-import { usePropertyStore } from "../store/propertyStore";
-import { useTranslation } from "react-i18next";
+import * as React from 'react';
+import { Plus, Pencil, Trash2, Search } from 'lucide-react';
+import { usePropertyStore } from '../store/propertyStore';
+import { useTranslation } from 'react-i18next';
+import PropertyForm from '../components/admin/PropertyForm';
 
-const PropertyForm = ({ propertyId, onClose }) => {
+export default function AdminProperties() {
   const { t } = useTranslation();
-  const { properties, updateProperty, addProperty } = usePropertyStore();
-  const [propertyData, setPropertyData] = useState({
-    description: "",
-    price: "",
-    location: "",
-    contacts: "",
-    dimension: "",
-    rooms: "",
-    floor: "",
-    mapUrl: "",
-    mainImage: "",
-  });
+  const { properties, deleteProperty } = usePropertyStore();
+  const [searchTerm, setSearchTerm] = React.useState('');
+  const [showForm, setShowForm] = React.useState(false);
+  const [editingProperty, setEditingProperty] = React.useState<number | null>(null);
 
-  useEffect(() => {
-    if (propertyId) {
-      const property = properties.find((p) => p.id === propertyId);
-      if (property) {
-        setPropertyData({
-          description: property.description || "",
-          price: property.price || "",
-          location: property.location || "",
-          contacts: property.contacts || "",
-          dimension: property.dimension || "",
-          rooms: property.rooms || "",
-          floor: property.floor || "",
-          mapUrl: property.mapUrl || "",
-          mainImage: property.mainImage || "",
-        });
-      }
-    }
-  }, [propertyId, properties]);
+  const filteredProperties = properties.filter(property =>
+    property.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    property.location.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (propertyId) {
-      updateProperty(propertyId, propertyData);
-    } else {
-      addProperty(propertyData);
+  const handleEdit = (id: number) => {
+    setEditingProperty(id);
+    setShowForm(true);
+  };
+
+  const handleDelete = async (id: number) => {
+    if (window.confirm(t('admin.confirmDelete'))) {
+      deleteProperty(id);
     }
-    onClose();
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-gray-500 bg-opacity-75 flex justify-center items-center">
-      <div className="bg-white p-6 rounded-lg shadow-lg w-1/2">
-        <h2 className="text-2xl font-bold mb-4">
-          {propertyId ? t("admin.editProperty") : t("admin.addProperty")}
-        </h2>
-        <form onSubmit={handleSubmit}>
-          <div className="mb-4">
-            <label
-              htmlFor="description"
-              className="block text-sm font-medium text-gray-700"
-            >
-              {t("admin.form.description")}
-            </label>
+    <div className="pt-24 pb-16">
+      <div className="container mx-auto px-4">
+        <div className="flex justify-between items-center mb-8">
+          <h1 className="text-3xl font-bold">{t('admin.title')}</h1>
+          <button
+            onClick={() => {
+              setEditingProperty(null);
+              setShowForm(true);
+            }}
+            className="bg-gray-900 text-white px-4 py-2 rounded-lg hover:bg-gray-800 flex items-center gap-2"
+          >
+            <Plus className="h-5 w-5" />
+            {t('admin.addProperty')}
+          </button>
+        </div>
+
+        <div className="mb-6">
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 h-5 w-5" />
             <input
               type="text"
-              id="description"
-              value={propertyData.description}
-              onChange={(e) =>
-                setPropertyData({
-                  ...propertyData,
-                  description: e.target.value,
-                })
-              }
-              className="w-full px-4 py-2 border rounded-lg"
+              placeholder={t('admin.searchProperties')}
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-full pl-10 pr-4 py-2 border rounded-lg"
             />
           </div>
+        </div>
 
-          <div className="mb-4">
-            <label
-              htmlFor="price"
-              className="block text-sm font-medium text-gray-700"
-            >
-              {t("admin.form.price")}
-            </label>
-            <input
-              type="text"
-              id="price"
-              value={propertyData.price}
-              onChange={(e) =>
-                setPropertyData({ ...propertyData, price: e.target.value })
-              }
-              className="w-full px-4 py-2 border rounded-lg"
-            />
+        <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+          <div className="overflow-x-auto">
+            <table className="w-full">
+              <thead className="bg-gray-50">
+                <tr>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    {t('admin.table.property')}
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    {t('admin.table.location')}
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    {t('admin.table.price')}
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    {t('admin.table.status')}
+                  </th>
+                  {/* Nuove colonne aggiunte */}
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    {t('admin.table.street')}
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    {t('admin.table.city')}
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    {t('admin.table.zipCode')}
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    {t('admin.table.country')}
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    {t('admin.table.type')}
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    {t('admin.table.yearBuilt')}
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    {t('admin.table.amenities')}
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    {t('admin.table.actions')}
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="bg-white divide-y divide-gray-200">
+                {filteredProperties.map((property) => (
+                  <tr key={property.id}>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="flex items-center">
+                        <img
+                          src={property.mainImage}
+                          alt={property.title}
+                          className="h-10 w-10 rounded-lg object-cover"
+                        />
+                        <div className="ml-4">
+                          <div className="text-sm font-medium text-gray-900">
+                            {property.title}
+                          </div>
+                          <div className="text-sm text-gray-500">
+                            {t(`hero.propertyType.${property.type.toLowerCase()}`)}
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      {property.location}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      {property.price}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full
+                        ${property.status === 'active' ? 'bg-green-100 text-green-800' : 
+                          property.status === 'pending' ? 'bg-yellow-100 text-yellow-800' : 
+                          'bg-red-100 text-red-800'}`}>
+                        {property.status}
+                      </span>
+                    </td>
+                    {/* Nuove celle aggiunte */}
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      {property.street}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      {property.city}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      {property.zipCode}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      {property.country}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      {t(`hero.propertyType.${property.type.toLowerCase()}`)}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      {property.yearBuilt}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      {property.amenities}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                      <button
+                        onClick={() => handleEdit(property.id)}
+                        className="text-indigo-600 hover:text-indigo-900 mr-4"
+                      >
+                        <Pencil className="h-5 w-5" />
+                      </button>
+                      <button
+                        onClick={() => handleDelete(property.id)}
+                        className="text-red-600 hover:text-red-900"
+                      >
+                        <Trash2 className="h-5 w-5" />
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
+        </div>
 
-          <div className="mb-4">
-            <label
-              htmlFor="location"
-              className="block text-sm font-medium text-gray-700"
-            >
-              {t("admin.form.location")}
-            </label>
-            <input
-              type="text"
-              id="location"
-              value={propertyData.location}
-              onChange={(e) =>
-                setPropertyData({ ...propertyData, location: e.target.value })
-              }
-              className="w-full px-4 py-2 border rounded-lg"
-            />
-          </div>
-
-          <div className="mb-4">
-            <label
-              htmlFor="contacts"
-              className="block text-sm font-medium text-gray-700"
-            >
-              {t("admin.form.contacts")}
-            </label>
-            <input
-              type="text"
-              id="contacts"
-              value={propertyData.contacts}
-              onChange={(e) =>
-                setPropertyData({ ...propertyData, contacts: e.target.value })
-              }
-              className="w-full px-4 py-2 border rounded-lg"
-            />
-          </div>
-
-          <div className="mb-4">
-            <label
-              htmlFor="dimension"
-              className="block text-sm font-medium text-gray-700"
-            >
-              {t("admin.form.dimension")}
-            </label>
-            <input
-              type="text"
-              id="dimension"
-              value={propertyData.dimension}
-              onChange={(e) =>
-                setPropertyData({ ...propertyData, dimension: e.target.value })
-              }
-              className="w-full px-4 py-2 border rounded-lg"
-            />
-          </div>
-
-          <div className="mb-4">
-            <label
-              htmlFor="rooms"
-              className="block text-sm font-medium text-gray-700"
-            >
-              {t("admin.form.rooms")}
-            </label>
-            <input
-              type="text"
-              id="rooms"
-              value={propertyData.rooms}
-              onChange={(e) =>
-                setPropertyData({ ...propertyData, rooms: e.target.value })
-              }
-              className="w-full px-4 py-2 border rounded-lg"
-            />
-          </div>
-
-          <div className="mb-4">
-            <label
-              htmlFor="floor"
-              className="block text-sm font-medium text-gray-700"
-            >
-              {t("admin.form.floor")}
-            </label>
-            <input
-              type="text"
-              id="floor"
-              value={propertyData.floor}
-              onChange={(e) =>
-                setPropertyData({ ...propertyData, floor: e.target.value })
-              }
-              className="w-full px-4 py-2 border rounded-lg"
-            />
-          </div>
-
-          <div className="mb-4">
-            <label
-              htmlFor="mapUrl"
-              className="block text-sm font-medium text-gray-700"
-            >
-              {t("admin.form.mapUrl")}
-            </label>
-            <input
-              type="url"
-              id="mapUrl"
-              value={propertyData.mapUrl}
-              onChange={(e) =>
-                setPropertyData({ ...propertyData, mapUrl: e.target.value })
-              }
-              className="w-full px-4 py-2 border rounded-lg"
-            />
-          </div>
-
-          <div className="mb-4">
-            <button
-              type="submit"
-              className="w-full bg-blue-500 text-white py-2 rounded-lg"
-            >
-              {t("admin.save")}
-            </button>
-          </div>
-        </form>
+        {showForm && (
+          <PropertyForm
+            propertyId={editingProperty}
+            onClose={() => {
+              setShowForm(false);
+              setEditingProperty(null);
+            }}
+          />
+        )}
       </div>
     </div>
   );
-};
-
-export default PropertyForm;
+}
