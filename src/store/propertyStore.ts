@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import * as propertyService from '../services/firebase/properties';
 
-export interface Property {
+interface Property {
   id: string;
   title: string;
   location: string;
@@ -14,14 +14,8 @@ export interface Property {
   type: string;
   description: string;
   status: 'active' | 'pending' | 'sold';
-  features?: string[];
   yearBuilt?: number;
-  parking?: number;
-  map: string;               // URL o link alla mappa
-  contacts: string;           // Contatti per la proprietà
-  dimension: string;          // Dimensione della proprietà
-  numRooms: number;           // Numero di locali
-  floor: string;              // Piano
+  googleMapsLink: string;
 }
 
 interface PropertyState {
@@ -51,12 +45,12 @@ export const usePropertyStore = create<PropertyState>((set, get) => ({
   propertyType: '',
   priceRange: '',
   location: '',
-  
+
   setSearchTerm: (term) => set({ searchTerm: term }),
   setPropertyType: (type) => set({ propertyType: type }),
   setPriceRange: (range) => set({ priceRange: range }),
   setLocation: (location) => set({ location: location }),
-  
+
   fetchProperties: async () => {
     set({ loading: true, error: null });
     try {
