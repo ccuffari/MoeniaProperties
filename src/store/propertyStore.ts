@@ -36,7 +36,7 @@ interface PropertyState {
   setPropertyType: (type: string) => void;
   setPriceRange: (range: string) => void;
   setLocation: (location: string) => void;
-  fetchProperties: () => Promise<void>;
+  fetchProperties: (filters?: Partial<PropertyState>) => Promise<void>;
   addProperty: (property: Omit<Property, 'id'>) => Promise<void>;
   updateProperty: (id: string, property: Partial<Property>) => Promise<void>;
   deleteProperty: (id: string) => Promise<void>;
@@ -55,13 +55,51 @@ export const usePropertyStore = create<PropertyState>((set, get) => ({
   setSearchTerm: (term) => set({ searchTerm: term }),
   setPropertyType: (type) => set({ propertyType: type }),
   setPriceRange: (range) => set({ priceRange: range }),
-  setLocation: (location) => set({ location: location }),
-  
-  fetchProperties: async () => {
+  setLocation: (location) => set({ location }),
+
+  fetchProperties: async (filters = {}) => {
     set({ loading: true, error: null });
     try {
-      const properties = await propertyService.getProperties();
-      set({ properties, loading: false });
+      const { searchTerm, propertyType, priceRange, location } = get();
+
+      const mergedFilters = { 
+        searchTerm, 
+        propertyType, 
+        priceRange, 
+        location, 
+        ...filters 
+      };
+
+      const allProperties = await propertyService.getProperties();
+
+      // Filtriamo le proprietà localmente per semplificare l'esempio
+      const filtered = allProperties.filter(property => {
+        const matchesSearch = property.title.toLowerCase().includes(mergedFilters.searchTerm.toLowerCase()) ||
+                              property.location.toLowerCase().includes(mergedFilters.searchTerm.toLowerCase()) ||
+                              property.description.toLowerCase().includes(mergedFilters.searchTerm.toLowerCase());
+        const matchesType = !mergedFilters.propertyType || property.type === mergedFilters.propertyType;
+        const matchesLocation = !mergedFilters.location || property.location.toLowerCase().includes(mergedFilters.location.toLowerCase());
+        
+        let matchesPrice = true;
+        if (mergedFilters.priceRange) {
+          const price = parseInt(property.price.replace(/[^0-9]/g, ''));
+          switch (mergedFilters.priceRange) {
+            case '0-1000000':
+              matchesPrice = price <= 1000000;
+              break;
+            case '1000000-5000000':
+              matchesPrice = price > 1000000 && price <= 5000000;
+              break;
+            case '5000000+':
+              matchesPrice = price > 5000000;
+              break;
+          }
+        }
+        
+        return matchesSearch && matchesType && matchesLocation && matchesPrice;
+      });
+
+      set({ properties: filtered, loading: false });
     } catch (error) {
       set({ error: (error as Error).message, loading: false });
     }
