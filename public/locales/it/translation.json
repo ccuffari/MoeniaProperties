@@ -99,6 +99,9 @@
   },
   "about": {
     "title": "Informazioni",
+    "meta": {
+      "title": "Chi Siamo"
+    },
     "intro": "Scopri di più sulla nostra azienda e sui nostri servizi.",
     "excellence": {
       "title": "Eccellenza nel Settore Immobiliare",

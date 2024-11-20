@@ -99,6 +99,9 @@
   },
   "about": {
     "title": "About",
+    "meta": {
+      "title": "About Us"
+    },
     "intro": "Learn more about our company and services.",
     "excellence": {
       "title": "Excellence in Real Estate",
