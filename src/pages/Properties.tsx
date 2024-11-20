@@ -108,14 +108,6 @@ export default function Properties() {
                   type={property.type}
                   status={property.status}
                 />
-                <button
-                  onClick={() => toggleFavorite(property.id)}
-                  className="absolute top-4 right-4 bg-gray-900 text-white px-3 py-1 rounded-full hover:bg-gray-800"
-                >
-                  {favorites.includes(property.id)
-                    ? t("properties.removeFromFavorites")
-                    : t("properties.addToFavorites")}
-                </button>
               </div>
             ))
           ) : (
