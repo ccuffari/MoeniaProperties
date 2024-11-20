@@ -61,7 +61,10 @@
       
     },
     "noResults": "No results",
-    "title": "Properties"
+    "title": "Properties",
+    "meta": {
+      "title": "Properties"
+    }
   },
   "contact": {
     "title": "Contact Us",
