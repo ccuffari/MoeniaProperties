@@ -5,7 +5,7 @@ import path from 'path';
 
 const GITHUB_TOKEN = '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';
 const REPO_NAME = 'MoeniaProperties';
-const REPO_OWNER = 'tuo-nome-utente';
+const REPO_OWNER = 'ccuffari';
 const IMAGE_FOLDER_PATH = 'img/properties'; // Il percorso all'interno del repository
 
 export async function uploadImageToGithub(imageBuffer: Buffer, imageName: string): Promise<string> {
