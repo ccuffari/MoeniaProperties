@@ -98,33 +98,30 @@
     "cookieNotice": "Utilizzando questo sito, accetti l'uso dei cookie."
   },
   "about": {
-    "title": "Informazioni",
+    "title": "Chi Siamo",
     "meta": {
       "title": "Chi Siamo"
     },
-    "intro": "Scopri di più sulla nostra azienda e sui nostri servizi.",
-    "excellence": {
-      "title": "Eccellenza nel Settore Immobiliare",
-      "description": "Siamo leader nella ricerca e selezione di proprietà esclusive, offrendo un servizio personalizzato che supera le aspettative dei nostri clienti più esigenti."
+    "intro": "Scopri di più sulla nostra visione e il nostro approccio nel settore immobiliare.",
+    "story": {
+      "title": "La Nostra Storia",
+      "description": "Dopo molti anni dedicati alla gestione di immobili, è nato questo progetto imprenditoriale per creare opportunità per coloro che si trovano in una situazione di indecisione. Il nostro obiettivo è aiutare i proprietari a valorizzare al massimo i propri immobili, trasformando sfide in vantaggi."
+    },
+    "philosophy": {
+      "title": "La Nostra Filosofia",
+      "description": "Possedere un immobile può portare grandi benefici, ma solo se valorizzato correttamente e sfruttato al meglio. Diversamente, può diventare un peso economico e perdere i suoi vantaggi. Noi crediamo nel mettere in luce il potenziale nascosto e nel cogliere i momenti giusti per massimizzare il valore."
+    },
+    "marketAnalysis": {
+      "title": "Analisi del Mercato",
+      "description": "Il mercato è saturo di immobili con un potenziale nascosto che spesso non vengono gestiti correttamente o venduti nel momento giusto. Questo comporta una perdita di valore. La nostra missione è individuare e valorizzare queste proprietà per preservarne e accrescerne il valore."
     },
     "team": {
-      "title": "Il Nostro Team di Professionisti",
-      "description": "Un gruppo di esperti dedicati con una profonda conoscenza del mercato immobiliare di lusso e un impegno totale nel soddisfare le esigenze dei nostri clienti."
+      "title": "Il Nostro Team",
+      "description": "Grazie alla stretta collaborazione con architetti, designer, professionisti del settore edile, avvocati e analisti immobiliari, offriamo un supporto concreto per ogni necessità. Il nostro approccio multidisciplinare garantisce soluzioni su misura per ogni immobile."
     },
     "mission": {
       "title": "La Nostra Missione",
-      "description": "Trasformare la ricerca di proprietà in un'esperienza esclusiva, combinando innovazione tecnologica, conoscenza approfondita del mercato e un servizio su misura."
-    },
-    "whyChooseUs": {
-      "title": "Perché Sceglierci",
-      "experience": {
-        "title": "Esperienza Comprovata",
-        "description": "Oltre 15 anni di esperienza nel mercato immobiliare di lusso, con una rete consolidata e una comprovata capacità di individuare le proprietà più esclusive."
-      },
-      "portfolio": {
-        "title": "Portfolio Esclusivo",
-        "description": "Una selezione accurata di proprietà di pregio, da residenze di lusso a uffici premium, che rappresentano il meglio del mercato immobiliare."
-      }
+      "description": "Moenia nasce con l’idea di offrire un servizio di analisi degli immobili. Insieme ai proprietari, creiamo un percorso personalizzato che li aiuti a prendere le decisioni più adatte alle loro esigenze attuali e future."
     }
   },
   "admin": {
