@@ -100,7 +100,29 @@
   },
 "about": {
   "title": "Informazioni",
-  "intro": "Scopri di più sulla nostra azienda e sui nostri servizi."
+  "intro": "Scopri di più sulla nostra azienda e sui nostri servizi.",
+    "excellence": {
+      "title": "Eccellenza nel Settore Immobiliare",
+      "description": "Siamo leader nella ricerca e selezione di proprietà esclusive, offrendo un servizio personalizzato che supera le aspettative dei nostri clienti più esigenti."
+    },
+    "team": {
+      "title": "Il Nostro Team di Professionisti",
+      "description": "Un gruppo di esperti dedicati con una profonda conoscenza del mercato immobiliare di lusso e un impegno totale nel soddisfare le esigenze dei nostri clienti."
+    },
+    "mission": {
+      "title": "La Nostra Missione",
+      "description": "Trasformare la ricerca di proprietà in un'esperienza esclusiva, combinando innovazione tecnologica, conoscenza approfondita del mercato e un servizio su misura."
+    },
+    "whyChooseUs": {
+      "title": "Perché Sceglierci",
+      "experience": {
+        "title": "Esperienza Comprovata",
+        "description": "Oltre 15 anni di esperienza nel mercato immobiliare di lusso, con una rete consolidata e una comprovata capacità di individuare le proprietà più esclusive."
+      },
+      "portfolio": {
+        "title": "Portfolio Esclusivo",
+        "description": "Una selezione accurata di proprietà di pregio, da residenze di lusso a uffici premium, che rappresentano il meglio del mercato immobiliare."
+      }
 },
 "admin": {
   "title": "Dashboard",
