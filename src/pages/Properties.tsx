@@ -1,9 +1,9 @@
-import * as React from "react";
-import { usePropertyStore } from "../store/propertyStore";
-import SearchFilters from "../components/SearchFilters";
-import PropertyCard from "../components/PropertyCard";
-import { Helmet } from "react-helmet-async";
-import { useTranslation } from "react-i18next";
+import * as React from 'react';
+import { usePropertyStore } from '../store/propertyStore';
+import SearchFilters from '../components/SearchFilters';
+import PropertyCard from '../components/PropertyCard';
+import { Helmet } from 'react-helmet-async';
+import { useTranslation } from 'react-i18next';
 
 export default function Properties() {
   const { t } = useTranslation();
@@ -23,21 +23,21 @@ export default function Properties() {
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    itemListElement: properties.map((property, index) => ({
+    "itemListElement": properties.map((property, index) => ({
       "@type": "ListItem",
-      position: index + 1,
-      item: {
+      "position": index + 1,
+      "item": {
         "@type": "RealEstateListing",
-        name: property.title,
-        description: property.description,
-        image: property.mainImage,
-        price: property.price,
-        address: {
+        "name": property.title,
+        "description": property.description,
+        "image": property.mainImage,
+        "price": property.price,
+        "address": {
           "@type": "PostalAddress",
-          addressLocality: property.location,
-        },
-      },
-    })),
+          "addressLocality": property.location
+        }
+      }
+    }))
   };
 
   if (loading) {
@@ -56,7 +56,9 @@ export default function Properties() {
     return (
       <div className="pt-24 pb-16">
         <div className="container mx-auto px-4">
-          <div className="text-center text-red-600">{error}</div>
+          <div className="text-center text-red-600">
+            {error}
+          </div>
         </div>
       </div>
     );
@@ -65,17 +67,17 @@ export default function Properties() {
   return (
     <div className="pt-24 pb-16">
       <Helmet>
-        <title>{t("properties.meta.title")}</title>
-        <meta name="description" content={t("properties.meta.description")} />
+        <title>{t('properties.meta.title')}</title>
+        <meta name="description" content={t('properties.meta.description')} />
         <script type="application/ld+json">
           {JSON.stringify(structuredData)}
         </script>
       </Helmet>
 
       <div className="container mx-auto px-4">
-        <h1 className="text-4xl font-bold mb-8">{t("properties.title")}</h1>
+        <h1 className="text-4xl font-bold mb-8">{t('properties.title')}</h1>
         <SearchFilters />
-
+        
         <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {properties.length > 0 ? (
             properties.map((property) => (
@@ -98,16 +100,14 @@ export default function Properties() {
                   className="absolute top-4 right-4 bg-gray-900 text-white px-3 py-1 rounded-full hover:bg-gray-800"
                 >
                   {favorites.includes(property.id)
-                    ? t("properties.removeFromFavorites")
-                    : t("properties.addToFavorites")}
+                    ? t('properties.removeFromFavorites')
+                    : t('properties.addToFavorites')}
                 </button>
               </div>
             ))
           ) : (
             <div className="col-span-full text-center py-12">
-              <p className="text-xl text-gray-600">
-                {t("properties.noResults")}
-              </p>
+              <p className="text-xl text-gray-600">{t('properties.noResults')}</p>
             </div>
           )}
         </div>
