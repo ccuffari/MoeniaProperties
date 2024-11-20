@@ -101,7 +101,30 @@
   },
 "about": {
   "title": "About",
-  "intro": "Learn more about our company and services."
+  "intro": "Learn more about our company and services.",
+    "excellence": {
+      "title": "Excellence in Real Estate",
+      "description": "We are leaders in the search and selection of exclusive properties, offering a personalized service that exceeds the expectations of our most demanding clients."
+    },
+    "team": {
+      "title": "Our Team of Professionals",
+      "description": "A dedicated group of experts with deep knowledge of the luxury real estate market and a total commitment to meeting our clients' needs."
+    },
+    "mission": {
+      "title": "Our Mission",
+      "description": "To transform property searching into an exclusive experience, combining technological innovation, deep market knowledge, and bespoke service."
+    },
+    "whyChooseUs": {
+      "title": "Why Choose Us",
+      "experience": {
+        "title": "Proven Experience",
+        "description": "Over 15 years of experience in the luxury real estate market, with a solid network and a proven ability to identify the most exclusive properties."
+      },
+      "portfolio": {
+        "title": "Exclusive Portfolio",
+        "description": "A carefully curated selection of prestigious properties, from luxury residences to premium offices, representing the best in the real estate market."
+      }
+    }
 },
 "admin": {
   "title": "Dashboard",

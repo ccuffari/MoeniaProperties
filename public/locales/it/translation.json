@@ -101,7 +101,7 @@
 "about": {
   "title": "Informazioni",
   "intro": "Scopri di più sulla nostra azienda e sui nostri servizi.",
-    "excellence": {
+  "excellence": {
       "title": "Eccellenza nel Settore Immobiliare",
       "description": "Siamo leader nella ricerca e selezione di proprietà esclusive, offrendo un servizio personalizzato che supera le aspettative dei nostri clienti più esigenti."
     },
@@ -122,6 +122,7 @@
       "portfolio": {
         "title": "Portfolio Esclusivo",
         "description": "Una selezione accurata di proprietà di pregio, da residenze di lusso a uffici premium, che rappresentano il meglio del mercato immobiliare."
+      }
       }
 },
 "admin": {
