@@ -60,7 +60,10 @@
     "items": {
     },
     "noResults": "Nessun risultato",
-    "title": "Immobili"
+    "title": "Immobili",
+        "meta": {
+          "title": "Properties"
+        }
   },
   "contact": {
     "title": "Contattaci",

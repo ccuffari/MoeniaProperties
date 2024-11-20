@@ -87,7 +87,7 @@ export default function SearchFilters() {
         </div>
       </div>
 
-      {/* Pulsante di ricerca */}
+      {/* Pulsante di ricerca
       <div className="mt-4">
         <button
           onClick={handleSearch}
@@ -97,6 +97,6 @@ export default function SearchFilters() {
           {t("search.button")}
         </button>
       </div>
-    </div>
+    </div> */}
   );
 }
