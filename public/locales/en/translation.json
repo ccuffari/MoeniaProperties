@@ -57,9 +57,7 @@
   "properties": {
     "featured": "Featured Properties",
     "viewDetails": "View Details",
-    "items": {
-      
-    },
+    "items": {},
     "noResults": "No results",
     "title": "Properties",
     "meta": {
@@ -99,9 +97,9 @@
     "adminAccess": "Admin Access",
     "cookieNotice": "By using this site, you agree to our use of cookies."
   },
-"about": {
-  "title": "About",
-  "intro": "Learn more about our company and services.",
+  "about": {
+    "title": "About",
+    "intro": "Learn more about our company and services.",
     "excellence": {
       "title": "Excellence in Real Estate",
       "description": "We are leaders in the search and selection of exclusive properties, offering a personalized service that exceeds the expectations of our most demanding clients."
@@ -125,31 +123,31 @@
         "description": "A carefully curated selection of prestigious properties, from luxury residences to premium offices, representing the best in the real estate market."
       }
     }
-},
-"admin": {
-  "title": "Dashboard",
-  "editProperty": "Edit Property",
-  "dashboard": {
-    "properties": "Properties",
-    "users": "Users",
-    "appointments": "Appointments",
-    "recentProperties": "Recent Properties",
-    "upcomingAppointments": "Upcoming Appointments",
-    "welcome": "Welcome",
-    "activeListings": "Active Listings",
-    "activeUsers": "Active Users",
-    "lastLogin": "Last Login"
   },
-  "viewAll": "View All",
-  "addProperty": "Add Property",
-  "searchProperties": "Search Properties",
-  "table": {
-    "property": "Property",
-    "location": "Location",
-    "price": "Price",
-    "status": "Status",
-    "actions": "Actions"
-  },
+  "admin": {
+    "title": "Dashboard",
+    "editProperty": "Edit Property",
+    "dashboard": {
+      "properties": "Properties",
+      "users": "Users",
+      "appointments": "Appointments",
+      "recentProperties": "Recent Properties",
+      "upcomingAppointments": "Upcoming Appointments",
+      "welcome": "Welcome",
+      "activeListings": "Active Listings",
+      "activeUsers": "Active Users",
+      "lastLogin": "Last Login"
+    },
+    "viewAll": "View All",
+    "addProperty": "Add Property",
+    "searchProperties": "Search Properties",
+    "table": {
+      "property": "Property",
+      "location": "Location",
+      "price": "Price",
+      "status": "Status",
+      "actions": "Actions"
+    },
     "form": {
       "title": "Title",
       "price": "Price",
@@ -167,5 +165,5 @@
       "save": "Save",
       "confirmDelete": "Confirm Deletion"
     }
-}
+  }
 }

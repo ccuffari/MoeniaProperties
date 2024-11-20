@@ -57,13 +57,12 @@
   "properties": {
     "featured": "Immobili in Evidenza",
     "viewDetails": "Vedi Dettagli",
-    "items": {
-    },
+    "items": {},
     "noResults": "Nessun risultato",
     "title": "Immobili",
-        "meta": {
-          "title": "Properties"
-        }
+    "meta": {
+      "title": "Properties"
+    }
   },
   "contact": {
     "title": "Contattaci",
@@ -98,10 +97,10 @@
     "adminAccess": "Accesso Admin",
     "cookieNotice": "Utilizzando questo sito, accetti l'uso dei cookie."
   },
-"about": {
-  "title": "Informazioni",
-  "intro": "Scopri di più sulla nostra azienda e sui nostri servizi.",
-  "excellence": {
+  "about": {
+    "title": "Informazioni",
+    "intro": "Scopri di più sulla nostra azienda e sui nostri servizi.",
+    "excellence": {
       "title": "Eccellenza nel Settore Immobiliare",
       "description": "Siamo leader nella ricerca e selezione di proprietà esclusive, offrendo un servizio personalizzato che supera le aspettative dei nostri clienti più esigenti."
     },
@@ -123,32 +122,32 @@
         "title": "Portfolio Esclusivo",
         "description": "Una selezione accurata di proprietà di pregio, da residenze di lusso a uffici premium, che rappresentano il meglio del mercato immobiliare."
       }
-      }
-},
-"admin": {
-  "title": "Dashboard",
-  "editProperty": "Modifica Immobile",
-  "dashboard": {
-    "properties": "Proprietà",
-    "users": "Utenti",
-    "appointments": "Appuntamenti",
-    "recentProperties": "Proprietà Recenti",
-    "upcomingAppointments": "Appuntamenti in Arrivo",
-    "welcome": "Benvenuto",
-    "activeListings": "Inserzioni Attive",
-    "activeUsers": "Utenti Attivi",
-    "lastLogin": "Ultimo Accesso"
+    }
   },
-  "viewAll": "Visualizza Tutto",
-  "addProperty": "Aggiungi Proprietà",
-  "searchProperties": "Cerca Proprietà",
-  "table": {
-    "property": "Proprietà",
-    "location": "Posizione",
-    "price": "Prezzo",
-    "status": "Stato",
-    "actions": "Azioni"
-  },
+  "admin": {
+    "title": "Dashboard",
+    "editProperty": "Modifica Immobile",
+    "dashboard": {
+      "properties": "Proprietà",
+      "users": "Utenti",
+      "appointments": "Appuntamenti",
+      "recentProperties": "Proprietà Recenti",
+      "upcomingAppointments": "Appuntamenti in Arrivo",
+      "welcome": "Benvenuto",
+      "activeListings": "Inserzioni Attive",
+      "activeUsers": "Utenti Attivi",
+      "lastLogin": "Ultimo Accesso"
+    },
+    "viewAll": "Visualizza Tutto",
+    "addProperty": "Aggiungi Proprietà",
+    "searchProperties": "Cerca Proprietà",
+    "table": {
+      "property": "Proprietà",
+      "location": "Posizione",
+      "price": "Prezzo",
+      "status": "Stato",
+      "actions": "Azioni"
+    },
     "form": {
       "title": "Titolo",
       "price": "Prezzo",
@@ -166,5 +165,5 @@
       "save": "Salva",
       "confirmDelete": "Conferma eliminazione"
     }
-}
+  }
 }
