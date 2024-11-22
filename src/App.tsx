@@ -34,7 +34,7 @@ const App: React.FC = () => {
     <HelmetProvider>
       <Router>
         <div className="min-h-screen bg-gray-50">
-          <Header />
+          {/* <Header /> */}
           <Routes>
             {/* Public Routes */}
             {/* <Route path="/" element={<Home />} /> */}
