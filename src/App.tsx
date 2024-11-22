@@ -5,6 +5,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import CookieConsentBanner from './components/CookieConsentBanner';
 import Home from './pages/Home';
+import Maintenance from './pages/Maintenance';
 import Properties from './pages/Properties';
 import About from './pages/About';
 import Contact from './pages/Contact';
@@ -36,38 +37,54 @@ const App: React.FC = () => {
           <Header />
           <Routes>
             {/* Public Routes */}
-            <Route path="/" element={<Home />} />
+            {/* <Route path="/" element={<Home />} /> */}
+            <Route path="/" element={<Maintenance />} />
             <Route path="/properties" element={<Properties />} />
             <Route path="/property/:id" element={<PropertyDetail />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/services" element={<Services />} />
             <Route path="/privacy" element={<Privacy />} />
-            <Route path="/login" element={
-              user ? <Navigate to="/admin/dashboard" replace /> : <Login />
-            } />
-            
+            <Route
+              path="/login"
+              element={
+                user ? <Navigate to="/admin/dashboard" replace /> : <Login />
+              }
+            />
+
             {/* Admin Routes */}
-            <Route path="/admin/dashboard" element={
-              <PrivateRoute>
-                <Dashboard />
-              </PrivateRoute>
-            } />
-            <Route path="/admin/properties" element={
-              <PrivateRoute>
-                <AdminProperties />
-              </PrivateRoute>
-            } />
-            <Route path="/admin/users" element={
-              <PrivateRoute>
-                <AdminUsers />
-              </PrivateRoute>
-            } />
-            <Route path="/admin/settings" element={
-              <PrivateRoute>
-                <AdminSettings />
-              </PrivateRoute>
-            } />
+            <Route
+              path="/admin/dashboard"
+              element={
+                <PrivateRoute>
+                  <Dashboard />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/admin/properties"
+              element={
+                <PrivateRoute>
+                  <AdminProperties />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/admin/users"
+              element={
+                <PrivateRoute>
+                  <AdminUsers />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/admin/settings"
+              element={
+                <PrivateRoute>
+                  <AdminSettings />
+                </PrivateRoute>
+              }
+            />
 
             {/* Catch-all redirect */}
             <Route path="*" element={<Navigate to="/" replace />} />
