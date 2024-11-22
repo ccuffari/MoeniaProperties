@@ -165,5 +165,9 @@
       "save": "Save",
       "confirmDelete": "Confirm Deletion"
     }
+  },
+    "maintenance": {
+      "title": "Under Maintenance",
+      "message": "We're working hard to improve your experience. Please check back soon!"
   }
 }

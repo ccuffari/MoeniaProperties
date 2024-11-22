@@ -165,5 +165,9 @@
       "save": "Salva",
       "confirmDelete": "Conferma eliminazione"
     }
-  }
+  },
+    "maintenance": {
+      "title": "Sito in Manutenzione",
+      "message": "Stiamo lavorando per migliorare la tua esperienza. Torna presto a trovarci!"
+    }
 }
